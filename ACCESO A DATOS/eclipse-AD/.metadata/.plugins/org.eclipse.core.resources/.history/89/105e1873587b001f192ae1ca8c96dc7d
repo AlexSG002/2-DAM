@@ -1,0 +1,8 @@
+package ventasArticulos;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="ventasarticulos")
+public class ventasarticulos {
+
+}

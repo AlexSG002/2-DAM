@@ -1,0 +1,10 @@
+package crearDepartamentosXML;
+
+public class dep {
+
+	private int id;
+	private String nombre;
+	private String localidad;
+	private int numemple;
+	private float salario;
+}

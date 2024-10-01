@@ -1,0 +1,196 @@
+package crearDepartamentosXML;
+
+import java.io.*;
+import java.util.ArrayList;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+
+public class Principal {
+
+	static String fichdep = (".\\AleatorioDepar.dat");
+	static int LON = 72;
+
+	public static void main(String[] args) {
+
+		crearxmldepartamentos();
+	}
+
+	private static void crearxmldepartamentos() throws IOException {
+
+		departamentos departs = new departamentos();
+		
+		// leer el fichero y cargar los departamentos en la lista
+		ArrayList<dep> lista  = cargarlistadep();
+
+		// cargo la lista en la clase raíz
+		departs.setListadep(lista);
+
+		// crear el XML
+		JAXBContext context;
+		try {
+			context = JAXBContext.newInstance(departamentos.class);
+
+			Marshaller m = context.createMarshaller();
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			m.marshal(departs, System.out);
+			m.marshal(departs, new File(".\\departamentos.xml"));
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	private static ArrayList<dep> cargarlistadep() {
+		ArrayList<dep> listadep = new ArrayList<dep>();
+		File fichero = new File(fichdep);
+
+		try {
+			RandomAccessFile file = new RandomAccessFile(fichero, "rw");
+			long posicion = 0;
+			for (;;) {
+				// dep si existe leemos y visualizamox
+				file.seek(posicion);
+				int cod = file.readInt();
+				if (cod != 0) {
+					String nom = "";
+					for (int i = 0; i < 15; i++) {
+						nom = nom + file.readChar();
+					}
+					String loc = "";
+					for (int i = 0; i < 15; i++) {
+						loc = loc + file.readChar();
+					}
+
+					int num = file.readInt();
+
+					float med = file.readFloat();
+					
+					dep dep = new dep(cod, nom, loc, num, med);
+					
+					listadep.add(dep);
+					System.out.println("Dep "+cod+" añadido a la lista");
+				}
+				posicion = posicion + LON;
+				if (posicion >= file.length())
+					break;
+				
+			}
+			file.close();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public static void insertarRegs() throws IOException {
+		int cod = 10, num = 3;
+		float mediasal = 1000f;
+		String nombre = "VENTAS", loc = "TALAVERA";
+		System.out.println(ejercicio3(cod, nombre, loc, num, mediasal));
+		System.out.println(ejercicio3(20, "INFORMÁTICA", "TALAVERA", 2, 1500.00f));
+		System.out.println(ejercicio3(30, "CONTABILIDAD", "TOLEDO", 1, 1600.00f));
+		System.out.println(ejercicio3(40, "COMPRAS", "TOLEDO", 2, 1500.00f));
+		System.out.println(ejercicio3(50, "FORMACIÓN", "TALAVERA", 4, 1500.00f));
+	}
+
+	private static String ejercicio3(int cod, String nombre, String loc, int num, float sal) {
+		String mensaje = "";
+		if (cod < 1 || cod > 100) {
+			return "ERROR EL DEPARTAMENTO DEBE ESTAR ENTRE 1 Y 100: " + cod;
+		}
+
+		try {
+			if (ejercicio2(cod)) {
+				return "ERROR EL DEPARTAMENTO YA EXISTE NO SE PUEDE INSERTAR: " + cod;
+
+			}
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		File fichero = new File(fichdep);
+		try {
+			RandomAccessFile file = new RandomAccessFile(fichero, "rw");
+			long posicion = (cod - 1) * LON;
+			file.seek(posicion);
+			file.writeInt(cod);
+			StringBuffer buffer = new StringBuffer(nombre);
+			buffer.setLength(15);
+			file.writeChars(buffer.toString());
+
+			buffer = new StringBuffer(loc);
+			buffer.setLength(15);
+			file.writeChars(buffer.toString());
+
+			file.writeInt(num);
+			file.writeFloat(sal);
+
+			mensaje += "REGISTRO INSERTADO, Cod: " + cod + ", " + nombre;
+
+			file.close();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		return mensaje;
+	}
+
+	private static boolean ejercicio2(int id) throws IOException {
+		File fichero = new File(fichdep);
+		boolean existe = false;
+		try {
+			RandomAccessFile file = new RandomAccessFile(fichero, "r");
+			int posicion = (id - 1) * LON; // calculo donde empieza el registro
+			if (posicion >= file.length())
+				existe = false;
+			else {
+				file.seek(posicion);
+				int ident = file.readInt();
+				if (ident == id)
+					existe = true;
+			}
+			file.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return existe;
+	}
+
+	private static void ejercicio1() throws IOException {
+		File fichero = new File(fichdep);
+		if (fichero.exists()) {
+			System.out.println("Fichero ya está creado");
+		} else
+			try {
+				RandomAccessFile file = new RandomAccessFile(fichero, "rw");
+				System.out.println("Fichero creado");
+				file.close();
+			} catch (FileNotFoundException e) {
+
+				e.printStackTrace();
+			}
+
+	}
+
+	private static void mostrarMenu() {
+		System.out.println("------------------------------------------------------");
+		System.out.println("OPERACIONES CON ALUMNOS");
+		System.out.println("  1. Ejercicio 1. Crear fichero");
+		System.out.println("  2. Ejercicio 2. Consultar registro");
+		System.out.println("  3. Ejercicio 3. Insertar registro");
+		System.out.println("  4. Ejercicio 4. Visualizar registro");
+		System.out.println("  5. Ejercicio 5. Modificar registro");
+		System.out.println("  6. Ejercicio 6. Borrar registro");
+		System.out.println("  7. Ejercicio 7. Listar departamentos");
+		System.out.println("  8. Ejercicio 8. Listar empleados");
+		System.out.println("  9. Ejercicio 9. Actualizar");
+		System.out.println("  0. Salir");
+		System.out.println("------------------------------------------------------");
+	}
+}

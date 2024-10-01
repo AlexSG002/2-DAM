@@ -1,0 +1,9 @@
+package xmlventas;
+
+public class Productos {
+
+	private int codigo;
+	private String nombre;
+	private int existencias;
+	private double precio;
+}

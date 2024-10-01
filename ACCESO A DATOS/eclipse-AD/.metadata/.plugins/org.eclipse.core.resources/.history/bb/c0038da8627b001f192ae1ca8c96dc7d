@@ -1,0 +1,6 @@
+package cursosAlumnos;
+
+public class Curso {
+
+	private ArrayList<Alumno>listaAlumnos = new ArrayList<Alumno>
+}

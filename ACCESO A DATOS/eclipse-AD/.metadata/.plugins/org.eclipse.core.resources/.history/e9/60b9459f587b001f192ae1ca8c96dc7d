@@ -1,0 +1,9 @@
+package ventasArticulos;
+
+public class Venta {
+
+	private int numVenta;
+	private int unidades;
+	private String cliente;
+	private String fecha;
+}

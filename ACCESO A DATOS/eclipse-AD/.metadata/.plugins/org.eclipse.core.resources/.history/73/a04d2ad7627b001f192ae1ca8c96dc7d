@@ -1,0 +1,8 @@
+package cursosAlumnos;
+
+import java.util.ArrayList;
+
+public class cursosalumnos {
+
+	private ArrayList<Curso> listaCursos = new ArrayList<Curso>();
+}

@@ -1,0 +1,6 @@
+package xmlproductos;
+
+public class Productos {
+
+	private ArrayList<Producto> lista = new ArrayList<Producto>();
+}

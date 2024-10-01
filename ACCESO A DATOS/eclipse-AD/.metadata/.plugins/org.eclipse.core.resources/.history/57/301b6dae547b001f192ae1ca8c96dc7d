@@ -1,0 +1,8 @@
+package nuevosDep;
+
+import java.util.ArrayList;
+
+public class NuevosDepartamentos {
+
+	private ArrayList<Departamento> listaDept = new ArrayList<Departamento>();
+}
