@@ -31,6 +31,7 @@ public class PantallaInicial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnColores.setText("Colores");
         btnColores.addActionListener(new java.awt.event.ActionListener() {

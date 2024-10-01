@@ -100,15 +100,20 @@ public class Menú extends javax.swing.JDialog {
 
     private void btnRojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRojoActionPerformed
         this.setVisible(false);
+        pantalla.getContentPane().setBackground(Color.red);
         pantalla.setVisible(true);
     }//GEN-LAST:event_btnRojoActionPerformed
 
     private void btnAzulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAzulActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        pantalla.getContentPane().setBackground(Color.blue);
+        pantalla.setVisible(true);
     }//GEN-LAST:event_btnAzulActionPerformed
 
     private void btnVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerdeActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        pantalla.getContentPane().setBackground(Color.green);
+        pantalla.setVisible(true);
     }//GEN-LAST:event_btnVerdeActionPerformed
 
     /**
