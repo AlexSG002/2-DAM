@@ -5,18 +5,28 @@
  */
 package gui;
 
+//Importamos la función color, para cambiar el fondo del layout de la aplicación.
+import java.awt.Color;
+//Importamos también la función DefaultListModel para poder establecer un modelo a la lista.
 import javax.swing.DefaultListModel;
 
 /**
  *
- * @author Tarde
+ * @author Alejandro Sánchez Gil
  */
 public class Pantalla extends javax.swing.JFrame {
+    //Creamos un modelo de lista para las vocales llamado "modelv".
+    DefaultListModel modelv = new DefaultListModel();
+    //Creamos otro modelo de lista para las consonantes llamado "modelc".
+    DefaultListModel modelc = new DefaultListModel();
     /**
      * Creates new form Pantalla
      */
     public Pantalla() {
+        
         initComponents();
+        //Obtenemos el ContentPane de la aplicación (Layout) y le cambiamos el color de fondo.
+        getContentPane().setBackground(new java.awt.Color(204, 166, 166));
     }
 
     /**
@@ -40,8 +50,13 @@ public class Pantalla extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        txtInfo.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
         txtInfo.setText("Ingrese palabra");
 
+        txfCampo.setBackground(new java.awt.Color(227, 210, 210));
+        txfCampo.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
+
+        btnIngresar.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,12 +64,18 @@ public class Pantalla extends javax.swing.JFrame {
             }
         });
 
+        txtVocal.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         txtVocal.setText("Comienza con vocal");
 
+        txtConsonante.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         txtConsonante.setText("Comienza con consonante");
 
+        lisVocal.setBackground(new java.awt.Color(227, 210, 210));
+        lisVocal.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(lisVocal);
 
+        lisConsonante.setBackground(new java.awt.Color(227, 210, 210));
+        lisConsonante.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
         jScrollPane2.setViewportView(lisConsonante);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -62,25 +83,28 @@ public class Pantalla extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtInfo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnIngresar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtVocal)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtConsonante))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                                .addContainerGap()
+                                .addComponent(txtConsonante))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtVocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(txtInfo)
+                        .addGap(18, 18, 18)
+                        .addComponent(txfCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnIngresar)
+                        .addGap(0, 29, Short.MAX_VALUE)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,21 +122,38 @@ public class Pantalla extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Método que realizará las funciones indicadas abajo una vez se pulse el botón de nombre "btnIngresar".
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-
-            if(txfCampo.getText().startsWith("A")||txfCampo.getText().startsWith("E")
-                    ||txfCampo.getText().startsWith("I")||txfCampo.getText().startsWith("O")||txfCampo.getText().startsWith("U")){
-                DefaultListModel model = new DefaultListModel();
-                model.addElement(txfCampo.getText());
-                lisVocal.setModel(model);
+        //Creamos la variable palabra de tipo String y la inicializamos al valor introducido en el textField de nombre "txfCampo" con la función "getText()".
+        String palabra = txfCampo.getText();
+        //Condición que comprueba si la variable palabra comienza por número, esto lo hacemos con la función "matches()" e igualandolo a una expresión regular
+        //que contiene los números del 0 al 9.
+        if(palabra.matches("^[0-9].*")){
+            //En caso de que se cumpla la condición no hace nada.
+        //En caso contrario:
+        }else{
+            //Comprueba si la palabra introducida comeinza por alguna vocal, esto lo he realizado también con la funcion "matches(") igualandolo a
+            //una expresión regular que contiene las vocales, tanto en mayúscula como en minúscula.
+            if(palabra.matches("[^aeiouAEIOU].*")){
+                //En caso de que se cumpla añade la variable palabra al "modelv", que es el modelo de la lista que contiene las vocales,
+                //a la cual le hemos dado valor antes como "txfCampo.getText()".
+                modelv.addElement(palabra);
+                //Establece entonces a la variable "lisVocal" que es la variable de la lista en la aplicación el modelo de vocales para representarlo en 
+                //la interfaz.
+                lisVocal.setModel(modelv);
+            //En caso contrario:
+            }else{
+                //Realiza lo mismo que la función anterior, simplemente añade la palabra a "modelc" que es el modelo de la lista que contiene las consonantes.
+                modelc.addElement(palabra);
+                //Finalmente, establece el "modelc" a la "lisConsonante" que es la lista de consonantes de la interfaz
+                lisConsonante.setModel(modelc);
             }
-        
+        }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**

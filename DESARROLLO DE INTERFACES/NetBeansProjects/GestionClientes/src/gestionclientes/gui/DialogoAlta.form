@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButtonAlta" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jButtonAlta" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabelFecha" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jSpinnerFecha" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabelProvincia" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxProvincia" min="-2" pref="247" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelApellidos" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jTextFieldNombre" min="-2" pref="248" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="jTextFieldApellidos" min="-2" pref="248" max="-2" attributes="0"/>
+                                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelApellidos" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldApellidos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelFecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSpinnerFecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelProvincia" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxProvincia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabelNombre">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nombre: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelApellidos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Apellidos: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelFecha">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fecha de alta: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelProvincia">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Provincia: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldNombre">
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldApellidos">
+        </Component>
+        <Component class="javax.swing.JSpinner" name="jSpinnerFecha">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="now" stepSize="5" type="date"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBoxProvincia">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="50">
+                <StringItem index="0" value="&#xc1;lava (Araba) &#x2013; Pa&#xed;s Vasco (Euskadi)"/>
+                <StringItem index="1" value="Albacete &#x2013; Castilla-La Mancha"/>
+                <StringItem index="2" value="Alicante &#x2013; Comunidad Valenciana"/>
+                <StringItem index="3" value="Almer&#xed;a &#x2013; Andaluc&#xed;a"/>
+                <StringItem index="4" value="Asturias &#x2013; Principado de Asturias"/>
+                <StringItem index="5" value="&#xc1;vila &#x2013; Castilla y Le&#xf3;n"/>
+                <StringItem index="6" value="Badajoz &#x2013; Extremadura"/>
+                <StringItem index="7" value="Barcelona &#x2013; Catalu&#xf1;a (Catalunya)"/>
+                <StringItem index="8" value="Burgos &#x2013; Castilla y Le&#xf3;n"/>
+                <StringItem index="9" value="C&#xe1;ceres &#x2013; Extremadura"/>
+                <StringItem index="10" value="C&#xe1;diz &#x2013; Andaluc&#xed;a"/>
+                <StringItem index="11" value="Cantabria &#x2013; Cantabria"/>
+                <StringItem index="12" value="Castell&#xf3;n (Castell&#xf3;) &#x2013; Comunidad Valenciana (Comunitat Valenciana)"/>
+                <StringItem index="13" value="Ciudad Real &#x2013; Castilla-La Mancha"/>
+                <StringItem index="14" value="C&#xf3;rdoba &#x2013; Andaluc&#xed;a"/>
+                <StringItem index="15" value="Cuenca &#x2013; Castilla-La Mancha"/>
+                <StringItem index="16" value="Gerona (Girona) &#x2013; Catalu&#xf1;a (Catalunya)"/>
+                <StringItem index="17" value="Granada &#x2013; Andaluc&#xed;a"/>
+                <StringItem index="18" value="Guadalajara &#x2013; Castilla-La Mancha"/>
+                <StringItem index="19" value="Guip&#xfa;zcoa (Gipuzkoa) &#x2013; Pa&#xed;s Vasco (Euskadi)"/>
+                <StringItem index="20" value="Huelva &#x2013; Andaluc&#xed;a"/>
+                <StringItem index="21" value="Huesca &#x2013; Arag&#xf3;n"/>
+                <StringItem index="22" value="Islas Baleares (Illes Balears) &#x2013; Islas Baleares (Illes Balears)"/>
+                <StringItem index="23" value="Ja&#xe9;n &#x2013; Andaluc&#xed;a"/>
+                <StringItem index="24" value="La Coru&#xf1;a (A Coru&#xf1;a) &#x2013; Galicia"/>
+                <StringItem index="25" value="La Rioja &#x2013; La Rioja"/>
+                <StringItem index="26" value="Las Palmas &#x2013; Canarias"/>
+                <StringItem index="27" value="Le&#xf3;n &#x2013; Castilla y Le&#xf3;n"/>
+                <StringItem index="28" value="L&#xe9;rida (Lleida) &#x2013; Catalu&#xf1;a (Catalunya)"/>
+                <StringItem index="29" value="Lugo &#x2013; Galicia"/>
+                <StringItem index="30" value="Madrid &#x2013; Comunidad de Madrid"/>
+                <StringItem index="31" value="M&#xe1;laga &#x2013; Andaluc&#xed;a"/>
+                <StringItem index="32" value="Murcia &#x2013; Regi&#xf3;n de Murcia"/>
+                <StringItem index="33" value="Navarra (Nafarroa) &#x2013; Comunidad Foral de Navarra (Nafarroako Foru Komunitate)"/>
+                <StringItem index="34" value="Orense (Ourense) &#x2013; Galicia"/>
+                <StringItem index="35" value="Palencia &#x2013; Castilla y Le&#xf3;n"/>
+                <StringItem index="36" value="Pontevedra &#x2013; Galicia"/>
+                <StringItem index="37" value="Salamanca &#x2013; Castilla y Le&#xf3;n"/>
+                <StringItem index="38" value="Santa Cruz de Tenerife &#x2013; Canarias"/>
+                <StringItem index="39" value="Segovia &#x2013; Castilla y Le&#xf3;n"/>
+                <StringItem index="40" value="Sevilla &#x2013; Andaluc&#xed;a"/>
+                <StringItem index="41" value="Soria &#x2013; Castilla y Le&#xf3;n"/>
+                <StringItem index="42" value="Tarragona &#x2013; Catalu&#xf1;a"/>
+                <StringItem index="43" value="Teruel &#x2013; Arag&#xf3;n"/>
+                <StringItem index="44" value="Toledo &#x2013; Castilla-La Mancha"/>
+                <StringItem index="45" value="Valencia &#x2013; Comunidad Valenciana (Comunitat Valenciana)"/>
+                <StringItem index="46" value="Valladolid &#x2013; Castilla y Le&#xf3;n"/>
+                <StringItem index="47" value="Vizcaya (Bizkaia) &#x2013; Pa&#xed;s Vasco (Euskadi)"/>
+                <StringItem index="48" value="Zamora &#x2013; Castilla y Le&#xf3;n"/>
+                <StringItem index="49" value="Zaragoza &#x2013; Arag&#xf3;n"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="jButtonAlta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Alta"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAltaActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>
