@@ -1,6 +1,0 @@
-package cursosAlumnos;
-
-public class cursosalumnos {
-
-	private ArrayList<Curso> listaCursos = new ArrayList<Curso>();
-}

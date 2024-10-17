@@ -1,3 +1,0 @@
-INDEX VERSION 1.134
-file:/C:/Users/Tarde/Documents/2DAM/ACCESO%20A%20DATOS/eclipse-AD/.metadata/.plugins/org.eclipse.jdt.core/1865797976.index
-meta_index

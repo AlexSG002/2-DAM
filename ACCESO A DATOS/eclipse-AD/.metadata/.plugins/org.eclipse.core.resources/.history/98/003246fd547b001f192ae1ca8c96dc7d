@@ -1,8 +1,0 @@
-package nuevosDep;
-
-public class Departamento {
-
-	private int deptNo;
-	private String dnombre;
-	private String loc;
-}

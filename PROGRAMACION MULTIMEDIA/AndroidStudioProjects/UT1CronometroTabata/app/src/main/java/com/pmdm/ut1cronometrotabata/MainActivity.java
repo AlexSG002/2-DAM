@@ -45,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void iniciarContadorTrabajo(int seriesNum, long tiempoTrabajo, long tiempoDescanso) {
-
+        if(contador!=null){
+            contador.cancel();
+        }
         txtEstado.setText("WORKING");
         layout.setBackgroundResource(R.drawable.green);
         txtSeries.setText("SERIES LEFT: "+seriesNum);
@@ -69,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void iniciarContadorDescanso(int seriesNum, long tiempoTrabajo, long tiempoDescanso) {
+        if(contadorDescanso!=null){
+            contadorDescanso.cancel();
+        }
         contadorDescanso = new CountDownTimer(tiempoDescanso, 1000) {
             @Override
             public void onTick(long l) {

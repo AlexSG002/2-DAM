@@ -1,9 +1,0 @@
-package crearDepartamentosXML;
-
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name="departamentos")
-public class departamentos {
-
-	private ArrayList<dep> = new ArrayList<dep>();
-}
