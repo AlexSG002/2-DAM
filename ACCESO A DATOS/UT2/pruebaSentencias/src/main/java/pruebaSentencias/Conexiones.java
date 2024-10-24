@@ -10,7 +10,7 @@ public class Conexiones {
 			conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+bd, usuario, pass);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("ERROR: "+e.getMessage());
 		}
 		return conexion;
 	}
@@ -23,7 +23,7 @@ public class Conexiones {
 			conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", usuario, pass);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("ERROR: "+e.getMessage());
 		}
 		return conexion;
 	}
@@ -38,7 +38,7 @@ public class Conexiones {
 					"jdbc:derby:"+bd);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("ERROR: "+e.getMessage());
 		}
 		return conexion;
 	}
@@ -53,7 +53,7 @@ public class Conexiones {
 					"jdbc:sqlite:file:"+bd);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("ERROR: "+e.getMessage());
 		}
 		return conexion;
 	}
