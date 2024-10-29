@@ -45,14 +45,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void iniciarContadorTrabajo(int seriesNum, long tiempoTrabajo, long tiempoDescanso) {
-        if(contador!=null){
+
+        if (contador != null) {
             contador.cancel();
         }
+
         txtEstado.setText("WORKING");
         layout.setBackgroundResource(R.drawable.green);
         txtSeries.setText("SERIES LEFT: "+seriesNum);
         playBeep();
-        contador = new CountDownTimer(tiempoTrabajo-1, 1000) {
+        contador = new CountDownTimer(tiempoTrabajo, 1000) {
             @Override
             public void onTick(long l) {
                 txtContador.setText("" + l / 1000);
@@ -60,10 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
                 txtEstado.setText("REST");
                 layout.setBackgroundResource(R.drawable.red);
-
                 iniciarContadorDescanso(seriesNum - 1, tiempoTrabajo, tiempoDescanso);
             }
         };
@@ -71,9 +71,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void iniciarContadorDescanso(int seriesNum, long tiempoTrabajo, long tiempoDescanso) {
-        if(contadorDescanso!=null){
+
+        if (contadorDescanso != null) {
             contadorDescanso.cancel();
         }
+
         contadorDescanso = new CountDownTimer(tiempoDescanso, 1000) {
             @Override
             public void onTick(long l) {
