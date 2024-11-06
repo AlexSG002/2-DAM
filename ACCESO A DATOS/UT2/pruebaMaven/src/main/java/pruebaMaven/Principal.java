@@ -1,5 +1,6 @@
 package pruebaMaven;
 
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -7,117 +8,102 @@ public class Principal {
 
 	public static void main(String[] args) {
 
-		Connection conexion = null;
+		try {
+			Connection conexion = null;
+			Scanner sc = new Scanner(System.in);
+			int opcion = 0;
 
-		Scanner sc = new Scanner(System.in);
-		int opcion = 0;
-
-		do {
-			mostrarMenu();
-			opcion = sc.nextInt();
-			switch (opcion) {
-			case 1:
-				System.out.println("Prueba MySQL!");
-				try {
-					// Cargar el driver
+			do {
+				mostrarMenu();
+				opcion = sc.nextInt();
+				switch (opcion) {
+				case 1:
+					// Mysql
+					System.out.println("Prueba Mysql!");
 					Class.forName("com.mysql.jdbc.Driver");
+					conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/ejemplo25", "root", "");
+					consultadepartamentos(conexion);
+					conexion.close();
 
-					// Establecemos la conexion con la BD
-					conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ejemplo", "root", "");
-
-					consultarDepar(conexion);
-					conexion.close(); // Cerrar conexión
-
-				} catch (ClassNotFoundException cn) {
-					cn.printStackTrace();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-
-				break;
-			case 2:
-				System.out.println("Prueba Derby!");
-				try {
-					// Cargar el driver
+					break;
+				case 2:
+					System.out.println("Prueba Derby!");
 					Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-					conexion = DriverManager.getConnection(
-							"jdbc:derby:C:\\Users\\Tarde\\Documents\\2DAM\\ACCESO A DATOS\\UT2\\bdembebidas\\bdderby\\ejemplo");
-
-					consultarDepar(conexion);
-					conexion.close(); // Cerrar conexión
-
-				} catch (ClassNotFoundException cn) {
-					cn.printStackTrace();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-
-				break;
-			case 3:
-				System.out.println("Prueba HSQLDB!");
-				try {
-					// Cargar el driver
-					Class.forName("org.hsqldb.jdbcDriver");
-					conexion = DriverManager.getConnection(
-							"jdbc:hsqldb:file:C:\\Users\\Tarde\\Documents\\2DAM\\ACCESO A DATOS\\UT2\\bdembebidas\\bdhsql\\ejemplo");
-
-					consultarDepar(conexion);
-					conexion.close(); // Cerrar conexión
-
-				} catch (ClassNotFoundException cn) {
-					cn.printStackTrace();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				break;
-			case 4:
-				System.out.println("Prueba SQlite!");
-				try {
-					// Cargar el driver
+					conexion = DriverManager.getConnection("jdbc:derby:.\\basedatos\\bdderby\\ejemplo");
+					consultadepartamentos(conexion);
+					conexion.close();
+					break;
+				case 3:
+					System.out.println("Prueba HSQLDB!");
+					Class.forName("org.hsqldb.jdbcDriver" );
+					//Class.forName("org.hsqldb.JDBCDriver");
+					//Class.forName("org.hsqldb.jdbc.JDBCDriver");
+					//org.hsqldb.jdbc.JDBCDriver
+					//conexion = DriverManager.getConnection("jdbc:hsqldb:file:.\\hsqldb\\ejemplo\\ejemplo");
+					conexion = DriverManager.getConnection("jdbc:hsqldb:.\\hsqldb\\ejemplo\\ejemplo");
+					
+					consultadepartamentos(conexion);
+					conexion.close();
+					break;
+				case 4:
+					System.out.println("Prueba SQLITE!");
 					Class.forName("org.sqlite.JDBC");
-					conexion = DriverManager.getConnection(
-							"jdbc:sqlite:file:C:\\Users\\Tarde\\Documents\\2DAM\\ACCESO A DATOS\\UT2\\bdembebidas\\sqlite\\ejemplo.db");
+					conexion = DriverManager.getConnection("jdbc:sqlite:.\\basedatos\\ejemplo.db");
+					consultadepartamentos(conexion);
+					conexion.close();
+					break;
 
-					consultarDepar(conexion);
-					conexion.close(); // Cerrar conexión
-
-				} catch (ClassNotFoundException cn) {
-					cn.printStackTrace();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				break;
-			case 5:
-				System.out.println("Prueba Oracle!");
-				try {
-					// Cargar el driver
+				case 5:
+					System.out.println("Prueba Oracle!");
 					Class.forName("oracle.jdbc.driver.OracleDriver");
-					conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "EJEMPLO", "EJEMPLO");
+					conexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", 
+							"ejemplo25","ejemplo25");
+					consultadepartamentos(conexion);
+					conexion.close();
+					break;
 
-					consultarDepar(conexion);
-					conexion.close(); // Cerrar conexión
-
-				} catch (ClassNotFoundException cn) {
-					cn.printStackTrace();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				case 6:
+					System.out.println("Prueba MariaDB!");
+					Class.forName ("org.mariadb.jdbc.Driver");	
+					conexion = DriverManager.getConnection   
+							("jdbc:mariadb://localhost:3306/ejemplo", "root", "");  
+         			consultadepartamentos(conexion);
+					conexion.close();
+					break;
+					
+				case 0:
+					System.out.println("FIN DE MENÚ!");
+					break;
+				default:
+					System.out.println("Seleccione una opción válida!");
+					break;
 				}
-				break;
+			} while (opcion != 0);
 
-			case 0:
-				System.out.println("Buenas noches");
-				break;
-			default:
-				System.out.println("Seleccione una opción válida!");
-				break;
-			}
-		} while (opcion != 0);
+			sc.close();
 
-		sc.close();
+		} catch (ClassNotFoundException cn) {
+			cn.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}// fin de main
 
-	public static void consultarDepar(Connection conexion) throws SQLException {
+	private static void mostrarMenu() {
+		System.out.println("------------------------------------------------------");
+		System.out.println("OPERACIONES CON DEPARTAMENTOS");
+		System.out.println("  1. Prueba mysql.");
+		System.out.println("  2. Prueba Derby.");
+		System.out.println("  3. Prueba HSQLDB.");
+		System.out.println("  4. Prueba Sqlite.");
+		System.out.println("  5. Prueba Oracle.");
+		System.out.println("  6. Prueba MariaDB.");
+		System.out.println("  0. Salir");
+		System.out.println("------------------------------------------------------");
+	}
+
+	private static void consultadepartamentos(Connection conexion) throws SQLException {
 		// Preparamos la consulta
 		Statement sentencia = conexion.createStatement();
 		String sql = "SELECT * FROM departamentos";
@@ -127,22 +113,15 @@ public class Principal {
 		// Se hace un bucle mientras haya registros y se van mostrando
 
 		while (resul.next()) {
-			System.out.printf("%d, %s, %s %n", resul.getInt(1), resul.getString(2), resul.getString(3));
+			System.out.printf("%d, %s, %s %n", 
+					resul.getInt(1), 
+					resul.getString(2), 
+					resul.getString(3));
 		}
 
 		resul.close(); // Cerrar ResultSet
 		sentencia.close(); // Cerrar Statement
 	}
-	
-	
-	private static void mostrarMenu() {
-		System.out.println("------------------------------------------------------");
-		System.out.println("  1. MySQL");
-		System.out.println("  2. Derby");
-		System.out.println("  3. HSQLDB");
-		System.out.println("  4. SQLITE");
-		System.out.println("  5. ORACLE");
-		System.out.println("  0. Salir");
-		System.out.println("------------------------------------------------------");
-	}
-}// fin de la clase
+
+}
+

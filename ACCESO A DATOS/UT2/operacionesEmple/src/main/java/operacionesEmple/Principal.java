@@ -11,7 +11,7 @@ public class Principal {
 		OperacionesEmple ope = new OperacionesEmple();
 		
 		//Connection conexion = Conexiones.getMysql("ejemplo25", "root", "");
-		Connection conexion = Conexiones.getOracle("EJEMPLO", "EJEMPLO");
+		Connection conexion = Conexiones.getOracle("ejemplo25", "ejemplo25");
 		//Connection conexion = Conexiones.getSQlite(".\\basedatos\\ejemplo.db");
 
 		if (conexion != null) {

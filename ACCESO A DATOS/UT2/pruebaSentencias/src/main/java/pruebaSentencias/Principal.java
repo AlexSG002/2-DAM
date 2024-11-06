@@ -5,182 +5,163 @@ import java.sql.*;
 public class Principal {
 
 	public static void main(String[] args) {
-		Connection conexion = Conexiones.getOracle("EJEMPLO", "EJEMPLO");
-		if(conexion!=null) {
+
+		// Connection conexion = Conexiones.getMysql("ejemplo25", "root", "");
+		Connection conexion = Conexiones.getOracle("ejemplo25", "ejemplo25");
+		// Connection conexion = Conexiones.getSQlite(".\\basedatos\\ejemplo.db");
+
+		if (conexion != null) {
+
+			actividad2_11(conexion, 10); // si existe con empleados
+			System.out.println("-----------------------------");
 			
-			System.out.println(actividad2_11(conexion, 10)); //Si existe con empleados
-			
-			System.out.println(actividad2_11(conexion, 99)); //Dep no existe
-			
-			System.out.println(actividad2_11(conexion, 40)); //Dep existe, pero sin emples
-				
+			actividad2_11(conexion, 99); // dep no existe
+			System.out.println("-----------------------------");
+
+			actividad2_11(conexion, 40); // dep existe pero sin empleados
+
 			try {
 				conexion.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-		}else {
-			System.out.println("ERROR. NO HAY CONEXIÓN CON LA BDD. COMPRUÉBALO");
+		} else {
+			System.out.println("ERROR EN LA CONEXIÓN. COMPRUEBA..");
 		}
 	}
-	
-	private static String actividad2_11(Connection conexion, int dept_no) {
-	    String mensaje = "";
 
-	    String sql1 = "SELECT COUNT(*) FROM DEPARTAMENTOS WHERE dept_no = ?";
-	    try {
-	       
-	        PreparedStatement sentencia = conexion.prepareStatement(sql1);
-	        sentencia.setInt(1, dept_no);
-	        ResultSet resul = sentencia.executeQuery();
-	        resul.next();
-	        int cuenta = resul.getInt(1);
-	        int error = 0;
+	private static void actividad2_11(Connection conexion, int dept_no) {
 
-	        if (cuenta == 0) {
-	            mensaje = "ERROR. EL DEPARTAMENTO NO EXISTE";
-	            error = 1;
-	        }
+		// comprobar si el dep existe
+		String sql1 = "select dnombre from departamentos where dept_no = ?";
 
-	        
-	        if (error == 0) { 
-	            String sql2 = "SELECT COUNT(*) FROM EMPLEADOS WHERE DEPT_NO = ?";
-	            PreparedStatement sentencia2 = conexion.prepareStatement(sql2);
-	            sentencia2.setInt(1, dept_no);
-	            ResultSet resul2 = sentencia2.executeQuery();
-	            resul2.next();
-	            cuenta = resul2.getInt(1);
+		PreparedStatement sentencia;
 
-	            if (cuenta == 0) {
-	                mensaje = "ERROR. EL DEPARTAMENTO NO TIENE EMPLEADOS";
-	                error = 1;
-	            }
+		try {
+			sentencia = conexion.prepareStatement(sql1);
+			sentencia.setInt(1, dept_no);
+			ResultSet resul = sentencia.executeQuery();
+			if (resul.next()) {
+				String nombre = resul.getString(1);
+				System.out.println("EMPLEADOS DEL DEPARTAMENTO: " + nombre);
 
-	            resul2.close();
-	            sentencia2.close();
-	        }
+				String sql2 = "select apellido, salario, oficio from empleados  where dept_no = ?";
+				PreparedStatement sentencia2 = conexion.prepareStatement(sql2);
+				sentencia2.setInt(1, dept_no);
+				ResultSet resul2 = sentencia2.executeQuery();
+				if (resul2.next()) {
+					System.out.println("Departamento con " + nombre);
+					System.out.printf("%15s %10s %15s%n", "APELLIDO", "SALARIO", "OFICIO");
+					System.out.printf("%15s %10s %15s%n", "---------------", "----------", "---------------");
+					// recorrer el result set
+					// definir contador y acumulador
+					int cuen = 0;
+					float suma = 0.f;
+					do {
+						cuen = cuen + 1;
+						suma = suma + resul2.getFloat(2);
+						System.out.printf("%15s %10s %15s%n", resul2.getString(1), resul2.getFloat(2),
+								resul2.getString(3));
 
-	        
-	        if (error == 0) {
-	            String sql3 = "SELECT dnombre FROM DEPARTAMENTOS WHERE dept_no = ?";
-	            PreparedStatement sentencia3 = conexion.prepareStatement(sql3);
-	            sentencia3.setInt(1, dept_no);
-	            ResultSet resul3 = sentencia3.executeQuery();
-	            resul3.next();
-	            String nombreDep = resul3.getString(1);
-	            mensaje = "EMPLEADOS DEL DEPARTAMENTO: " + nombreDep;
+					} while (resul2.next());
 
-	            resul3.close();
-	            sentencia3.close();
-	        }
+					System.out.printf("%15s %10s %15s%n", "---------------", "----------", "---------------");
+					// con select
+					String sql3 = "select avg(salario), count(emp_no) from empleados  where dept_no = ?";
+					PreparedStatement sentencia3 = conexion.prepareStatement(sql3);
+					sentencia3.setInt(1, dept_no);
+					ResultSet resul3 = sentencia3.executeQuery();
+					resul3.next();
+					float medi = resul3.getFloat(1);
+					int cuenta = resul3.getInt(2);
+					System.out.println("SALARIO MEDIO: " + medi);
+					System.out.println("Numero empleados: " + cuenta);
 
-	        resul.close();
-	        sentencia.close();
+					// con contadores
+					float medi2 = suma / cuen;
+					System.out.println("--SALARIO MEDIO: " + medi2);
+					System.out.println("--Numero empleados: " + cuen);
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        mensaje = "ERROR AL EJECUTAR LA CONSULTA: " + e.getMessage();
-	    }
+					sentencia2.close();
+					sentencia3.close();
+					resul2.close();
+					resul3.close();
 
-	    return mensaje;
+				} else {
+					System.out.printf("%15s %10s %15s%n", "---------------", "----------", "---------------");
+					System.out.println("    Departamento sin empleado");
+					System.out.printf("%15s %10s %15s%n", "---------------", "----------", "---------------");
+
+				}
+
+			} else {
+				System.out.println("DEPARTAMENTO NO EXISTE: " + dept_no);
+			}
+			sentencia.close();
+			resul.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
+	public static void pruebasinsertar() {
 
-	public static void pruebasInsertar() {
-		Connection conexion = Conexiones.getOracle("EJEMPLO", "EJEMPLO");
+		// Connection conexion = Conexiones.getMysql("ejemplo25", "root", "");
+		// Connection conexion = Conexiones.getOracle("ejemplo25", "ejemplo25");
+		Connection conexion = Conexiones.getSQlite(".\\basedatos\\ejemplo.db");
 
 		if (conexion != null) {
 
-			System.out.println("PRUEBA INSERTAR EMPLEADO EN MYSQL");
-			// ERROR EN EMPLEADO, DIRECTOR Y DEP
+			System.out.println("PRUEBA verempleadosdep");
+
+			// EMP_NO, APELLIDO, OFICIO, DIR, SALARIO, COMISIÓN, DEPT_NO
+			// Error en empleado, dir y dep
 			System.out.println(insertarempleado(conexion, 7369, "", "", 222, -1500.0f, 100.0f, 45));
-			System.out.println("-------------------------------");
-			// ERROR EN EMPLEADO
+			System.out.println("--------------");
+			// Error en empleado,
 			System.out.println(insertarempleado(conexion, 7369, null, "INFORMÁTICO", 7499, 1500.0f, 100.0f, 10));
-			System.out.println("-------------------------------");
-			// ERROR EN DIRECTOR
-			System.out.println(insertarempleado(conexion, 123, "EMPLE123", "INFORMÁTICO", 222, 1500.0f, 100.0f, 10));
-			System.out.println("-------------------------------");
-			// ERROR EN DEP
+			System.out.println("--------------");
+
+			// Error en dep,
 			System.out.println(insertarempleado(conexion, 123, "EMPLE123", null, 7499, 1500.0f, 100.0f, 45));
-			System.out.println("-------------------------------");
-			// EMPLEADO YA INSERTADO
-			System.out.println(insertarempleado(conexion, 123, "EMPLE123", "EMPLEADO", 7499, 1500.0f, 100.0f, 10));
-			System.out.println("-------------------------------");
-			System.out.println(insertarempleado(conexion, 124, "EMPLE124", "EMPLEADO", 7499, 1500.0f, 100.0f, 10));
+			System.out.println("--------------");
+
+			// TODO OK
+			System.out.println(insertarempleado(conexion, 123, "EMPLE123", "INFORMÁTICO", 7499, 1500.0f, 100.0f, 10));
+
+			System.out.println("--------------");
+			// TODO OK
+			System.out.println(insertarempleado(conexion, 124, "EMPLE124", "INFORMÁTICO", 7499, 1800.0f, 110.0f, 20));
+
+			System.out.println("--------------");
+			// TODO OK
+			System.out.println(insertarempleado(conexion, 125, "EMPLE125", "INFORMÁTICO", 7499, 1800.0f, 110.0f, 20));
+
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		} else {
-			System.out.println("ERROR. NO HAY CONEXIÓN CON LA BDD. COMPRUÉBALO");
+			System.out.println("ERROR EN LA CONEXIÓN. COMPRUEBA..");
 		}
-		
-		try {
-			conexion.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-
-	private static String insertaremple(Connection conexion, int emp_no, String apellido, String oficio, int dir,
-			float salario, float comision, int dep) {
-
-		String mensaje = "";
-		// Cargar fecha
-
-		java.util.Date utilDate = new java.util.Date();
-		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		System.out.println(utilDate);
-		System.out.println(sqlDate);
-		
-		String sql = "INSERT INTO EMPLEADOS (emp_no, apellido, oficio, dir, fecha_alt, salario, comision, dept_no) "
-				+ "VALUES ("+emp_no+", '"+apellido+"', '"+oficio+"', "+dir+", '"+sqlDate+"', "+salario+", "+comision+", "+dep+")";
-		
-		System.out.println(sql);
-		
-		String sql2 = "INSERT INTO EMPLEADOS (emp_no, apellido, oficio, dir, fecha_alt, salario, comision, dept_no) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-		
-		try {
-			//Statement sentencia = conexion.createStatement();
-			//int filas = sentencia.executeUpdate(sql);
-			
-			PreparedStatement sentencia = conexion.prepareStatement(sql2);
-			
-			sentencia.setInt(1, emp_no);
-			sentencia.setString(2, apellido);
-			sentencia.setString(3, oficio);
-			sentencia.setInt(4, dir);
-			sentencia.setDate(5, sqlDate);
-			sentencia.setFloat(6, salario);
-			sentencia.setFloat(7, comision);
-			sentencia.setInt(8, dep);
-			
-			int filas = sentencia.executeUpdate();
-			
-			//System.out.printf("Fila insertada: %d %n", filas);
-			mensaje = "Empleado insertado: "+emp_no;
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			mensaje = "ERROR AL INSERTAR: "+ e.getMessage();
-		}
-		
-		
-
-		return mensaje;
 	}
 
 	private static String insertarempleado(Connection conexion, int emp_no, String apellido, String oficio, int dir,
-			float salario, float comision, int dep) {
+			float salario, float comision, int dept_no) {
+
 		String mensaje = "";
-		int error = 0; // Si ocurre algún error la ponemos a 1
+		int error = 0; // si ocurre error la ponemos a 1
 
 		if (salario <= 0) {
 			error = 1;
-			mensaje = mensaje + "EL SALARIO ES NEGATIVO, ERROR NO PUEDE SER NEGATIVO.\n";
+			mensaje = mensaje + "EL SALARIO ES NEGATIVO, ERROR NO PUEDE SER NEGATIVO. \n";
 		}
 
 		if (apellido == null || apellido.equals("")) {
@@ -193,111 +174,200 @@ public class Principal {
 			mensaje = mensaje + "EL OFICIO NO PUEDE SER NULO. \n";
 		}
 
-		// Comprobar si el empleado existe
-		String sql1 = "SELECT COUNT(*) FROM EMPLEADOS WHERE emp_no=" + emp_no;
+		// comprobar si el empleado existe
+		String sql1 = "select count(*) from empleados where emp_no=" + emp_no;
 		Statement sentencia;
 		try {
 			sentencia = conexion.createStatement();
-
 			ResultSet resul = sentencia.executeQuery(sql1);
 			resul.next();
 			int cuenta = resul.getInt(1);
 			if (cuenta == 1) {
-				// Empleado existe
+				// empleado existe, no se inserta
 				mensaje = mensaje + "EL NUM DE EMPLEADO YA EXISTE: " + emp_no + ", ERROR AL INSERTAR.\n";
 				error = 1;
 			}
-			// Comprobar si el director existe
-			sql1 = "SELECT COUNT(*) FROM EMPLEADOS WHERE emp_no=" + dir;
+
+			// comprobar si el director existe
+			sql1 = "select count(*) from empleados where emp_no=" + dir;
 			sentencia = conexion.createStatement();
 			resul = sentencia.executeQuery(sql1);
 			resul.next();
 			cuenta = resul.getInt(1);
 			if (cuenta == 0) {
-				// Director no existe
+				// director no existe.
 				mensaje = mensaje + "EL DIRECTOR (" + dir + ") NO EXISTE EN EMPLEADOS, ERROR AL INSERTAR.\n";
 				error = 1;
 			}
-			// Comprobar si el departamento existe
-			sql1 = "SELECT COUNT(*) FROM DEPARTAMENTOS WHERE dept_no=" + dep;
+
+			// comprobar si el dep existe
+
+			sql1 = "select count(*) from departamentos where dept_no=" + dept_no;
 			sentencia = conexion.createStatement();
 			resul = sentencia.executeQuery(sql1);
 			resul.next();
 			cuenta = resul.getInt(1);
 			if (cuenta == 0) {
-				// Departamento no existe
-				mensaje = mensaje + "EL DEPARTAMENTO (" + dep + ") NO EXISTE EN DEPARTAMENTOS, ERROR AL INSERTAR.\n";
+				// dept no existe.
+				mensaje = mensaje + "EL NUM DE DEPARTAMENTO(" + dept_no + ") NO EXISTE EN LA TABLA DEPARTAMENTOS.\n";
 				error = 1;
 			}
 
-			// Una vez finalizadas las comprobaciones se pregunta si ha habido algún error
+			// una vez finalizadas las comprobaciones se pregunta si ha habido algún error
 			if (error == 1) {
 				// NO SE INSERTA
 				mensaje = mensaje + "REGISTRO NO INSERTADO";
 			} else {
-				// Procede inserción
-				// mensaje = mensaje + "DATOS CORRECTOS. PROCEDE INSERCIÓN";
-				mensaje = insertaremple(conexion, emp_no, apellido, oficio, dir, salario, comision, dep);
+				// A insertar el empleado
+				// mensaje = mensaje + "DATOS CORRECTOS. A INSERTAR";
+				mensaje = insertaremple(conexion, emp_no, apellido, oficio, dir, salario, comision, dept_no);
+
 			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return mensaje;
+
 	}
 
-	public static void verEmpleados(String[] args) throws SQLException {
-		Connection conexion = Conexiones.getMySQL("ejemplo", "root", "");
-		System.out.println("PRUEBA INSERTAR DEP EN MYSQL");
-		System.out.println(insertardepartamento(conexion, 12, "DEP 12", "TOLEDO"));
+	private static String insertaremple(Connection conexion, int emp_no, String apellido, String oficio, int dir,
+			float salario, float comision, int dept_no) {
 
-		conexion.close();
+		String mensaje = "";
+		// cargar fecha
+		java.util.Date utilDate = new java.util.Date();
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		System.out.println(utilDate);
+		System.out.println(sqlDate);
+
+		String sql = "INSERT INTO empleados(emp_no, apellido, oficio, dir, fecha_alt, salario,"
+				+ " comision, dept_no) VALUES (" + emp_no + ",'" + apellido + "', '" + oficio + "'," + dir + ",'"
+				+ sqlDate + "', " + salario + ", " + comision + ", " + dept_no + ")";
+		System.out.println("sql=>" + sql);
+
+		String sql2 = "INSERT INTO empleados(emp_no, apellido, oficio, dir, fecha_alt, salario,"
+				+ " comision, dept_no) VALUES (?, ?, ?,?, ?, ?,?, ?)";
+
+		// Statement sentencia;
+		try {
+			// sentencia = conexion.createStatement();
+			// int filas = sentencia.executeUpdate(sql);
+			// System.out.printf("Fila insertada: %d %n", filas);
+
+			PreparedStatement sentencia = conexion.prepareStatement(sql2);
+
+			sentencia.setInt(1, emp_no);
+			sentencia.setString(2, apellido);
+			sentencia.setString(3, oficio);
+			sentencia.setInt(4, dir);
+			sentencia.setDate(5, sqlDate);
+			sentencia.setFloat(6, salario);
+			sentencia.setFloat(7, comision);
+			sentencia.setInt(8, dept_no);
+
+			int filas = sentencia.executeUpdate(); // filas afectadas
+			mensaje = "Empleado insertado: " + emp_no;
+			// conexion.close(); se cierra en main
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			// System.out.println("ERROR NO SE INERTAsq
+			mensaje = "ERRORR AL INSERTAR: " + e.getMessage();
+		}
+
+		return mensaje;
+
 	}
 
-	public static void pruebaCrearVistas(String[] args) {
-		Connection conexion = Conexiones.getMySQL("ejemplo", "root", "");
-		System.out.println("PRUEBA CREAR VISTA EN MYSQL");
-		String vista = "CREATE OR REPLACE VIEW totales (dep, dnombre, nemp, media) AS "
-				+ "SELECT d.dept_no, dnombre, COUNT(emp_no), AVG(salario) "
-				+ "FROM departamentos d LEFT JOIN empleados e "
-				+ "ON e.dept_no = d.dept_no GROUP BY d.dept_no, dnombre";
-		crearVista(conexion, vista);
+	public static void verempleados() {
+		Connection conexion = Conexiones.getMysql("ejemplo25", "root", "");
+		System.out.println("PRUEBA verempleadosdep MYSQL");
+		verempleadosdep(conexion, 10);
 
-		conexion = Conexiones.getOracle("EJEMPLO", "EJEMPLO");
-		System.out.println("PRUEBA CREAR VISTA EN ORACLE");
-		crearVista(conexion, vista);
+		conexion = Conexiones.getDerby(".\\basedatos\\bdderby\\ejemplo");
+		System.out.println("PRUEBA verempleadosdep DERBY");
+		verempleadosdep(conexion, 10);
+
 	}
 
-	public static void main2(String[] args) throws SQLException {
+	public static void pruebainsertar() {
 
-		// Subir el salario a los empleados de un dep.
-		Connection conexion = Conexiones.getOracle("EJEMPLO", "EJEMPLO");
-		System.out.println("PRUEBA SUBIDA EN ORACLE");
-		subirsalario(conexion, 100, 10);
+		Connection conexion = Conexiones.getMysql("ejemplo25", "root", "");
+		System.out.println("PRUEBA INSERTAR DEP MYSQL");
+		System.out.println(Actividad2_10_insertardepartamento(conexion, 12, "DEP 12", "TOLEDO"));
 
-		conexion = Conexiones.getMySQL("ejemplo", "root", "");
-		System.out.println("PRUEBA SUBIDA EN MYSQL");
-		subirsalario(conexion, 100, 10);
+		conexion = Conexiones.getSQlite(".\\basedatos\\ejemplo.db");
+		System.out.println("PRUEBA INSERTAR  SQLITE");
+		System.out.println(Actividad2_10_insertardepartamento(conexion, 12, "DEP 12", "TOLEDO"));
 
-		conexion = Conexiones
-				.getSQLITE("C:\\Users\\Tarde\\Documents\\2DAM\\ACCESO A DATOS\\UT2\\bdembebidas\\sqlite\\ejemplo.db");
+		conexion = Conexiones.getOracle("EJEMPLO25", "ejemplo25");
+		System.out.println("PRUEBA INSERTAR ORACLE");
+		System.out.println(Actividad2_10_insertardepartamento(conexion, 12, "DEP 12", "TOLEDO"));
+
+	}
+
+	public static void verempleadosdep(Connection conexion, int dept) {
+
+		try {
+
+			String sql = "select emp_no, apellido, oficio, salario from empleados where dept_no = " + dept;
+			Statement sentencia = conexion.createStatement();
+			ResultSet resul = sentencia.executeQuery(sql);
+			System.out.println("Datos de los empleados del dep : " + dept);
+			while (resul.next()) {
+				System.out.println("Emp-no:" + resul.getInt(1) + ". Apellido: " + resul.getString(2) + ". Oficio: "
+						+ resul.getString(3) + ". Salario: " + resul.getFloat(4));
+			}
+			resul.close();
+			sentencia.close();
+
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			System.out.println("Código de error: " + e.getErrorCode() + "\nMensaje de error: " + e.getMessage());
+
+		}
+
+	}
+
+	public static void pruebacrearvista() {
+
+		Connection conexion = Conexiones.getMysql("ejemplo25", "root", "");
+		// CREATE or replace
+		System.out.println("PRUEBA crear vista MYSQL");
+		String vista = "CREATE VIEW totales (dep, dnombre, nemp, media) AS "
+				+ " SELECT d.dept_no, dnombre, COUNT(emp_no), " + "  AVG(salario)  "
+				+ " FROM departamentos d LEFT JOIN empleados e " + " ON e.dept_no = d.dept_no "
+				+ " GROUP BY d.dept_no, dnombre";
+		crearvista(conexion, vista);
+
+		conexion = Conexiones.getSQlite(".\\basedatos\\ejemplo.db");
 		System.out.println("PRUEBA SUBIDA EN SQLITE");
-		subirsalario(conexion, 100, 10);
+		crearvista(conexion, vista);
+
+		conexion = Conexiones.getOracle("EJEMPLO25", "ejemplo25");
+		System.out.println("PRUEBA VISTA EN ORACLE");
+		crearvista(conexion, vista);
 	}
 
-	public static String insertardepartamento(Connection conexion, int dept, String nom, String loc) {
+	public static String Actividad2_10_insertardepartamento(Connection conexion, int dept, String nom, String loc) {
 		String mensaje = "";
 		try {
 
 			String sql = "INSERT INTO departamentos VALUES(" + dept + ", '" + nom + "', '" + loc + "')";
 			System.out.println("SENTENCIA: " + sql);
+
 			Statement sentencia = conexion.createStatement();
 			int filas = sentencia.executeUpdate(sql);
+
 			mensaje = "Registro Insertado. Filas afectadas: " + filas;
 			sentencia.close();
-
+			conexion.close();
 		} catch (SQLException e) {
+
 			mensaje = "Código de error: " + e.getErrorCode() + "\nMensaje de error: " + e.getMessage();
 
 		}
@@ -305,14 +375,32 @@ public class Principal {
 		return mensaje;
 	}
 
-	private static void crearVista(Connection conexion, String vista) {
-		Statement sentencia;
-		System.out.println("Vista a crear");
+	public static void pruebaupdate() {
 
+		// Subir el salario a los empleados de un dep
+		Connection conexion = Conexiones.getMysql("ejemplo25", "root", "");
+		System.out.println("PRUEBA SUBIDA EN MYSQL");
+		subirsalario(conexion, 100, 10);
+
+		conexion = Conexiones.getOracle("EJEMPLO25", "ejemplo25");
+		System.out.println("PRUEBA SUBIDA EN ORACLE");
+		subirsalario(conexion, 100, 10);
+
+		conexion = Conexiones.getSQlite(".\\basedatos\\ejemplo.db");
+		System.out.println("PRUEBA SUBIDA EN SQLITE");
+		subirsalario(conexion, 100, 10);
+	}
+
+	private static void crearvista(Connection conexion, String vista) {
+
+		Statement sentencia;
 		try {
+			System.out.println("Vista a crear");
 			sentencia = conexion.createStatement();
 			int filas = sentencia.executeUpdate(vista);
-			System.out.printf("Vista creada");
+			System.out.println("Vista creada");
+			conexion.close();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -320,14 +408,25 @@ public class Principal {
 
 	}
 
-	private static void subirsalario(Connection c, int subida, int dep) throws SQLException {
+	private static void subirsalario(Connection conexion, int subida, int dep) {
 
 		String sql = "UPDATE empleados set salario = salario + " + subida + " where dept_no = " + dep;
+
 		System.out.println(sql);
 
-		Statement sentencia = c.createStatement();
-		int filas = sentencia.executeUpdate(sql);
-		System.out.printf("Empleados modificados: %d %n", filas);
+		Statement sentencia;
+		try {
+
+			sentencia = conexion.createStatement();
+			int filas = sentencia.executeUpdate(sql);
+			System.out.printf("Empleados modificados: %d %n", filas);
+			conexion.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
