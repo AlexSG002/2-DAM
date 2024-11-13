@@ -22,7 +22,7 @@ public class PantallaInicial extends javax.swing.JFrame {
         setResizable(false);
         this.setIconImage(new ImageIcon(getClass().getResource("/gui/imgs/main_icon.png")).getImage());
         this.setTitle("Biblioteca");
-        jComboBox1.addItem(new ImageIcon("/gui/imgs/spain25.png"));
+        
     }
 
     /**
