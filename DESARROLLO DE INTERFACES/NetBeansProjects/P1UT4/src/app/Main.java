@@ -5,6 +5,7 @@
  */
 package app;
 
+import gui.Formulario;
 import gui.PantallaInicial;
 import javax.swing.JFrame;
 import org.jvnet.substance.SubstanceLookAndFeel;
