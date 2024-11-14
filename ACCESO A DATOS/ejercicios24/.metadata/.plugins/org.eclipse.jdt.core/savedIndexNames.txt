@@ -1,0 +1,6 @@
+INDEX VERSION 1.134+C:\Users\Tarde\Documents\2DAM\ACCESO A DATOS\ejercicios24\.metadata\.plugins\org.eclipse.jdt.core
+183746005.index
+1865797976.index
+3530332382.index
+127985292.index
+1746197156.index

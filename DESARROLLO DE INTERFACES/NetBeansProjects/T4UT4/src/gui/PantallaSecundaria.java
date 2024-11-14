@@ -13,19 +13,26 @@ import javax.swing.ImageIcon;
  * @author Alejandro Sánchez Gil
  */
 public class PantallaSecundaria extends javax.swing.JFrame {
+    //Variable que comprueba si se está reproduciendo música.
     boolean playing = false;
+    //Creamos unas instancias de las otras pantallas de la aplicación.
     private PantallaInicial parent;
     private Usuario user;
+    //Creamos un AudioClip de cada canción.
     AudioClip mantra;
     AudioClip six;
     
     /**
      * Creates new form PantallaSecundaria
      */
+    //Constructor de la PantallaSecundaria.
     public PantallaSecundaria(PantallaInicial parent, Usuario user) {
+        //Guardamos la información del user, es decir la pantalla de usuario.
         this.user = user;
         initComponents();
+        //Guardamos la configuración de parent, es decir la pantalla inicial.
         this.parent = parent;
+        //Establecemos iconos y audios.
         this.setIconImage(new ImageIcon(getClass().getResource("/gui/imgs/reproductor-de-musica.png")).getImage());
         getContentPane().setBackground(new java.awt.Color(121, 210, 230));
         mantra = java.applet.Applet.newAudioClip(getClass().getResource("/audio/mantra.wav"));
@@ -141,26 +148,34 @@ public class PantallaSecundaria extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Botón de cerrar sesión.
     private void jMenuCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuCerrarMouseClicked
         this.dispose();
         parent.setVisible(true);
     }//GEN-LAST:event_jMenuCerrarMouseClicked
-
+    //Botón de audio para reproducir la música seleccionada.
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         if(jRadioButtonMantra.isSelected()){
+            //La música será reproducida en caso de que no haya nada en reproducción.
             if(!playing){
+                //Cambia el icono del play a icono de stop.
             jLabel3.setIcon(new ImageIcon(getClass().getResource("/gui/imgs/detener.png")));
+            //Reproduce la música.
             mantra.play();
+            //Cambia la booleana playing a true.
             playing = true;
+            //En caso contrario:
             }else{
+                //Establece de nuevo el icono a play.
                 jLabel3.setIcon(new ImageIcon(getClass().getResource("/gui/imgs/play.png")));
+                //Para la canción actualmente reproducida.
                 mantra.stop();
+                //Cambia la booleana playing a false.
                 playing = false;
             }  
             
         }
-        
+        //Mismo código con la canción Six.
         if(jRadioButtonSix.isSelected()){
             if(!playing){
             jLabel3.setIcon(new ImageIcon(getClass().getResource("/gui/imgs/detener.png")));
@@ -174,7 +189,7 @@ public class PantallaSecundaria extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jLabel3MouseClicked
-
+    //Abre el menú de usuario.
     private void jMenuUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuUsuarioMouseClicked
         user.setVisible(true);
     }//GEN-LAST:event_jMenuUsuarioMouseClicked
@@ -226,13 +241,14 @@ public class PantallaSecundaria extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonMantra;
     private javax.swing.JRadioButton jRadioButtonSix;
     // End of variables declaration//GEN-END:variables
-
+    //Método para actualizar el idioma en caso de que esté seleccionado el español.
     public void actualizarIdioma(boolean spanish){
         if(spanish){
             jMenuUsuario.setText("Usuario");
             jMenuCerrar.setText("Cerrar Sesión");
             jLabelCanciones.setText("Mis canciones:");
             jLabelReproductor.setText("Reproductor MP3");
+            //En caso contrario lo actualiza al inglés.
         }else{
             jMenuUsuario.setText("User");
             jMenuCerrar.setText("Logout");

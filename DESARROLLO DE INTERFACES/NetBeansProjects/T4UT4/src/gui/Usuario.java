@@ -9,18 +9,22 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author lannc
+ * @author Alejandro Sánhez Gil
  */
 public class Usuario extends javax.swing.JFrame {
 
+    //Creamos una instancia de la pantalla inicial que es su parent, ya que de esta sacamos la password y el nombre del usuario además del idioma.
     private PantallaInicial parent;
     private String pass;
     private String nomUsu;
     /**
      * Creates new form Usuario
      */
+    //Constructor para usuario.
     public Usuario(PantallaInicial parent) {
+        //Establecemos como pantalla inicial la ya existente que abrimos en un inicio.
         this.parent = parent;
+        //Cambios estéticos
         initComponents();
         getContentPane().setBackground(new java.awt.Color(255, 105, 97));
         this.setIconImage(new ImageIcon(getClass().getResource("/gui/imgs/usuario (2).png")).getImage());
@@ -135,18 +139,18 @@ public class Usuario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Método para cerrar el menú de usuario.
     private void jButtonVovlerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVovlerActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonVovlerActionPerformed
-
+    //Método para mostrar el nombre de usuario y la pass.
     private void jButtonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarActionPerformed
         jTextField1.setText(nomUsu);
         jTextField2.setText(pass);
     }//GEN-LAST:event_jButtonMostrarActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
@@ -195,6 +199,7 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 
+    //Método para actualizar el idioma a español si la variable booleana es true.
     public void actualizarIdioma(boolean spanish){
         if(spanish){
             jButtonMostrar.setText("Mostrar");
@@ -202,6 +207,7 @@ public class Usuario extends javax.swing.JFrame {
             jLabelDetalles.setText("DETALLES DE USUARIO");
             jLabelNombre.setText("Nombre de usuario:");
             jLabelPass.setText("Contraseña:");
+            //En caso contrario lo establece al inglés.
         }else{
             jButtonMostrar.setText("Show");
             jButtonVovler.setText("Return");
@@ -210,7 +216,7 @@ public class Usuario extends javax.swing.JFrame {
             jLabelPass.setText("Password:");
         }
     }
-
+//Getters y setters de la pass y el nombre de usuario.
     public String getPass() {
         return pass;
     }

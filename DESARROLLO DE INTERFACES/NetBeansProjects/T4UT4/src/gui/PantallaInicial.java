@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
  * @author Alejandro Sánchez Gil
  */
 public class PantallaInicial extends javax.swing.JFrame {
+    //Creamos una instancia de las 2 pantallas de la aplicación.
     Usuario user = new Usuario(this);
     PantallaSecundaria pantalla = new PantallaSecundaria(this, user);
     
@@ -25,6 +26,7 @@ public class PantallaInicial extends javax.swing.JFrame {
      */
     public PantallaInicial() {
         initComponents();
+        //Establecemos cambios visuales y decorados.
         this.setIconImage(new ImageIcon(getClass().getResource("/gui/imgs/centro-de-juegos.png")).getImage());
         jPanel1.setBackground(new java.awt.Color(180, 211, 178));
         jPanel2.setOpaque(false);
@@ -196,31 +198,35 @@ public class PantallaInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Función del botón salir.
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButtonSalirActionPerformed
-
+    //Función del botón cambio de idioma a Español.
     private void jButtonEspanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEspanaActionPerformed
         setSpanish();
     }//GEN-LAST:event_jButtonEspanaActionPerformed
-
+    //Función del botón cambio de idioma a Inglés.
     private void jButtonInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInglesActionPerformed
         setEnglish();
     }//GEN-LAST:event_jButtonInglesActionPerformed
-
+    //Función del botón Limpiar.
     private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
         jTextField1.setText("");
         jPasswordField1.setText("");
     }//GEN-LAST:event_jButtonLimpiarActionPerformed
-
+    //Función del botón entrada.
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
+        //Tras comprobar que las entradas son válidas.
         if(entradaValida()){
+            //Establece el nombre de usuario y la contraseña para revisarlo posteriormente.
             user.setPass(new String(jPasswordField1.getPassword()));
             user.setNomUsu(jTextField1.getText());
             this.setVisible(false);
-        pantalla.setVisible(true);
+            //Abrimos la segunda pantalla.
+            pantalla.setVisible(true);
         }else{
+            //En caso de que no se cumpla.
             JOptionPane.showMessageDialog(this,"Los campos no pueden estar vacíos" ,"Error" ,JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonEntrarActionPerformed
@@ -278,7 +284,7 @@ public class PantallaInicial extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
-
+    //Método que cambia el idioma a Español.
     private void setSpanish() {
         jButtonEntrar.setText("Entrar");
         jButtonLimpiar.setText("Limpiar");
@@ -287,11 +293,11 @@ public class PantallaInicial extends javax.swing.JFrame {
         jLabelInicio.setText("INICIO DE SESIÓN");
         jLabelNombre.setText("Nombre de usuario:");
         jLabelPass.setText("Contraseña:");
-        
+        //Estos métodos sirven para cambiar el idioma en el resto de pantallas de la aplicación.
         pantalla.actualizarIdioma(true);
         user.actualizarIdioma(true);
     }
-
+    //Método que cambia el idioma a Inglés
     private void setEnglish() {
         jButtonEntrar.setText("Login");
         jButtonLimpiar.setText("Clean");
@@ -303,7 +309,8 @@ public class PantallaInicial extends javax.swing.JFrame {
         pantalla.actualizarIdioma(false);
         user.actualizarIdioma(false);
     }
-    
+    //Método que comprueba si las entradas son válidas. 
+    //Considero como válido cualquier cosa, mientras no este vacío puedes tener un nombre de usuario numérico si lo deseas.
     private boolean entradaValida(){
         if(jTextField1.getText().equals("") || jPasswordField1.getPassword().length==0){
             return false;
