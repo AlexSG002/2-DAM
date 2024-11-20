@@ -465,6 +465,9 @@
               <Image iconType="3" name="/gui/imgs/guardar.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListarUsuariosActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

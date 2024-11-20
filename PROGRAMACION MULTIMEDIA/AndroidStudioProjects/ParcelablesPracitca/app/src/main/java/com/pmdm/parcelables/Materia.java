@@ -7,16 +7,16 @@ import androidx.annotation.NonNull;
 
 public class Materia implements Parcelable {
     public String nombreMateria;
-    public int notaMateria;
+    public float notaMateria; // Cambiado a float para admitir decimales
 
-    public Materia(String nombreMateria, int notaMateria){
+    public Materia(String nombreMateria, float notaMateria){
         this.nombreMateria = nombreMateria;
         this.notaMateria = notaMateria;
     }
 
     protected Materia(Parcel in) {
         nombreMateria = in.readString();
-        notaMateria = in.readInt();
+        notaMateria = in.readFloat(); // Cambiado a readFloat
     }
 
     public static final Creator<Materia> CREATOR = new Creator<Materia>() {
@@ -47,6 +47,6 @@ public class Materia implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeString(nombreMateria);
-        parcel.writeInt(notaMateria);
+        parcel.writeFloat(notaMateria); // Cambiado a writeFloat
     }
 }

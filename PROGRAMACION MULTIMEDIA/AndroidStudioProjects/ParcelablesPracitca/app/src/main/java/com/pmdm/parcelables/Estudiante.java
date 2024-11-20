@@ -10,20 +10,23 @@ import java.util.ArrayList;
 public class Estudiante implements Parcelable {
     public String nomEstudiante;
     public int edad;
-    public int notaMedia;
+    public float notaMedia; // Cambiado a float para admitir decimales
     public ArrayList<Materia> listaMaterias;
-    public ArrayList<Estudiante> estudiantes;
-    public Estudiante(String nomEstudiante, int edad, int notaMedia){
+
+    // Constructor de 3 parámetros
+    public Estudiante(String nomEstudiante, int edad, float notaMedia){
         this.nomEstudiante = nomEstudiante;
         this.edad = edad;
         this.notaMedia = notaMedia;
+        this.listaMaterias = new ArrayList<>(); // Inicializa la lista
     }
 
-    public Estudiante(String nomEstudiante, int edad, int notaMedia, ArrayList<Materia>listaMaterias){
+    // Constructor de 4 parámetros (opcional, si lo necesitas)
+    public Estudiante(String nomEstudiante, int edad, float notaMedia, ArrayList<Materia> listaMaterias){
         this.nomEstudiante = nomEstudiante;
         this.edad = edad;
         this.notaMedia = notaMedia;
-        this.listaMaterias = new ArrayList<Materia>();
+        this.listaMaterias = listaMaterias != null ? listaMaterias : new ArrayList<>();
     }
 
     @Override
@@ -39,9 +42,8 @@ public class Estudiante implements Parcelable {
     protected Estudiante(Parcel in) {
         nomEstudiante = in.readString();
         edad = in.readInt();
-        notaMedia = in.readInt();
-        listaMaterias = in.readArrayList(Materia.class.getClassLoader());
-        estudiantes = in.createTypedArrayList(Estudiante.CREATOR);
+        notaMedia = in.readFloat(); // Cambiado a readFloat
+        listaMaterias = in.createTypedArrayList(Materia.CREATOR); // Usar createTypedArrayList
     }
 
     public static final Creator<Estudiante> CREATOR = new Creator<Estudiante>() {
@@ -65,7 +67,7 @@ public class Estudiante implements Parcelable {
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeString(nomEstudiante);
         parcel.writeInt(edad);
-        parcel.writeInt(notaMedia);
+        parcel.writeFloat(notaMedia); // Cambiado a writeFloat
         parcel.writeTypedList(listaMaterias);
     }
 }

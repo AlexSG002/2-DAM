@@ -20,6 +20,7 @@ import javax.swing.ListCellRenderer;
 public class Formulario extends javax.swing.JFrame {
 
     PantallaInicial parent;
+    Usuarios u;
     /**
      * Creates new form PantallaInicial
      */
@@ -31,6 +32,7 @@ public class Formulario extends javax.swing.JFrame {
         this.setIconImage(new ImageIcon(getClass().getResource("/gui/imgs/main_icon.png")).getImage());
         this.setTitle("Biblioteca");
         loadComboBoxWithImages();
+        this.u = new Usuarios(this);
     }
 
     /**
@@ -257,6 +259,11 @@ public class Formulario extends javax.swing.JFrame {
         jPanel3.add(jButtonAgregarUsuario);
 
         jButtonListarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/imgs/guardar.png"))); // NOI18N
+        jButtonListarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListarUsuariosActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButtonListarUsuarios);
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -313,9 +320,13 @@ public class Formulario extends javax.swing.JFrame {
 
     private void jButtonAgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarUsuarioActionPerformed
         if(validarEntradas()){
-            
+            crearUsuario();
         }
     }//GEN-LAST:event_jButtonAgregarUsuarioActionPerformed
+
+    private void jButtonListarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarUsuariosActionPerformed
+        u.setVisible(true);
+    }//GEN-LAST:event_jButtonListarUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,18 +378,23 @@ public class Formulario extends javax.swing.JFrame {
             return false;
         }
         
-        if(jTextFieldNIF.getText().matches("^[0-9]{8}[A-Za-z]$")){
+        if(!jTextFieldNIF.getText().matches("^[0-9]{8}[A-Za-z]$")){
             JOptionPane.showMessageDialog(this, "El NIF introducido es incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
-        if(jTextFieldEmail.getText().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")){
+        if(!jTextFieldEmail.getText().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")){
             JOptionPane.showMessageDialog(this, "El email introducido es incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
         if(jTextFieldApellidos.getText().isEmpty() || jTextFieldEmail.getText().isEmpty() || jTextFieldNombre.getText().isEmpty() || jTextFieldNIF.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "No puede haber campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if(u.NIFDuplicado(jTextFieldNIF.getText())){
+            JOptionPane.showMessageDialog(this, "Usuario con mismo NIF ya existe en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
@@ -423,6 +439,36 @@ public class Formulario extends javax.swing.JFrame {
                 return label;
             }
         });
+    }
+
+    public String[] crearUsuario() {
+        String[] usuario = new String[7];
+        usuario[0]=jTextFieldNIF.getText();
+        usuario[1]=jTextFieldNombre.getText();
+        usuario[2]=jTextFieldApellidos.getText();
+        usuario[3]=jTextFieldEmail.getText();
+        usuario[4]=jComboBox1.getSelectedItem().toString();
+        if(jRadioButton1.isSelected()){
+            usuario[5]="Si";
+        }else{
+            usuario[5]="No";
+        }
+        usuario[6]="";
+        if (jCheckBox1.isSelected()) 
+            usuario[6] += jCheckBox1.getText() + " ";
+        if (jCheckBox2.isSelected()) 
+            usuario[6] += jCheckBox2.getText() + " ";
+        if (jCheckBox3.isSelected()) 
+            usuario[6] += jCheckBox3.getText() + " ";
+        if (jCheckBox4.isSelected()) 
+            usuario[6] += jCheckBox4.getText() + " ";
+        if (jCheckBox5.isSelected()) 
+            usuario[6] += jCheckBox5.getText() + " ";
+        if (jCheckBox6.isSelected()) 
+            usuario[6] += jCheckBox6.getText() + " ";
+        
+        
+        return usuario;
     }
 
     

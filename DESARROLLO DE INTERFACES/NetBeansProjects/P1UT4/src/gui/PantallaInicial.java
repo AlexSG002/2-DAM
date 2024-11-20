@@ -17,6 +17,7 @@ public class PantallaInicial extends javax.swing.JFrame {
 
     boolean clave = false;
     Formulario f = new Formulario(this);
+    
     /**
      * Creates new form PantallaInicial
      */

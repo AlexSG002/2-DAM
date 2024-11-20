@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/cambiarTamaño"
+        android:title="Cambiar tamaño"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/reiniciar"
+        android:title="Reiniciar"
+        app:showAsAction="never"
+        android:icon="@android:drawable/ic_menu_revert" />
+    <item
+        android:id="@+id/instrucciones"
+        android:title="Instrucciones"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/cambiarMina"
+        android:title="Cambio de personaje"
+        app:showAsAction="always"
+        android:icon="@drawable/mina_terrestre"/>
+</menu>
