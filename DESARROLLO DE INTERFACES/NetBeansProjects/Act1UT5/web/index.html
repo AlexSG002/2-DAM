@@ -1,16 +1,131 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Currículum Vitae</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FAF3E3;
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        .contenedor {
+            background-color: #F0F0F0;
+            width: 800px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cabecera {
+            text-align: center;
+            color: #00CC00;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .titulo {
+            color: #00CC00;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0 20px;
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .columna {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .columna > div {
+            width: 48%;
+        }
+
+        .negrita {
+            color: #00CC00;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="cabecera">
+            <h1>Alejandro Sánchez Gil</h1>
+        </div>
+        <div>
+            <p><span class="negrita">Dirección:</span> Calle Supuesta, 44, Ciudad, Inventolandia</p>
+            <p><span class="negrita">Email:</span> alejandro.sanchez@ejemplo.com</p>
+            <p><span class="negrita">Teléfono:</span> (+34) 777 777 777</p>
+        </div>
+        <div>
+            <h2 class="titulo">Perfil Profesional</h2>
+            <p>Desarrollador de software con más de 2 años de experiencia en la creación y optimización de aplicaciones web y móviles. 
+                Entusiasta de la tecnología y defensor del aprendizaje permanente, con experiencia destacada en Python, React y arquitecturas serverless. 
+                Interesado en explorar nuevas oportunidades donde pueda aportar mis conocimientos en proyectos innovadores y colaborar en equipos dinámicos.</p>
+        </div>
+        <div>
+            <h2 class="titulo">Experiencia Laboral</h2>
+            <h3>Desarrollador FullStack - Tremendo Enterprises</h3>
+            <p>Junio 2026 - Presente</p>
+            <ul>
+                <li>Desarrollo de aplicaciones web utilizando HTML y CSS.</li>
+                <li>Colaboración en proyectos de de interfaces automatizadas.</li>
+            </ul>
+
+            <h3>Programador - Empresa Ficitcia</h3>
+            <p>Marzo 2025 - Mayo 2026</p>
+            <ul>
+                <li>Desarrollo de soluciones backend con Node.js y Express.</li>
+                <li>Gestión de bases de datos SQL y NoSQL.</li>
+                <li>Participación en reuniones de planificación y evaluación de proyectos.</li>
+            </ul>
+        </div>
+        <div class="columna">
+            <div>
+                <h2 class="titulo">Educación</h2>
+                <p><strong>Instituto de Ejemplo</strong> - Grado en Desarrollo de Aplicaciones Multiplataforma</p>
+                <p>2023 - 2025</p>
+            </div>
+            <div>
+                <h2 class="titulo">Habilidades</h2>
+                <ul>
+                    <li>Lenguajes de programación: JavaScript, Python, Java</li>
+                    <li>Frameworks: React, Angular, Node.js</li>
+                    <li>Herramientas: Git, Docker, Jenkins</li>
+                    <li>Metodologías Ágiles: Scrum y Lean</li>
+                </ul>
+            </div>
+        </div>
+        <div class="columna">
+            <div>
+                <h2 class="titulo">Certificaciones</h2>
+                <p>Desarrollador Web Full Stack - Certificación de Ejemplo (2024)</p>
+                <p>Python Avanzado - Curso de Ejemplo (2022)</p>
+            </div>
+            <div>
+                <h2 class="titulo">Referencias</h2>
+                <p>Disponibles a solicitud.</p>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>

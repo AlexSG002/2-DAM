@@ -1,0 +1,2 @@
+Introduce un número: 
+Producto de las cifras: 16
