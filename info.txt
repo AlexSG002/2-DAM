@@ -1,0 +1,44 @@
+Buenas tardes,
+
+He estado buscando información en internet al respecto a ver si podemos solucionarlo, intenta hacer esto que te comparto:
+
+Para el LAF:
+
+Asegúrate de incluir las bibliotecas externas en el proyecto y de que están marcadas como dependencias para el JAR exportado:
+
+Ve a Propiedades del proyecto → Librerías.
+Si usas NetBeans, activa la opción Package Required Libraries into Generated JAR en Build > Packaging.
+ 
+
+Problemas con las imágenes (jPanelLogo y otras)
+
+Causa: Al mover el proyecto, las imágenes pueden no estar incluidas en el JAR o el programa busca rutas absolutas que no existen en el otro equipo.
+
+Solución:
+
+Reubica las imágenes dentro del proyecto:
+Crea una carpeta llamada resources dentro de src.
+Copia las imágenes en src/resources.
+Carga las imágenes con rutas relativas: Usa getClass().getResource() para asegurarte de que el programa puede encontrar los recursos:
+ImageIcon icon = new ImageIcon(getClass().getResource("/resources/logo.png"));
+jPanelLogo.setIcon(icon);
+Verifica que las imágenes se incluyan en el JAR generado:
+Tras construir el proyecto, abre el JAR con un programa como WinRAR o 7-Zip y asegúrate de que las imágenes están presentes en la carpeta resources
+Error al establecer el icono de la aplicación:
+Causa: Similar a las imágenes, si el icono no se empaqueta correctamente o usa una ruta absoluta, no se encontrará en otro ordenador.
+Solución: Asegúrate de que el icono esté en el proyecto y usa rutas relativas para cargarlo: setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/icono.png")));
+Incluye correctamente las bibliotecas al exportar:
+Causa: Las bibliotecas externas (como la de validación o LAF) no están incluidas en el archivo JAR exportado.
+Solución:
+En NetBeans:
+Ve a Propiedades del proyecto → Build > Packaging.
+Marca la opción Package Required Libraries into Generated JAR.
+Verifica que las bibliotecas se empaquetan correctamente revisando el JAR.
+Configuración general para portabilidad:
+Usa rutas relativas siempre. Evita cualquier ruta que dependa del sistema (por ejemplo, C:/imagenes/).
+Empaqueta todos los recursos (imágenes, configuraciones, JARs externos).
+Prueba el JAR en un ordenador distinto para verificar que no depende de configuraciones específicas.
+Exportar correctamente el proyecto:
+En NetBeans, usa Limpieza y Construcción (Clean and Build).
+Verifica que en la carpeta dist se genera un único archivo JAR con todos los recursos incluidos.
+Si necesitas compartir el proyecto completo, incluye la carpeta src y el archivo nbproject.

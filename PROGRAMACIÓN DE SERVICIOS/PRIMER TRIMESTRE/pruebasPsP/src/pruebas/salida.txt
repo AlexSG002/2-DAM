@@ -1,0 +1,15 @@
+ El volumen de la unidad C es Boot
+ El n£mero de serie del volumen es: CE7B-857E
+
+ Directorio de C:\Users\Tarde\eclipse-workspace\pruebasPsP
+
+10/10/2024  19:04    <DIR>          .
+10/10/2024  17:31    <DIR>          ..
+10/10/2024  17:31               396 .classpath
+10/10/2024  17:31               386 .project
+10/10/2024  17:31    <DIR>          .settings
+10/10/2024  17:31    <DIR>          bin
+10/10/2024  19:04                 0 error.txt
+10/10/2024  17:31    <DIR>          src
+               3 archivos            782 bytes
+               5 dirs  309.050.908.672 bytes libres

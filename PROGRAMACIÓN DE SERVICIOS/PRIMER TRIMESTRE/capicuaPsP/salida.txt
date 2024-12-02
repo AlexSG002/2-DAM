@@ -1,0 +1,2 @@
+Introduce un número para ver si es capicua
+Numero capicua!

@@ -1,0 +1,2 @@
+Introduce un número decimal para traducirlo a binario
+1100011
