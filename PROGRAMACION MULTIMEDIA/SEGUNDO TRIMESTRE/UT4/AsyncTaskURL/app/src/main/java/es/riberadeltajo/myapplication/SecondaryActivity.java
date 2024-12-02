@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +25,16 @@ public class SecondaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_secondary);
         ll = findViewById(R.id.LinearLayout);
         Button bVolver = findViewById(R.id.buttonVolver);
+        Button bReset = findViewById(R.id.buttonReset);
+
+        bReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ll.removeAllViews();
+                imagenesBytes.clear();
+                Toast.makeText(SecondaryActivity.this, "Se han reseteado las imágenes.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         byte[] nuevaImagenBytes = getIntent().getByteArrayExtra("IMAGEN");
         if (nuevaImagenBytes != null) {

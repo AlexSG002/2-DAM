@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ExecutorService executorService;
     private Handler mainHandler;
     Button bDescargarImagen;
+    Button bDescargarURL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         executorService = Executors.newSingleThreadExecutor();
         mainHandler = new Handler(Looper.getMainLooper());
         bDescargarImagen = findViewById(R.id.btnDescargar2);
+        bDescargarURL = findViewById(R.id.btnDescargar);
 
         bDescargarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,11 +47,39 @@ public class MainActivity extends AppCompatActivity {
                 DescargarImagen();
                 EditText editTextImagen = findViewById(R.id.editTextImagen);
                 editTextImagen.setText("");
+                bDescargarImagen.setText("Volver a descargar");
+            }
+        });
+
+        bDescargarURL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Descargar();
             }
         });
     }
 
-    public void Descargar(View v) {
+    public boolean comprobarImagen(String url){
+        String[] extensionesValidas = {".jpeg",".jpg",".png"};
+
+        for(String extension : extensionesValidas){
+            if(url.toLowerCase().endsWith(extension)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean comprobarTexto(String url){
+        String extensionTXT = ".txt";
+
+        if(url.toLowerCase().endsWith(extensionTXT)){
+            return true;
+        }
+        return false;
+    }
+
+    public void Descargar() {
         EditText edURL = findViewById(R.id.edURL);
         txtDescarga = findViewById(R.id.txtDescarga);
         txtDescarga.setMovementMethod(new ScrollingMovementMethod());
@@ -59,7 +89,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (networkInfo != null && networkInfo.isConnected()) {
             String url = edURL.getText().toString();
-            executorService.execute(new DescargaPaginaWeb(url));
+            if(comprobarTexto(url)) {
+                executorService.execute(new DescargaPaginaWeb(url));
+            }else{
+                txtDescarga.setText("La url introducida no es un texto (extensión .txt)");
+            }
         } else {
             txtDescarga.setText("No se ha podido establecer conexión a internet");
         }
@@ -72,7 +106,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (networkInfo != null && networkInfo.isConnected()) {
             String url = editTextImagen.getText().toString();
-            executorService.execute(new DescargarImagen(url));
+            if(comprobarImagen(url)) {
+                executorService.execute(new DescargarImagen(url));
+            }else{
+                Toast.makeText(MainActivity.this, "Introduce una URL de imagen válida (jpg, jpeg o png).",Toast.LENGTH_SHORT).show();
+            }
         } else {
             Toast.makeText(MainActivity.this, "No se ha podido establecer conexión a internet",Toast.LENGTH_SHORT).show();
         }
@@ -94,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra("IMAGEN",imagenBytes);
                 mainHandler.post(()->startActivity(i));
             }catch (IOException e){
-                mainHandler.post(()->Toast.makeText(MainActivity.this, "Error al descargar la imagen",Toast.LENGTH_SHORT).show());
+                mainHandler.post(()->Toast.makeText(MainActivity.this, "Introduce una URL correcta(htps://www.ejemplo.png/jpg/jpeg)",Toast.LENGTH_SHORT).show());
             }
         }
 
@@ -205,3 +243,4 @@ public class MainActivity extends AppCompatActivity {
 }
 //Foto del bicho: https://www.hola.com/horizon/square/e48159e847bc-cristiano-ronaldo.jpg
 //Foto de messi: https://s.france24.com/media/display/451ed2b8-eed6-11ea-afdd-005056bf87d6/w:1280/p:16x9/messi-1805.jpg
+//Foto de dinho: https://estaticos-cdn.prensaiberica.es/clip/ae1f1131-ae9d-490d-999b-1e702bf4c109_alta-libre-aspect-ratio_default_0.jpg
