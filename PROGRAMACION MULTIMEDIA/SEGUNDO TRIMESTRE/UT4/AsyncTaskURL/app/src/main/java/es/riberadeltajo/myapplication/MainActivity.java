@@ -25,32 +25,44 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
-
+    //Declaramos las variables que vamos a usar.
     private TextView txtDescarga;
     private ExecutorService executorService;
     private Handler mainHandler;
-    Button bDescargarImagen;
-    Button bDescargarURL;
+    private static Button bDescargarImagen;
+    private Button bDescargarURL;
+    private Button bReset;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //Inicializamos el executor service y el handler.
         executorService = Executors.newSingleThreadExecutor();
         mainHandler = new Handler(Looper.getMainLooper());
         bDescargarImagen = findViewById(R.id.btnDescargar2);
         bDescargarURL = findViewById(R.id.btnDescargar);
+        bReset = findViewById(R.id.buttonReset);
 
+        bReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SecondaryActivity.resetearImagenes();
+                Toast.makeText(MainActivity.this, "Se han reseteado las imágenes.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        //Al pulsar el botón descargar imagen ejecutamos el método DescargarImagen().
         bDescargarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DescargarImagen();
+                //Limpiamos el texto de la URL
                 EditText editTextImagen = findViewById(R.id.editTextImagen);
                 editTextImagen.setText("");
-                bDescargarImagen.setText("Volver a descargar");
             }
         });
-
+        //Cambié el tipo de entrada del evento onClickListener del método por defecto.
         bDescargarURL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,10 +70,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    //Método para comprobar que las imagenes sean válidas.
     public boolean comprobarImagen(String url){
+        //Declaramos las extensiones válidas, yo he optado por poner jpeg, jpg y png.
         String[] extensionesValidas = {".jpeg",".jpg",".png"};
-
+        //Comprobamos
         for(String extension : extensionesValidas){
             if(url.toLowerCase().endsWith(extension)){
                 return true;
@@ -131,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, SecondaryActivity.class);
                 i.putExtra("IMAGEN",imagenBytes);
                 mainHandler.post(()->startActivity(i));
+
             }catch (IOException e){
                 mainHandler.post(()->Toast.makeText(MainActivity.this, "Introduce una URL correcta(htps://www.ejemplo.png/jpg/jpeg)",Toast.LENGTH_SHORT).show());
             }
@@ -142,8 +156,8 @@ public class MainActivity extends AppCompatActivity {
             try {
                 URL url = new URL(myurl);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(10000 /* milisegundos */);
-                conn.setConnectTimeout(15000 /* milisegundos */);
+                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(15000);
                 conn.setRequestMethod("GET");
                 conn.setDoInput(true);
 
@@ -210,8 +224,8 @@ public class MainActivity extends AppCompatActivity {
             try {
                 URL url = new URL(myurl);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(10000 /* milisegundos */);
-                conn.setConnectTimeout(15000 /* milisegundos */);
+                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(15000);
                 conn.setRequestMethod("GET");
                 conn.setDoInput(true);
 
@@ -239,6 +253,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         executorService.shutdown();
+    }
+
+    public static void cambiarTextoBoton(){
+        //Cambiamos el texto del botón.
+        bDescargarImagen.setText("Volver a descargar");
     }
 }
 //Foto del bicho: https://www.hola.com/horizon/square/e48159e847bc-cristiano-ronaldo.jpg

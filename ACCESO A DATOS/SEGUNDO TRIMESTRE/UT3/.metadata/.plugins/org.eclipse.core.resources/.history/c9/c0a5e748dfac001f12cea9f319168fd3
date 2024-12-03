@@ -1,0 +1,62 @@
+package principal;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+
+import clases.*;
+
+public class Principal {
+
+	private static SessionFactory factory;
+	
+	public static void main(String[] args) {
+		
+		factory = Conexion.getSession(); //Creo la sessionFactory una única vez.
+
+		conuniqueresultmaxproductoporcompra();
+		
+		factory.close();
+
+
+	}
+
+	private static void conuniqueresultmaxproductoporcompra() {
+		
+		Session session = factory.openSession();
+	
+		Query<Compras> q = session.createQuery("from Compras",Compras.class);
+		
+		List<Compras> lista = q.list();
+		int num = lista.size();
+		if (num>0) {
+			
+			
+			for (Compras com: lista){
+				
+				String con = " select d.productos "
+						+ " from Detcompras d where d.compras.numcompra = " + com.getNumcompra()
+						+ " and d.productos.pvp = "
+						+ "( select max(d2.productos.pvp) "
+						+ "    from Detcompras d2 where d2.compras.numcompra = " +  
+						com.getNumcompra() +") ";
+				
+				
+				
+				
+				
+				
+				
+			}
+			
+			session.close();
+		
+	}
+	
+	
+	
+
+}

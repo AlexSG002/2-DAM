@@ -1,6 +1,7 @@
 package principal;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -8,6 +9,8 @@ import java.util.logging.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import org.hibernate.query.Query;
 
 import clases.*;
 
@@ -21,53 +24,141 @@ public class Principal {
 
 		factori = Conexion.getSession(); // Creo la sessionFactory una única vez.
 
-		verdatosdecentro(1000);
-		System.out.println("-----------");
-		verdatosdecentro(1111);
-		System.out.println("-----------");
-		verdatosdecentro(1050);
+//		verdatosdecentro(1000);
+//   	System.out.println("-----------");
+//		verdatosdecentro(1111);
+//		System.out.println("-----------");
+//		verdatosdecentro(1050);
+//		
+//		System.out.println("-----------");
+//		mostrardatosprofescentro(1011); // tiene subordinados
+//		System.out.println("-----------");
+//		mostrardatosprofescentro(2002); // No es JEFE
+//		System.out.println("-----------");
+//		mostrardatosprofescentro(9999); // NO EXISTE
+//		
+//		System.out.println("------------------insertar/actualizar---");
+//		//  centro nuevo, no existe, se creará
+//		actualizarcentro(1500, "Centro 1500", 2000, "C/Las Palmeras 2");
+//		System.out.println("------Existe-------------");
+//		// centro existe, se actualiza
+//		actualizarcentro(1050, "Centro 1050", 2000, "C/Las Palmeras 2");
+//		
 		
-		System.out.println("-----------");
-		mostrardatosprofescentro(1011); // tiene subordinados
-		System.out.println("-----------");
-		mostrardatosprofescentro(2002); // No es JEFE
-		System.out.println("-----------");
-		mostrardatosprofescentro(9999); // NO EXISTE
+//		System.out.println("------------------Asignar asig a profesor---");
+//		asignarasigaprofesor(1000, "Nueva2"); // nueva asig
+//		System.out.println("------Añadir");
+//		asignarasigaprofesor(1000, "IF0006"); // añado asig 
+//		System.out.println("------Ya la tiene");
+//		asignarasigaprofesor(1000, "IF0001"); // ya tiene esa asig
+//	
+		//Borrar asignatura
+//		System.out.println("------existe");
+//		borrarasignatura("IF0003"); // existe y tiene reg
+//		
+//		System.out.println("------ no existe");
+//		borrarasignatura("IF1111"); // no existe
+	
+		// ejemplos con consultas Querys
+		listartodosloscentros();
 		
-		System.out.println("------------------insertar/actualizar---");
-		//  centro nuevo, no existe, se creará
-		actualizarcentro(1500, "Centro 1500", 2000, "C/Las Palmeras 2");
-		System.out.println("------Existe-------------");
-		// centro existe, se actualiza
-		actualizarcentro(1050, "Centro 1050", 2000, "C/Las Palmeras 2");
-		
-		
-		System.out.println("------------------Asignar asig a profesor---");
-		asignarasigaprofesor(1000, "Nueva"); // nueva asig
-		System.out.println("------Añadir");
-		asignarasigaprofesor(1000, "IF0003"); // añado asig 
-		System.out.println("------Ya la tiene");
-		asignarasigaprofesor(1000, "IF0001"); // ya tiene esa asig
 		factori.close();
 
 	}
      
+	private static void listartodosloscentros() {
+		
+		Session session = factori.openSession();
+			
+		Query<C1Centros> q = session.createQuery("from C1Centros",C1Centros.class);
+	
+		List<C1Centros> lista = q.list();
+		int num = lista.size();
+		if (num>0) {
+			
+			for (C1Centros cen: lista){
+				System.out.println("Cod centro: "+
+			     cen.getCodCentro()+ "   Nombre: " +
+						cen.getNomCentro() +"  Número de profesores: " +
+			     cen.getC1Profesoreses().size());
+				System.out.println("----------------------------------------------------------------------");
+				
+				if (cen.getC1Profesoreses().size()==0) {
+					System.out.println("    ** SIN PROFESORES **");
+				}
+				else {
+					// si hay profesores
+					mostrardatosprofescentro(cen.getC1Profesoreses());
+				}
+				System.out.println("---------------------------------------");				
+				System.out.println();
+			} // fin for centros
+			
+		}
+		else {
+			System.out.println("------ SIN CENTROS -------");
+		}
+		session.close();
+
+		
+		
+		
+	}
+
+	private static void borrarasignatura(String codasi) {
+		Session session = factori.openSession();
+		C1Asignaturas asi = (C1Asignaturas) session.get(C1Asignaturas.class, codasi);
+		if (asi==null) {
+			System.out.println("LA ASIGNATURA A BORRAR no existe: "+ codasi);
+			
+		}
+		else{
+			Transaction tx = session.beginTransaction();
+			session.remove(asi);
+			tx.commit();
+			System.out.println("LA ASIGNATURA HA SIDO BORRADA: "+ codasi);
+		}
+		
+		session.close();
+	}
+
 	private static void asignarasigaprofesor(int codprof, String codasi) {
 		Session session = factori.openSession();
-		C1Profesores profe = (C1Profesores) session.get(C1Profesores.class, (short)codprof);
-		
-		if(profe!=null) {
-			C1Asignaturas asi = (C1Asignaturas)session.get(C1Asignaturas.class, (String)codasi);
-			if(asi==null) {
-				asi = new C1Asignaturas();
+
+		C1Profesores profe = (C1Profesores) session.get(C1Profesores.class, (short) codprof);
+		//Transaction tx = session.beginTransaction();
+
+		if (profe!=null) {
+			// profe existe
+			//se busca la asignatura
+			C1Asignaturas asi = (C1Asignaturas) session.get(C1Asignaturas.class, codasi);
+			if (asi==null) {
+				//Nueva asignatura, se añade
+				asi= new C1Asignaturas ();
 				asi.setCodAsig(codasi);
 				asi.setNombreAsi(codasi+" NOMBRE");
 				session.persist(asi);
+				
 			}
-		}else {
+			
+			//asignar la asignatura al set
+			profe.getC1Asignaturases().add(asi);
+			Transaction tx = session.beginTransaction();
+			session.merge(profe);
+			
+			try {
+		    	tx.commit();
+			} catch(org.hibernate.exception.ConstraintViolationException e) {
+				e.printStackTrace();
+				//System.out.println(e.getErrorMessage());
+			}
+					
+		}
+		else {
 			System.out.println(" ** PROFESOR NO EXISTE: "+codprof);
 		}
 		
+		session.close();		
 		
 	}
 	
@@ -210,6 +301,8 @@ public class Principal {
 		System.out.printf("%5s %-30s %-30s %-30s %-20s%n",
 				"-----","--------------------","--------------------","--------------------",
 				"--------------------");
+		int max=0;
+		String nombremax ="";
 		for (C1Profesores p : lista) {
 			
 			String jefe="NO TIENE";
@@ -225,8 +318,24 @@ public class Principal {
 			  p.getCodProf(), p.getNombreApe(), 
 			  espe,  jefe, 	  p.getC1Asignaturases().size());
 			  
+			// preguntar por el máximo
+			if( p.getC1Asignaturases().size() > max) {
+				nombremax = p.getNombreApe();
+				max=p.getC1Asignaturases().size();
+			 }
+			else {
+				if( p.getC1Asignaturases().size() == max) {
+					nombremax = nombremax + ". " +p.getNombreApe();
+				}
 			}
-	
+			
+			} // fin for
+		System.out.printf("%5s %-30s %-30s %-30s %-20s%n",
+				"-----","--------------------","--------------------","--------------------",
+				"--------------------");
+	      // Mostrar línea de totales
+		System.out.println("Nombre de profesor que imparte más asignaturas: " + nombremax);
+		
 	}
 
 }

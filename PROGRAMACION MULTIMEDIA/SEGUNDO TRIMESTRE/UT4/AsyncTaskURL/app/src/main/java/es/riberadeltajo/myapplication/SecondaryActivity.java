@@ -25,23 +25,21 @@ public class SecondaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_secondary);
         ll = findViewById(R.id.LinearLayout);
         Button bVolver = findViewById(R.id.buttonVolver);
-        Button bReset = findViewById(R.id.buttonReset);
-
-        bReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ll.removeAllViews();
-                imagenesBytes.clear();
-                Toast.makeText(SecondaryActivity.this, "Se han reseteado las imágenes.", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         byte[] nuevaImagenBytes = getIntent().getByteArrayExtra("IMAGEN");
         if (nuevaImagenBytes != null) {
-            if (imagenesBytes.size() < MAX_IMAGENES) {
-                imagenesBytes.add(nuevaImagenBytes);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(nuevaImagenBytes, 0, nuevaImagenBytes.length);
+            int ancho = bitmap.getWidth();
+            int alto = bitmap.getHeight();
+
+            if (validarImagenes(ancho, alto)) {
+                if (imagenesBytes.size() < MAX_IMAGENES) {
+                    imagenesBytes.add(nuevaImagenBytes);
+                } else {
+                    Toast.makeText(this, "El número máximo de imágenes es 3", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(this, "El número máximo de imágenes es 3", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "La imagen no cumple con el tamaño mínimo de 200x200 px o el máximo de 1920x1080 px", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -51,8 +49,10 @@ public class SecondaryActivity extends AppCompatActivity {
             Intent intent = new Intent(SecondaryActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
+            MainActivity.cambiarTextoBoton();
         });
     }
+
 
     private void mostrarImagenes() {
         ll.removeAllViews();
@@ -82,6 +82,22 @@ public class SecondaryActivity extends AppCompatActivity {
             nuevaImagen.addView(imagen);
             ll.addView(nuevaImagen);
         }
+    }
+
+    public static void resetearImagenes(){
+        imagenesBytes.clear();
+    }
+
+    private boolean validarImagenes(int ancho, int alto){
+        int minAncho=200;
+        int minAlto=200;
+        int maxAncho=1920;
+        int maxAlto=1080;
+
+        if(ancho < minAncho || alto < minAlto || ancho > maxAncho || alto > maxAlto){
+            return false;
+        }
+        return true;
     }
 
 }

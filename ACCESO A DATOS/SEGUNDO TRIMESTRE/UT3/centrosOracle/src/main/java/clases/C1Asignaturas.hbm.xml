@@ -9,7 +9,7 @@
         <property name="nombreAsi" type="string">
             <column length="30" name="NOMBRE_ASI"/>
         </property>
-        <set fetch="select" inverse="false" lazy="true" name="c1Profesoreses" schema="CENTROS" table="C1_ASIGPROF">
+        <set fetch="select" inverse="false" lazy="false" name="c1Profesoreses" schema="CENTROS" table="C1_ASIGPROF">
             <key>
                 <column length="6" name="C1_ASIGNATURAS_COD_ASIG" not-null="true"/>
             </key>

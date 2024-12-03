@@ -1,0 +1,5 @@
+1.Boton seleccionar contacto. Solo
+2.Luego 2 editText para filtrar por nom o por ape y un botón para buscar
+3. Que aparezca en lista los contactos que coincidan, fragmento
+4. OnLongClick a contacto y se activa el botón enviar sms
+5. Una vez clicado en enviar, debe salir foto de contacto, nombre, tlf, es decir datos de contacto y un sms enviado con éxito, tmb un botón de volver(reset).

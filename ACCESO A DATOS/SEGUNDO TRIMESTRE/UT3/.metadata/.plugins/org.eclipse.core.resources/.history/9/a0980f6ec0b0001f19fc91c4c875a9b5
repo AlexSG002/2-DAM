@@ -1,0 +1,10 @@
+package clases;
+
+public class Accesosporestacion {
+	private int codEstacion;
+	private String nombre;
+	private String direccion;
+	private long contador;
+
+
+}

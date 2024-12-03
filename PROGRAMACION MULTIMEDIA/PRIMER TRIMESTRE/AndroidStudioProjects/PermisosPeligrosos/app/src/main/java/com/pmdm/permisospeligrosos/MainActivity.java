@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode==PERMISO_UBICACION);
+        if(requestCode==PERMISO_UBICACION)
             if(grantResults[0]==PackageManager.PERMISSION_GRANTED) {
                 obtenerLocalizacion();
             }
