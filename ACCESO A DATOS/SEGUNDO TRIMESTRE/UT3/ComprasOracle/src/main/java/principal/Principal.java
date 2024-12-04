@@ -24,10 +24,89 @@ public class Principal {
 		factory = Conexion.getSession(); //Creo la sessionFactory una única vez.
 
 		conuniqueresultmaxproductoporcompra();
+		// Utilizando la clase auxiliar
+		listartotalclientes1();
 		
+		// Consulta from Clientes
+		listartotalclientes2();
 		factory.close();
 
 
+	}
+
+	private static void listartotalclientes2() {
+		
+		Session session = factory.openSession();
+		String hql ="From Clientes c order by c.codcliente";
+		Query<Clientes> q = session.createQuery(hql, Clientes.class);
+		List<Clientes> lista = q.list();
+		int num = lista.size();
+		System.out.printf("%10s %-30s %10s %10s %n","CODCLIENTE",
+				"NOMBRE CLIENTE","NUMCOMPRAS","TOTAL" );
+		System.out.printf("%10s %-30s %10s %10s %n","----------",
+				"------------------------------","----------","----------" );
+		Long tcon=0l;
+		Double tsuma = 0d;
+		for (Clientes tt: lista){
+			
+			System.out.printf("%10s %-30s %10s %10s %n",
+					tt.getCodcliente(), tt.getNombre(),
+					tt.getComprases().size(),0);
+				
+			
+			
+			tcon = tcon + tt.getComprases().size();
+			tsuma = tsuma + 0;
+			
+		}
+		System.out.printf("%10s %-30s %10s %10s %n","----------",
+				"------------------------------","----------","----------" );
+	
+		System.out.printf("%10s %-30s %10s %10s %n",
+				"TOTALES =>","",tcon, tsuma);
+		session.close();
+		
+		
+		session.close();
+	}
+	
+	
+	
+	private static void listartotalclientes1() {
+		
+		Session session = factory.openSession();
+		String hql = "select new clases.TotalCliente(c.codcliente, c.nombre , count(distinct con),"
+				+ " sum(det.unidades * det.productos.pvp) ) "
+				+ " from Clientes c left join c.comprases con join con.detcomprases det"
+				+ " group by c.codcliente, c.nombre "
+				+ " order by c.codcliente";
+		
+		Query<TotalCliente> q = session.createQuery(hql, TotalCliente.class);
+		List<TotalCliente> lista = q.list();
+		int num = lista.size();
+		
+		
+		System.out.printf("%10s %-30s %10s %10s %n","CODCLIENTE",
+				"NOMBRE CLIENTE","NUMCOMPRAS","TOTAL" );
+		System.out.printf("%10s %-30s %10s %10s %n","----------",
+				"------------------------------","----------","----------" );
+		Long tcon=0l;
+		Double tsuma = 0d;
+		for (TotalCliente tt: lista){
+			
+			//System.out.println(tt.toString());
+			System.out.printf("%10s %-30s %10s %10s %n",
+			tt.getCodcliente(), tt.getNombre(), tt.getContador(), tt.getSuma());
+			tcon = tcon + tt.getContador();
+			tsuma = tsuma + tt.getSuma();
+			
+		}
+		System.out.printf("%10s %-30s %10s %10s %n","----------",
+				"------------------------------","----------","----------" );
+	
+		System.out.printf("%10s %-30s %10s %10s %n",
+				"TOTALES =>","",tcon, tsuma);
+		session.close();
 	}
 
 	private static void conuniqueresultmaxproductoporcompra() {

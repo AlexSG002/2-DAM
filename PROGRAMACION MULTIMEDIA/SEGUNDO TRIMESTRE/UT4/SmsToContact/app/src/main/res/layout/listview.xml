@@ -1,20 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:padding="16dp">
 
-    <TextView
+    <EditText
+        android:id="@+id/editTextNombre"
         android:layout_width="match_parent"
-        android:layout_height="67dp"
-        android:height="30dp"
-        android:longClickable="true"
-        android:orientation="vertical"
-        android:text="TextView" />
-    <ListView
-        android:id="@+id/list_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        android:layout_height="61dp"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="text" />
 
+    <Button
+        android:id="@+id/buttonFiltrarNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filtrar por Nombre"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/editTextApellido"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:ems="10"
+        android:hint="Apellido"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/buttonFiltrarApellido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filtrar por Apellido"
+        tools:visibility="visible" />
+
+    <ListView
+        android:id="@+id/listViewContactos"
+        android:layout_width="match_parent"
+        android:layout_height="518dp"
+        android:visibility="visible" />
+
+</LinearLayout>
