@@ -1,5 +1,7 @@
 package principal;
+import java.math.BigInteger;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -29,9 +31,40 @@ public class Principal {
 		
 		// Consulta from Clientes
 		listartotalclientes2();
+		
+		listarTotalProductos();
+		
+		listarDatosPorProducto();
+		
+		borrarCliente(1);
+		
+		borrarCliente(6);
+		
+		borrarCliente(100);
 		factory.close();
 
 
+	}
+
+	private static void borrarCliente(int cli) {
+		Session session = factory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+		String hqlDel = "delete Clientes c where c.codcliente = ?1";
+		int filas = session.createMutationQuery( hqlDel ).setParameter(1, cli ).executeUpdate();
+		if(filas!=0) {
+			System.out.println("CLIENTE BORRADO: "+cli);
+		}else {
+			System.out.println("CLIENTE NO EXISTE: "+cli);
+		}
+		System.out.println("FILAS BORRADAS: "+filas);
+		tx.commit();
+		}catch(org.hibernate.exception.ConstraintViolationException e) {
+			System.out.println("ATENCIÓN CLIENTE "+cli+" NO SE PUEDE BORRAR, TIENE REG RELACIONADOS.");
+		}
+		
+		
+		session.close();
 	}
 
 	private static void listartotalclientes2() {
@@ -149,6 +182,100 @@ public class Principal {
 	}
 	
 }//
+	
+	private static void listarTotalProductos() {
+		Session session = factory.openSession();
+		String hql ="From Productos p order by p.codproducto";
+		Query<Productos> q = session.createQuery(hql, Productos.class);
+		
+		List<Productos> lista = q.list();
+
+		System.out.println();
+		
+		int totaluni = 0, max =0;
+		float totalimp = 0;
+		String nommax = "";
+//		String hql2 = "select coalesce(sum( d.unidades ), 0) from, Detcompras de where d.id.codproducto =: cod";
+		for(Productos p : lista) {
+			Set <Detcompras> detalle = p.getDetcomprases();
+			int sumauni = 0;
+			for(Detcompras de : detalle) {
+				sumauni = sumauni + de.getUnidades().intValue();
+			}
+			
+//			Query<BigInteger> q2 = session.createQuery(hql2, BigInteger.class);
+//			q2.setParameter("cod", p.getCodproducto());
+//			BigInteger ss = q2.uniqueResult();
+//			sumauni = ss.intValue();
+			
+			float total = p.getPvp().floatValue()*sumauni;
+			System.out.printf("%10s %-30s %10s %10s %n", p.getCodproducto(), p.getDenominacion(), p.getPvp(), sumauni, total);
+			
+			totaluni = totaluni+sumauni;
+			totalimp = totalimp +total;
+			
+			if(sumauni >= max) {
+				
+				if(sumauni == max) {
+					nommax = nommax + p.getDenominacion();
+				}else {
+					nommax = p.getDenominacion();
+				}
+				
+			}
+		}
+		
+		System.out.printf("%10s %-30s %10s %10s %n", "TOTALES: ", "", "", totaluni, totalimp);
+		
+		System.out.println("Producto/s más vendido/s( "+max+" ): "+nommax);
+		
+		session.close();
+		
+	}
+	
+	
+	
+	
+	private static void listarDatosPorProducto() {
+		Session session = factory.openSession();
+		String hql ="From Productos p order by p.codproducto";
+		Query<Productos> q = session.createQuery(hql, Productos.class);
+		
+		List<Productos> lista = q.list();
+		for(Productos p: lista) {
+			System.out.println("*****");
+			System.out.println("CODIGO PRODUCTO: "+p.getCodproducto());
+			System.out.println("Denominación: "+p.getDenominacion()+"    Precio: "+p.getPvp());
+			System.out.println("---------------------------------------------------------------------------------------");
+			
+			if(p.getDetcomprases().size()==0) {
+				System.out.println("   ** SIN COMPRAS **");
+				System.out.println("---------------------------------------------------------------------------------------");
+			}else {
+				System.out.printf("%10s %10s %10s %-30s %10s %10s %n", "Num_Compra","FechaCompras","CodCliente","Nombre Cliente", "Unidades","Importe");
+				System.out.printf("%10s %10s %10s %-30s %10s %10s %n", "-----------","-----------","-----------","---------------------------------", "-----------","-----------");
+				
+				Set <Detcompras> detalle = p.getDetcomprases();
+				int sumauni = 0;
+				float timp = 0;
+				
+				for(Detcompras de:detalle) {
+					float imp = de.getUnidades().intValue() * p.getPvp().floatValue();
+					timp=timp+imp;
+					sumauni = sumauni + de.getUnidades().intValue();
+					System.out.printf("%10s %10s %10s %-30s %10s %10s %n", de.getCompras().getNumcompra(),
+							de.getCompras().getFecha(),
+							de.getCompras().getClientes().getCodcliente(),
+							de.getCompras().getClientes().getNombre(), 
+							de.getUnidades(), imp);
+				}
+				System.out.printf("%10s %10s %10s %-30s %10s %10s %n", "-----------","-----------","-----------","---------------------------------", "-----------","-----------");
+				System.out.printf("%10s %10s %10s %-30s %10s %10s %n", "TOTALES","","","", sumauni, timp);
+			}
+		}
+		
+		session.close();
+	}
 	
 } // fin clase
 

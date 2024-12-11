@@ -24,17 +24,21 @@ public class Principal {
 
 		factori = Conexion.getSession(); // Creo
 
-		consultasobjetos();
-
-		consultatotales();
+//		consultasobjetos();
+//
+//		consultatotales();
+//		
+//		consultaconobjetos();
 		
-		consultaconobjetos();
+		insertardepardenuevos();
 		
-
 		factori.close();
 	}
 
 	
+
+
+
 	private static void consultaconobjetos() {
 		Session session = factori.openSession();
 		Query cons = session.createQuery("select d.deptNo, count(em.empNo), "
@@ -271,5 +275,26 @@ public class Principal {
 		session.close();
 
 	}
+	
+	private static void insertardepardenuevos() {
+		Session session = factori.openSession();
+		System.out.println("\nInsertar nuevos departamentos\n-----------------------");
+		Transaction tx = session.beginTransaction();
+		try {
+		String hqlInsert = "insert into Departamentos (deptNo, dnombre, loc)"
+			           + " select n.deptNo, n.dnombre, n.loc from Nuevos n";
+
+		Query cons = (Query) session.createMutationQuery( hqlInsert );
+		int filascreadas = cons.executeUpdate();
+
+		tx.commit(); // valida la transacción
+
+		System.out.printf("FILAS INSERTADAS: %d%n",filascreadas); 
+		}catch(org.hibernate.exception.ConstraintViolationException e) {
+			System.out.println("ERROR: SE HAN ENCONTRADO CLAVES REPETIDAS."+e.getMessage());
+		}
+		session.close();
+	}
+	
 
 }
