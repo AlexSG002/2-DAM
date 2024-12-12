@@ -42,10 +42,11 @@ public class MainActivity extends AppCompatActivity {
         bDescargarImagen = findViewById(R.id.btnDescargar2);
         bDescargarURL = findViewById(R.id.btnDescargar);
         bReset = findViewById(R.id.buttonReset);
-
+        //Botón para resetar las imágenes.
         bReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Método dentro de la Secondary Activity que resetea las imágenes.
                 SecondaryActivity.resetearImagenes();
                 Toast.makeText(MainActivity.this, "Se han reseteado las imágenes.", Toast.LENGTH_SHORT).show();
             }
@@ -111,15 +112,16 @@ public class MainActivity extends AppCompatActivity {
             txtDescarga.setText("No se ha podido establecer conexión a internet");
         }
     }
-
+    //Método para descargar las imágenes desde url
     public void DescargarImagen(){
         EditText editTextImagen = findViewById(R.id.editTextImagen);
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
         if (networkInfo != null && networkInfo.isConnected()) {
             String url = editTextImagen.getText().toString();
+            //Comprobamos que la imagen sea válida
             if(comprobarImagen(url)) {
+                //Ejecutamos la clase DescargarImagen que contiene el método Run e implementa Runnable como un hilo.
                 executorService.execute(new DescargarImagen(url));
             }else{
                 Toast.makeText(MainActivity.this, "Introduce una URL de imagen válida (jpg, jpeg o png).",Toast.LENGTH_SHORT).show();
@@ -139,22 +141,30 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             try{
+                //Declaramos un array de bytes para formar las imágenes y lo inicializamos a lo que devuelva el método descargaImagen en función de la url.
                 byte[] imagenBytes = descargaImagen(url);
-
+                //Declaramos e inicializamos un nuevo intent de la Main activity a la Secondary Activity.
                 Intent i = new Intent(MainActivity.this, SecondaryActivity.class);
+                //Le pasamos la imagen como dato.
                 i.putExtra("IMAGEN",imagenBytes);
+                //Iniciamos la activity con el método post.
                 mainHandler.post(()->startActivity(i));
 
+                //Con este catch atrapamos los errores en caso de que lo introducido no sea una url.
             }catch (IOException e){
                 mainHandler.post(()->Toast.makeText(MainActivity.this, "Introduce una URL correcta(htps://www.ejemplo.png/jpg/jpeg)",Toast.LENGTH_SHORT).show());
             }
         }
-
+        //Método que devuelve un array de bytes, obtiene la imagen de la url y la va construyendo en bloques bytes de 1024 bytes.
         private byte[] descargaImagen(String myurl) throws IOException {
+            //Establecemos el inputStream a null.
             InputStream is = null;
+            //Declaramos un buffer de tipo ByteArrayOutputStream, para ir cargando las imagenes en bloques e ir construyendola poco a poco antes de tener la imagen completa en bytes.
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             try {
+                //Obtenemos la url.
                 URL url = new URL(myurl);
+                //Nos conectamos con protocolo HTTP.
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(10000);
                 conn.setConnectTimeout(15000);
@@ -163,17 +173,23 @@ public class MainActivity extends AppCompatActivity {
 
                 conn.connect();
                 int response = conn.getResponseCode();
+                //Si la conexión no fue existosa.
                 if (response != HttpURLConnection.HTTP_OK) {
                     throw new IOException("Error en la conexión: " + response);
                 }
+                //Si la conexión fue exitosa obtenemos la entrada de la conexión es decir la imagen.
                 is = conn.getInputStream();
+                //Declaramos un nuevo array de bytes de nombre datos y de tamaño 1024, estos son nuestros bloques, que iremos rellenando de "imagen" poco a poco.
                 byte[]datos = new byte[1024];
-                int nRead;
+                //Declaramos un entero nLeido para continuar el siguiente byte en el último leído y para leer hasta el final de bytes.
+                int nLeido;
 
-                while((nRead = is.read(datos, 0, datos.length))!=-1){
-                    buffer.write(datos, 0, nRead);
+                //Mientras nLeido sea leido, leemos datos hasta el final de los datos mientras nLeido sea mayor que 0, el fin del flujo llega cuando los datos son iguales a -1.
+                while((nLeido = is.read(datos, 0, datos.length))!=-1){
+                    //Escribimos en el buffer los datos y lo leido.
+                    buffer.write(datos, 0, nLeido);
                 }
-
+                //Devolvemos el buffer como un array de bytes, que sería la imagen completa.
                 return buffer.toByteArray();
             } finally {
                 if (is != null) {
@@ -254,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         executorService.shutdown();
     }
-
+    //Método para cambiar el texto del botón en la otra clase al pulsar volver.
     public static void cambiarTextoBoton(){
         //Cambiamos el texto del botón.
         bDescargarImagen.setText("Volver a descargar");
