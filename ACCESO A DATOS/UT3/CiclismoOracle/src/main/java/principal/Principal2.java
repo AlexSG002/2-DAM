@@ -40,7 +40,7 @@ public class Principal2 {
 	    try {
 	        tx = sesion.beginTransaction();
 
-	        String hql = "FROM RESUMEN_CAMISETAS";
+	        String hql = "FROM ResumenCamisetas";
 	        Query<ResumenCamisetas> q = sesion.createQuery(hql, ResumenCamisetas.class);
 	        List<ResumenCamisetas> lista = q.list();
 

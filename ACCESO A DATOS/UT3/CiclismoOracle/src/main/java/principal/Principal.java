@@ -36,7 +36,7 @@ public class Principal {
 	private static void llenarResumenCamisetas() {
 		Session sesion = factory.openSession();
 		
-		String con ="From RESUMEN_CAMISETAS";
+		String con ="From ResumenCamisetas";
 		Query<ResumenCamisetasId> q = sesion.createQuery(con, ResumenCamisetasId.class);
 		List<ResumenCamisetasId> lista = q.list();
 		Transaction tx = sesion.beginTransaction();
