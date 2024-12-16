@@ -1,0 +1,56 @@
+<!-- res/layout/fragment_contact_detail.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageViewFotoDetalles"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_launcher_foreground"
+        android:layout_gravity="center"
+        android:contentDescription="" />
+
+    <TextView
+        android:id="@+id/textViewNombreDetalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Contacto"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/textViewNumeroDetalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Número de Teléfono"
+        android:textSize="16sp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/buttonEnviarMensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar Mensaje" />
+
+    <EditText
+        android:id="@+id/editTextMensaje"
+        android:layout_width="match_parent"
+        android:layout_height="313dp"
+        android:ems="10"
+        android:hint="Introduce un mensaje..."
+        android:inputType="text"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/buttonEnviar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar"
+        android:visibility="gone"/>
+</LinearLayout>
