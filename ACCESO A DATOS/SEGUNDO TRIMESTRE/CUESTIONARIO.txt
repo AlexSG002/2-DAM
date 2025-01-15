@@ -1,0 +1,26 @@
+11. indica ventajas e inconvenientes de las bdor.
+Se pueden almacenar múltiples valores en una columna de una misma fila Ventaja
+Soporte de tipos de datos básicos y complejos Ventaja
+Aumentan la complejidad del sistema Incon
+El usuario puede crear sus propios tipos de datos Ventaja
+Son más costosas de mantener Incon
+Gestión de tipos de datos complejos con un esfuerzo mínimo Ventaja
+
+12. relaciona los métodos de un TYPE OBJECT con su tipo:
+Los métodos que sirven para actuar con los objetos MEMBER
+Los métodos que sirven para inicializar el objeto CONSTRUCTOR
+Los métodos estáticos independientes de las instancias del objeto STATIC
+
+13. ¿Qué criterio escribiría para obtener datos de la ciudad de Madrid y con edad mayor o igual a 15?
+a. ICriterion criterio = new And().add(Where.equal("ciudad", "Madrid)).add(Where.gt("edad",15));
+b. ICriterion criterio = new And().add(Where.equal("ciudad", "Madrid)).add(Where.ge("edad",15)); CORRECTA
+c. ICriterion criterio = new Or().add(Where.equal("ciudad", "Madrid)).add(Where.gt("edad",15));
+
+14. Indica verdadero o falso a las siguientes afirmaciones.
+Es necesario especificar el tamaño máximo de una tabla anidad Falso
+Una tabla anidad está formada por un conjunto de elementos, todos del mismo tipo Verdadero
+La colección VARRAY es un tipo de tabla anidada Falso
+La tabla anidada está contenida en una columna Verdadero
+
+15. Por cada objeto TYPE OBJECT existe un constructor predefinido por Oracle ¿Verdadero o Falso?
+Verdadero
