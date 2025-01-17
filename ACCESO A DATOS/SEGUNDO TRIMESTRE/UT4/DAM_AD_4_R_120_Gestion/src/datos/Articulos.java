@@ -15,6 +15,7 @@ public class Articulos {
 		this.denom = denom;
 		this.stock = stock;
 		this.pvp = pvp;
+		this.descuento = descuento;
 	}
 	public int getCodarti() {
 		return codarti;

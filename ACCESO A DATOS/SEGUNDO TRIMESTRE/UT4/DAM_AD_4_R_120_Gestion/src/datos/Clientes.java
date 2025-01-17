@@ -14,6 +14,7 @@ public class Clientes {
 		this.numcli = numcli;
 		this.nombre = nombre;
 		this.pobla = pobla;
+		this.descuento = descuento;
 	}
 
      

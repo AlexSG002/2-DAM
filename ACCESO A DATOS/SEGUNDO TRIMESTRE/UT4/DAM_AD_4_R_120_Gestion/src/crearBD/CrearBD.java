@@ -7,7 +7,12 @@ import org.neodatis.odb.ODBFactory;
 import org.neodatis.odb.Objects;
 import org.neodatis.odb.core.query.IQuery;
 import org.neodatis.odb.core.query.criteria.Where;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import org.neodatis.odb.ObjectValues;
+import org.neodatis.odb.Values;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
+import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
 
 import datos.Articulos;
 import datos.Clientes;
@@ -91,10 +96,10 @@ public class CrearBD {
 		  	
 		  	for(Clientes c : objects) {
 		  		for(Articulos a : articulos) {
-		  			descuento = a.getPvp()*a.getDescuento();
+		  			descuento = a.getPvp()-a.getDescuento();
 		  		}
+		  		
 		  	}
-	
 		  	Ventas v1 = new Ventas (1,ar1,cli1,5,"05/06/2014", descuento);
 			Ventas v2 = new Ventas (2,ar1,cli2,4,"15/06/2014", descuento);
 			Ventas v3 = new Ventas (3,ar1,cli6,3,"25/06/2014", descuento);
@@ -110,10 +115,26 @@ public class CrearBD {
 			odb.store(v4);
 			odb.store(v5);
 			odb.store(v6);
+		  	
+			
+			Values val = odb.getValues(new ValuesCriteriaQuery(Ventas.class).count("*"));
+			ObjectValues ov = val.nextValues();
+			BigInteger value = (BigInteger) ov.getByAlias("*");
+			System.out.println("Número de ventas: "+value.longValue());
+		  
 			
 			
-		  
-		  
+			Values groupby = odb.getValues(new ValuesCriteriaQuery
+					(Ventas.class, Where.equal("codarti", ar1))
+					.field("codarti.denom")
+					.count("codventa")
+					.groupBy("codarti.denom"));
+			
+			while(groupby.hasNext()) {
+				ObjectValues objetos = (ObjectValues) groupby.next();
+				System.out.println(objetos.getByAlias("codarti.denom")+"*"+objetos.getByIndex(1));
+			}
+			
 		  
 		  odb.close();
           System.out.println("BASE DE DATOS CREADA");
