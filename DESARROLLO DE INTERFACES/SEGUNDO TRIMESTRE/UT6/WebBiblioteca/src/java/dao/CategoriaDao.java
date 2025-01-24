@@ -20,10 +20,15 @@ import model.Categoria;
  */
 public class CategoriaDao {
     public static boolean registrar(Categoria cat){
+        Connection con = null;
+        PreparedStatement st = null;
         try {
-            String SQL = "INSERT INTO categorias(nombre) values('?');";
-            Connection con = conexion.conectar();
-            PreparedStatement st = con.prepareStatement(SQL);
+            String SQL = "INSERT INTO categorías(nombre) values('?');";
+            con = conexion.conectar();
+            if(con==null){
+                return false;
+            }
+            st = con.prepareStatement(SQL);
             st.setString(1, cat.getNombre());
             if(st.executeUpdate()>0){
                 return true;
@@ -32,17 +37,34 @@ public class CategoriaDao {
             }
         } catch (SQLException ex) {
             return false;
+        }finally{
+            try{
+                if(st!=null){
+                    st.close();
+                }
+                if(con!=null){
+                    con.close();
+                }
+            }catch(SQLException ex){
+                Logger.getLogger(CategoriaDao.class.getName()).log(Level.SEVERE,null, ex);
+            }
         }
     }
     
     public static ArrayList<Categoria> listar(){
+        ArrayList<Categoria> lista = null;
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet resultado = null;
         try {
             String SQL = "SELECT * FROM categorías;";
-            Connection con = conexion.conectar();
-            PreparedStatement st = con.prepareStatement(SQL);
+            con = conexion.conectar();
+            if(con==null){
+                return null;
+            }
+            st = con.prepareStatement(SQL);
             //st.setString(1, cat.getNombre());
-            ResultSet resultado = st.executeQuery();
-            ArrayList<Categoria> lista = null;
+            resultado = st.executeQuery();
             Categoria cat;
             while(resultado.next()){
                 cat = new Categoria();

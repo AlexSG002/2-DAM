@@ -581,11 +581,15 @@
                                                                                                 <input type="text" name="nombre" value="" placeholder="Nombre de la categoría"/>
                                                                                             </div>
                                                                            		</div>
+                                                                                    
+                                                                                        <button class="btn" btn-success type="submit">
+                                                                                            <i class="fa fa-save"></i>
+                                                                                            Registrar
+                                                                                        </button>
+                                                                                        <div>
+                                                                                            <%=(request.getAttribute("mensaje")!=null?request.getAttribute("mensaje"):"")%>
+                                                                                        </div>
                                                                                     </form>
-                                                                                    <button class="btn" btn-success type="submit">
-                                                                                        <i class="fa fa-save"></i>
-                                                                                        Registrar
-                                                                                    </button>
 										</div><!-- /.modal-content -->
 									</div><!-- /.modal-dialog -->
 								</div>
