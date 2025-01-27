@@ -12,24 +12,30 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Categoria;
+import model.Editorial;
+
 
 /**
  *
  * @author Tarde
  */
-public class CategoriaDao {
-    public static boolean registrar(Categoria cat){
+public class EditorialDao {
+    public static boolean registrar(Editorial edit){
         Connection con = null;
         PreparedStatement st = null;
         try {
-            String SQL = "INSERT INTO categorías(nombre) values(?);";
+            String SQL = "INSERT INTO editoriales(nit, nombre, telefono, direccion, email, sitioweb) values(?,?,?,?,?,?);";
             con = conexion.conectar();
             if(con==null){
                 return false;
             }
             st = con.prepareStatement(SQL);
-            st.setString(1, cat.getNombre());
+            st.setString(1, edit.getNit());
+            st.setString(2, edit.getNombre());
+            st.setString(3, edit.getTelefono());
+            st.setString(4, edit.getDireccion());
+            st.setString(5, edit.getEmail());
+            st.setString(6, edit.getSitioweb());
             if(st.executeUpdate()>0){
                 return true;
             }else{
@@ -46,18 +52,18 @@ public class CategoriaDao {
                     con.close();
                 }
             }catch(SQLException ex){
-                Logger.getLogger(CategoriaDao.class.getName()).log(Level.SEVERE,null, ex);
+                Logger.getLogger(EditorialDao.class.getName()).log(Level.SEVERE,null, ex);
             }
         }
     }
     
-    public static ArrayList<Categoria> listar(){
-        ArrayList<Categoria> lista = null;
+    public static ArrayList<Editorial> listar(){
+        ArrayList<Editorial> lista = null;
         Connection con = null;
         PreparedStatement st = null;
         ResultSet resultado = null;
         try {
-            String SQL = "SELECT * FROM categorías;";
+            String SQL = "SELECT * FROM editoriales;";
             con = conexion.conectar();
             if(con==null){
                 return null;
@@ -65,12 +71,16 @@ public class CategoriaDao {
             st = con.prepareStatement(SQL);
             //st.setString(1, cat.getNombre());
             resultado = st.executeQuery();
-            Categoria cat;
+            Editorial edit;
             while(resultado.next()){
-                cat = new Categoria();
-                cat.setCodigo(resultado.getInt("codigo"));
-                cat.setNombre(resultado.getString("nombre"));
-                lista.add(cat);
+                edit = new Editorial();
+                edit.setNit(resultado.getString("nit"));
+                edit.setNombre(resultado.getString("nombre"));
+                edit.setTelefono(resultado.getString("telefono"));
+                edit.setDireccion(resultado.getString("direccion"));
+                edit.setEmail(resultado.getString("email"));
+                edit.setSitioweb(resultado.getString("sitioweb"));
+                lista.add(edit);
             }
             return lista;
         } catch (SQLException ex) {
