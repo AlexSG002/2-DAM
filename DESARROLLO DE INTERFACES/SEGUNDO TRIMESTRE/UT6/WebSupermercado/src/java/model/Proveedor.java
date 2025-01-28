@@ -12,11 +12,11 @@ package model;
 public class Proveedor {
     private String nit;
     private String nombre;
-    private int tlf;
+    private String tlf;
     private String direccion;
     private String correoElectronico;
 
-    public Proveedor(String nit, String nombre, int tlf, String direccion, String correoElectronico) {
+    public Proveedor(String nit, String nombre, String tlf, String direccion, String correoElectronico) {
         this.nit = nit;
         this.nombre = nombre;
         this.tlf = tlf;
@@ -27,7 +27,7 @@ public class Proveedor {
     public Proveedor() {
         this.nit = "";
         this.nombre = "";
-        this.tlf = 0;
+        this.tlf = "";
         this.direccion = "";
         this.correoElectronico = "";
     }
@@ -48,11 +48,11 @@ public class Proveedor {
         this.nombre = nombre;
     }
 
-    public int getTlf() {
+    public String getTlf() {
         return tlf;
     }
 
-    public void setTlf(int tlf) {
+    public void setTlf(String tlf) {
         this.tlf = tlf;
     }
 

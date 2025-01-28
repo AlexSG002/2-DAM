@@ -29,66 +29,104 @@ public class Principal {
 //		consultatotales();
 //		
 //		consultaconobjetos();
-		
+
 		insertardepardenuevos();
 		
+		insertardual();
+		
+
 		factori.close();
 	}
 
-	
+	private static void insertardual() {
+		
+		Session session = factori.openSession();
+		System.out.println("\nInsertar nuevos departamentos\n-----------------------");
+		Transaction tx = session.beginTransaction();
 
+		try {
+			String hqlInsert = "insert into Departamentos (deptNo, dnombre, loc)"
+					+ " select 200, 'Nuevo200', 'Talavera' from dual";
 
+			Query cons = (Query) session.createMutationQuery(hqlInsert);
+			int filascreadas = cons.executeUpdate();
+
+			tx.commit(); // valida la transacción
+
+			System.out.printf("FILAS INSERTADAS: %d%n", filascreadas);
+			
+		} catch (java.lang.IllegalArgumentException e) {
+			System.out.println("ERROR. NO EXISTE LA TABLA ORIGEN.");
+			System.out.println(e.getMessage());
+		}
+
+		session.close();
+	}
+
+	private static void insertardepardenuevos() {
+		Session session = factori.openSession();
+		System.out.println("\nInsertar nuevos departamentos\n-----------------------");
+		Transaction tx = session.beginTransaction();
+
+		try {
+			String hqlInsert = "insert into Departamentos (deptNo, dnombre, loc)"
+					+ " select n.deptNo, n.dnombre, n.loc from Nuevos n";
+
+			Query cons = (Query) session.createMutationQuery(hqlInsert);
+			int filascreadas = cons.executeUpdate();
+
+			tx.commit(); // valida la transacción
+
+			System.out.printf("FILAS INSERTADAS: %d%n", filascreadas);
+			
+		} catch (org.hibernate.exception.ConstraintViolationException e) {
+			System.out.println("ERROR. SE HA ENCONTRADO CLAVES REPETIDAS.");
+			System.out.println(e.getErrorMessage());
+		}
+
+		session.close();
+	}
 
 	private static void consultaconobjetos() {
 		Session session = factori.openSession();
-		Query cons = session.createQuery("select d.deptNo, count(em.empNo), "
-				+ " coalesce(avg(em.salario),0), "
-				+ " d.dnombre from Departamentos d left join d.empleadoses em  " 
+		Query cons = session.createQuery("select d.deptNo, count(em.empNo), " + " coalesce(avg(em.salario),0), "
+				+ " d.dnombre from Departamentos d left join d.empleadoses em  "
 				+ " group by d.deptNo,d.dnombre order by d.deptNo", Object.class);
-		
-		System.out.printf("%n%10s %-15s %14s %-14s", "NUMERO DEP", "NOMBRE", 
-	             "SALARIO MEDIO", "NUM EMPLES");
-		System.out.printf("%n%10s %-15s %14s %-14s", "----------", "---------------",
-	       "--------------", "--------------");
+
+		System.out.printf("%n%10s %-15s %14s %-14s", "NUMERO DEP", "NOMBRE", "SALARIO MEDIO", "NUM EMPLES");
+		System.out.printf("%n%10s %-15s %14s %-14s", "----------", "---------------", "--------------",
+				"--------------");
 
 		List filas = cons.list();
 		for (int i = 0; i < filas.size(); i++) {
 			Object[] filaActual = (Object[]) filas.get(i); // Acceso a una fila
-			System.out.printf("%n%10s %-15s %14.2f %-14s", filaActual[0], 
-	                filaActual[3], filaActual[2], filaActual[1]);
+			System.out.printf("%n%10s %-15s %14.2f %-14s", filaActual[0], filaActual[3], filaActual[2], filaActual[1]);
 		}
 	}
 
-	
-	
 	private static void consultatotales() {
-	Session session = factori.openSession();
+		Session session = factori.openSession();
 
-	Query cons4 = session.createQuery("select new clases.Totales("
-        + " d.deptNo, count(em.empNo),  "
-		+ " coalesce(avg(em.salario),0),  d.dnombre )"
-		+ " from Departamentos d left join d.empleadoses em " 
-        + " group by  d.deptNo,d.dnombre order by d.deptNo", Totales.class);
-	
-	System.out.printf("%n%10s %-15s %14s %-14s", 
-			"NUMERO DEP", "NOMBRE", "SALARIO MEDIO", "NUM EMPLES");
-	
-	System.out.printf("%n%10s %-15s %14s %-14s", "----------", "---------------",
-				"--------------", "--------------");
-	
-	List<Totales> filas4 = cons4.list();
-	for (int i = 0; i < filas4.size(); i++) {
-		Totales tot = (Totales) filas4.get(i);
-		System.out.printf("%n%10s %-15s %14.2f %-14s",
-				tot.getNumero(),
-                tot.getNombre() ,tot.getMedia(),
-                tot.getCuenta());
-		
-	}
-	System.out.printf("%n%10s %-15s %14s %-14s", "----------", "---------------",
-				"--------------", "--------------");
-	
-	session.close();
+		Query cons4 = session.createQuery("select new clases.Totales(" + " d.deptNo, count(em.empNo),  "
+				+ " coalesce(avg(em.salario),0),  d.dnombre )" + " from Departamentos d left join d.empleadoses em "
+				+ " group by  d.deptNo,d.dnombre order by d.deptNo", Totales.class);
+
+		System.out.printf("%n%10s %-15s %14s %-14s", "NUMERO DEP", "NOMBRE", "SALARIO MEDIO", "NUM EMPLES");
+
+		System.out.printf("%n%10s %-15s %14s %-14s", "----------", "---------------", "--------------",
+				"--------------");
+
+		List<Totales> filas4 = cons4.list();
+		for (int i = 0; i < filas4.size(); i++) {
+			Totales tot = (Totales) filas4.get(i);
+			System.out.printf("%n%10s %-15s %14.2f %-14s", tot.getNumero(), tot.getNombre(), tot.getMedia(),
+					tot.getCuenta());
+
+		}
+		System.out.printf("%n%10s %-15s %14s %-14s", "----------", "---------------", "--------------",
+				"--------------");
+
+		session.close();
 	}
 
 	public static void main2(String[] args) {
@@ -275,26 +313,5 @@ public class Principal {
 		session.close();
 
 	}
-	
-	private static void insertardepardenuevos() {
-		Session session = factori.openSession();
-		System.out.println("\nInsertar nuevos departamentos\n-----------------------");
-		Transaction tx = session.beginTransaction();
-		try {
-		String hqlInsert = "insert into Departamentos (deptNo, dnombre, loc)"
-			           + " select n.deptNo, n.dnombre, n.loc from Nuevos n";
-
-		Query cons = (Query) session.createMutationQuery( hqlInsert );
-		int filascreadas = cons.executeUpdate();
-
-		tx.commit(); // valida la transacción
-
-		System.out.printf("FILAS INSERTADAS: %d%n",filascreadas); 
-		}catch(org.hibernate.exception.ConstraintViolationException e) {
-			System.out.println("ERROR: SE HAN ENCONTRADO CLAVES REPETIDAS."+e.getMessage());
-		}
-		session.close();
-	}
-	
 
 }

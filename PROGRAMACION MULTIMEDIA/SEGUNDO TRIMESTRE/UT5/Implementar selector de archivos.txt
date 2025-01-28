@@ -1,0 +1,2 @@
+Implementar selector de archivos, dar botón, elegir archivo a leer, entrar en los archivos del emulador y elegir el archivo (proyecto nuevo xd),
+Implementar recycleview dondr el texto del archivo se represente como item en el recycler view y al hacer onLongClick borrarlo, y botón de añadir.

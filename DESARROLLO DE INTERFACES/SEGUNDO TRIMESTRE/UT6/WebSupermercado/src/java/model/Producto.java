@@ -10,15 +10,15 @@ package model;
  * @author Tarde
  */
 public class Producto {
-    private int codigo;
+    private String codigo;
     private String nombre;
     private String descripcion;
-    private int stock;
-    private int pvp;
-    private int codigoCategoria;
+    private String stock;
+    private String pvp;
+    private String codigoCategoria;
     private String nitProveedor;
 
-    public Producto(int codigo, String nombre, String descripcion, int stock, int pvp, int codigoCategoria, String nitProveedor) {
+    public Producto(String codigo, String nombre, String descripcion, String stock, String pvp, String codigoCategoria, String nitProveedor) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -29,20 +29,20 @@ public class Producto {
     }
 
     public Producto() {
-        this.codigo = 0;
+        this.codigo = "";
         this.nombre = "";
         this.descripcion = "";
-        this.stock = 0;
-        this.pvp = 0;
-        this.codigoCategoria = 0;
+        this.stock = "";
+        this.pvp = "";
+        this.codigoCategoria = "";
         this.nitProveedor = "";
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
@@ -62,27 +62,27 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public int getStock() {
+    public String getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(String stock) {
         this.stock = stock;
     }
 
-    public int getPvp() {
+    public String getPvp() {
         return pvp;
     }
 
-    public void setPvp(int pvp) {
+    public void setPvp(String pvp) {
         this.pvp = pvp;
     }
 
-    public int getCodigoCategoria() {
+    public String getCodigoCategoria() {
         return codigoCategoria;
     }
 
-    public void setCodigoCategoria(int codigoCategoria) {
+    public void setCodigoCategoria(String codigoCategoria) {
         this.codigoCategoria = codigoCategoria;
     }
 

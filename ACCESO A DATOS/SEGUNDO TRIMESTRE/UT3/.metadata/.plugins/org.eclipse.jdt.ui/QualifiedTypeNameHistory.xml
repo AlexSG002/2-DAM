@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.math.BigInteger"/>
-    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="org.hibernate.exception.ConstraintViolationException"/>
+    <fullyQualifiedTypeName name="java.util.Set"/>
+    <fullyQualifiedTypeName name="clases.ResumenCamisetas"/>
+    <fullyQualifiedTypeName name="clases.Equipos"/>
+    <fullyQualifiedTypeName name="clases.Camisetas"/>
+    <fullyQualifiedTypeName name="clases.Ciclistas"/>
+    <fullyQualifiedTypeName name="clases.Cursos"/>
+    <fullyQualifiedTypeName name="clases.Nuevosalumnos"/>
+    <fullyQualifiedTypeName name="org.neodatis.odb.ODBFactory"/>
 </qualifiedTypeNameHistroy>

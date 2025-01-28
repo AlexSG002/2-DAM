@@ -2,6 +2,14 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="C:\Users\Tarde\Documents\2DAM\ACCESO A DATOS\SEGUNDO TRIMESTRE\UT4\sanchezgilalejandro_neo"/>
+			<item value="C:\Users\Tarde\Documents\2DAM\ACCESO A DATOS\SEGUNDO TRIMESTRE\UT4\tenis"/>
+			<item value="C:\Users\Tarde\Documents\2DAM\ACCESO A DATOS\SEGUNDO TRIMESTRE\UT4\paises"/>
+			<item value="C:\Users\Tarde\Documents\2DAM\ACCESO A DATOS\SEGUNDO TRIMESTRE\UT4\tema4Neodatis"/>
+			<item value="C:\Users\Tarde\Documents\2DAM\ACCESO A DATOS\SEGUNDO TRIMESTRE\UT4"/>
+			<item value="C:\Users\Tarde\Documents\2DAM\ACCESO A DATOS\UT3"/>
+			<item value="C:\Users\Tarde\Documents\2DAM\ACCESO A DATOS\SEGUNDO TRIMESTRE\UT3"/>
+			<item value="C:\Users\Tarde\Documents\2DAM\ACCESO A DATOS\SEGUNDO TRIMESTRE\UT3\metroMariaDB"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -13,6 +21,7 @@
 		</list>
 	</section>
 	<section name="MavenProjectWizardArchetypePage">
+		<item key="catalog" value="All Catalogs"/>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
 			<item value="[artifactId]-TRUNK"/>
@@ -43,16 +52,15 @@
 	</section>
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
-			<item value="pruebas"/>
-			<item value="pruebastema3"/>
+			<item value="a"/>
 		</list>
 		<list key="name">
 		</list>
 		<list key="artifactId">
-			<item value="metroMariaDB"/>
-			<item value="comprasOracle"/>
-			<item value="centrosOracle"/>
-			<item value="ejemplo25"/>
+			<item value="sanchezgilalejandro_neo"/>
+			<item value="tenis"/>
+			<item value="paises"/>
+			<item value="tema4Neodatis"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

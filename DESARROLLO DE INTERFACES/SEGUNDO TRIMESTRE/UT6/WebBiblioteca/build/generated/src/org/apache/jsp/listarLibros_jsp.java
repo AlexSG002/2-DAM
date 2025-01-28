@@ -11,6 +11,11 @@ public final class listarLibros_jsp extends org.apache.jasper.runtime.HttpJspBas
 
   private static java.util.List<String> _jspx_dependants;
 
+  static {
+    _jspx_dependants = new java.util.ArrayList<String>(1);
+    _jspx_dependants.add("/css.jsp");
+  }
+
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
   public java.util.List<String> getDependants() {
@@ -54,7 +59,8 @@ public final class listarLibros_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t\t<meta name=\"description\" content=\"Christian Gámez Udemy\" />\n");
       out.write("\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0\" />\n");
       out.write("\n");
-      out.write("\t\t<!-- bootstrap & fontawesome -->\n");
+      out.write("\t\t");
+      out.write("<!-- bootstrap & fontawesome -->\n");
       out.write("\t\t<link rel=\"stylesheet\" href=\"assets/css/bootstrap.min.css\" />\n");
       out.write("\t\t<link rel=\"stylesheet\" href=\"assets/font-awesome/4.5.0/css/font-awesome.min.css\" />\n");
       out.write("\n");
@@ -86,7 +92,8 @@ public final class listarLibros_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t\t<!--[if lte IE 8]>\n");
       out.write("\t\t<script src=\"assets/js/html5shiv.min.js\"></script>\n");
       out.write("\t\t<script src=\"assets/js/respond.min.js\"></script>\n");
-      out.write("\t\t<![endif]-->\n");
+      out.write("\t\t<![endif]-->");
+      out.write("\n");
       out.write("\t</head>\n");
       out.write("\n");
       out.write("\t<body class=\"no-skin\">\n");
@@ -488,7 +495,7 @@ public final class listarLibros_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t\t\t\t\t\t\t\t<b class=\"arrow\"></b>\n");
       out.write("\t\t\t\t\t\t\t</li>\n");
       out.write("                                                        <li class=\"\">\n");
-      out.write("\t\t\t\t\t\t\t\t<a href=\"#\">\n");
+      out.write("\t\t\t\t\t\t\t\t<a href=\"registroEditorial.jsp\">\n");
       out.write("\t\t\t\t\t\t\t\t\t<i class=\"menu-icon fa fa-caret-right\"></i>\n");
       out.write("\t\t\t\t\t\t\t\t\tRegistrar Editorial\n");
       out.write("\t\t\t\t\t\t\t\t</a>\n");
@@ -496,7 +503,7 @@ public final class listarLibros_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t\t\t\t\t\t\t\t<b class=\"arrow\"></b>\n");
       out.write("\t\t\t\t\t\t\t</li>\n");
       out.write("                                                        <li class=\"\">\n");
-      out.write("\t\t\t\t\t\t\t\t<a href=\"#\">\n");
+      out.write("\t\t\t\t\t\t\t\t<a href=\"registroCategoria.jsp\">\n");
       out.write("\t\t\t\t\t\t\t\t\t<i class=\"menu-icon fa fa-caret-right\"></i>\n");
       out.write("\t\t\t\t\t\t\t\t\tRegistrar Categoría\n");
       out.write("\t\t\t\t\t\t\t\t</a>\n");

@@ -23,10 +23,16 @@ public class Principal {
 
 		factori = Conexion.getSession(); // Creo la sessionFactory una única vez.
 
-	//	listarlineasestacionesaccesos();
+	
+		insertartrenesnuevos();
 		
-		veraccesosporestacion();
-		
+		// insertar trenes con insert
+		insertarconinsert();
+
+		// listarlineasestacionesaccesos();
+
+		// veraccesosporestacion();
+
 //		System.out.println("-----Estacion existe");
 //		veraccesosestacion(2);
 //
@@ -49,111 +55,195 @@ public class Principal {
 //		tipos.add("SERIE 8000");
 //		
 //		vertrenesportipo(tipos);
-		
+
 		factori.close();
+
+	}
+
+	private static void insertartrenesnuevos() {
+		Session session = factori.openSession();
+		String con="From TNuevosTrenes";
+		Query q = session.createQuery(con, TNuevosTrenes.class);
+		List<TNuevosTrenes> lista = q.list();
+		// recorremos rgistro a registro
+		Transaction tx = session.beginTransaction();
+		for (TNuevosTrenes tn:lista) {
+			TTrenes tren = session.get(TTrenes.class, tn.getCodTren());
+			int error =0;
+			TCocheras coch = session.get(TCocheras.class, tn.getCodCochera());
+			TLineas lin = session.get(TLineas.class, tn.getCodLinea());
+			String mensaje="";
+			
+			if (coch==null) {
+				error=1;
+				mensaje = mensaje + "Error, la cochera No existe: "+ tn.getCodCochera() +".\n";
+			}
+			
+			if (lin==null) {
+				error=1;
+				mensaje = mensaje + "Error, la línea No existe: "+ tn.getCodLinea() +".\n";
+			}
+			
+			if (tren==null) {
+				// nuevo tren
+				if (error==0) {
+					// insertar nuevo tren
+					TTrenes nuevo = new TTrenes();
+					nuevo.setCodTren(tn.getCodTren());
+					nuevo.setNombre(tn.getNombre());
+					nuevo.setTipo(tn.getTipo());
+					nuevo.setTCocheras(coch);
+					nuevo.setTLineas(lin);
+					session.persist(nuevo);
+					tx.commit();
+					mensaje = mensaje + "Se ha insertado un tren nuevo: "+ tn.getCodTren() +".\n";
+					
+				}
+				else {
+					mensaje = mensaje + "Error. No se  puede insertar nuevo tren: "+ tn.getCodTren() +".\n";
+					
+				}
+			}
+			else {
+				// se actualiza el tren
+				if (error==0) {
+					// actualizar tren que existe
+					tren = session.get(TTrenes.class, tn.getCodTren());
+					tren.setNombre(tn.getNombre());
+					tren.setTipo(tn.getTipo());
+					tren.setTCocheras(coch);
+					tren.setTLineas(lin);
+					session.merge(tren);
+					tx.commit();
+					mensaje = mensaje + "Se ha actualizado el tren: "+ tn.getCodTren() +".\n";
+				}
+				else {
+					mensaje = mensaje + "Error. No se  puede actualizar el tren: "+ tn.getCodTren() +".\n";
+					
+				}
+			}
+			
+			System.out.println("---------------------");
+			System.out.println(mensaje);
+			
+		} // fin for
+	
+		session.close();
+		
+		
+		
+	}
+
+	private static void insertarconinsert() {
+		Session session = factori.openSession();
+
+		String con = " INSERT into TTrenes  (codTren, nombre, tipo, TCocheras.codCochera, TLineas.codLinea ) "
+				+ " select codTren, nombre, tipo, codCochera, codLinea from TNuevosTrenes ";
+		Transaction tx = session.beginTransaction();
+		
+		try {
+		
+			Query cons = (Query) session.createMutationQuery(con);
+			int filascreadas = cons.executeUpdate();
+
+			tx.commit(); // valida la transacción
+
+			System.out.printf("FILAS INSERTADAS: %d%n", filascreadas);
+
+		} catch (org.hibernate.exception.ConstraintViolationException e) {
+		
+			System.out.println(e.getErrorMessage());
+			tx.commit(); 
+		}
 
 	}
 
 	private static void veraccesosporestacion() {
 		Session session = factori.openSession();
-		//Accesosporestacion
+		// Accesosporestacion
 		String con = "select new clases.Accesosporestacion(e.codEstacion, e.nombre, e.direccion, count(a) ) "
-				+ "   from TEstaciones e left join e.TAccesoses a"
-				+ "   group by e.codEstacion, e.nombre, e.direccion"
+				+ "   from TEstaciones e left join e.TAccesoses a" + "   group by e.codEstacion, e.nombre, e.direccion"
 				+ "   order by  e.codEstacion";
-			
+
 		Query q = session.createQuery(con, Accesosporestacion.class);
 		List<Accesosporestacion> lista = q.list();
-		//Cod_estación  Nombre  Dirección  Número de accesos
-		System.out.printf("%6s %-30s %-30s %6s %n",
-	               "CODEST","NOMBRE", "DIRECCIÓN","NUMACC");
-			System.out.printf("%6s %-30s %-30s %6s %n",
-		               "------","------------------------------", "------------------------------",
-		               "------");
-		String nombremax="";
+		// Cod_estación Nombre Dirección Número de accesos
+		System.out.printf("%6s %-30s %-30s %6s %n", "CODEST", "NOMBRE", "DIRECCIÓN", "NUMACC");
+		System.out.printf("%6s %-30s %-30s %6s %n", "------", "------------------------------",
+				"------------------------------", "------");
+		String nombremax = "";
 		Long max = 0l;
-		float suma=0;
-		for (Accesosporestacion acc:lista) {
-			//System.out.println(acc.toString());
-			System.out.printf("%6s %-30s %-30s %6s %n",
-					acc.getCodEstacion(), acc.getNombre(),
-					acc.getDireccion(), acc.getContador());
+		float suma = 0;
+		for (Accesosporestacion acc : lista) {
+			// System.out.println(acc.toString());
+			System.out.printf("%6s %-30s %-30s %6s %n", acc.getCodEstacion(), acc.getNombre(), acc.getDireccion(),
+					acc.getContador());
 			suma = suma + acc.getContador();
 			if (acc.getContador() >= max) {
-				
-				if (acc.getContador() == max){
-					nombremax = nombremax + acc.getNombre()+". ";
+
+				if (acc.getContador() == max) {
+					nombremax = nombremax + acc.getNombre() + ". ";
+				} else {
+					max = acc.getContador();
+					nombremax = acc.getNombre() + ". ";
+
 				}
-				else {
-					max =acc.getContador();
-					nombremax = acc.getNombre()+". ";
-					
-				}
-				
+
 			}
-			
-			
+
 		}
-		System.out.printf("%6s %-30s %-30s %6s %n",
-	               "------","------------------------------", "------------------------------",
-	               "------");
-		System.out.println("Nombre estación o estaciones con más accesos: "+
-				nombremax);
-		//media
-		float media= suma / lista.size();
-		System.out.println("Media de accesos: "+media);
+		System.out.printf("%6s %-30s %-30s %6s %n", "------", "------------------------------",
+				"------------------------------", "------");
+		System.out.println("Nombre estación o estaciones con más accesos: " + nombremax);
+		// media
+		float media = suma / lista.size();
+		System.out.println("Media de accesos: " + media);
 		session.close();
 	}
 
 	private static void listarlineasestacionesaccesos() {
 		Session session = factori.openSession();
-		String con = "from TLineas l "
-				+ " left join l.TLineaEstacions lt "
+		String con = "from TLineas l " + " left join l.TLineaEstacions lt "
 				+ " left join lt.TEstaciones.TAccesoses ta order by l.codLinea";
-		
+
 		Query q = session.createQuery(con, Object.class);
 		List<Object[]> lista = q.list();
-		
-		System.out.printf("%6s %-30s %6s %-30s %6s %-30s%n",
-               "CODLIN","NOMBRELIN", "CODEST","NOMBREESTACION","CODACC","DESCR.ACCESO");
-		System.out.printf("%6s %-30s %6s %-30s %6s %-30s%n",
-	               "------","------------------------------", "------","------------------------------",
-	               "------","------------------------------");
-		
-		
+
+		System.out.printf("%6s %-30s %6s %-30s %6s %-30s%n", "CODLIN", "NOMBRELIN", "CODEST", "NOMBREESTACION",
+				"CODACC", "DESCR.ACCESO");
+		System.out.printf("%6s %-30s %6s %-30s %6s %-30s%n", "------", "------------------------------", "------",
+				"------------------------------", "------", "------------------------------");
+
 		for (int i = 1; i < lista.size(); i++) {
 			Object[] par = (Object[]) lista.get(i);
 			TLineas lin = (TLineas) par[0]; // objeto empleado el primero
 			TLineaEstacion liest = (TLineaEstacion) par[1];
-			
-			//TEstaciones  acc= (TEstaciones) par[2];
-			
+
+			// TEstaciones acc= (TEstaciones) par[2];
+
 			TAccesos acc = (TAccesos) par[3];
-			String est="SIN ESTACIONES";
-			String acceso="SIN ACCESOS";
-			String codes="";
-			String codac="";
-			
-			if (liest!=null) {
-				est=liest.getTEstaciones().getNombre();
-				Integer cod=liest.getTEstaciones().getCodEstacion();
-				codes=cod.toString();
+			String est = "SIN ESTACIONES";
+			String acceso = "SIN ACCESOS";
+			String codes = "";
+			String codac = "";
+
+			if (liest != null) {
+				est = liest.getTEstaciones().getNombre();
+				Integer cod = liest.getTEstaciones().getCodEstacion();
+				codes = cod.toString();
 			}
-			if (acc!=null) {
-				acceso=acc.getDescripcion();
-				Integer aa= acc.getCodAcceso();
-				codac=aa.toString();
+			if (acc != null) {
+				acceso = acc.getDescripcion();
+				Integer aa = acc.getCodAcceso();
+				codac = aa.toString();
 			}
-			System.out.printf("%6s %-30s %6s %-30s %6s %-30s%n",
-					lin.getCodLinea(), lin.getNombre(),
-					codes, est,
-					 codac, acceso
-					);
+			System.out.printf("%6s %-30s %6s %-30s %6s %-30s%n", lin.getCodLinea(), lin.getNombre(), codes, est, codac,
+					acceso);
 		}
-		
-		
-		System.out.println();	System.out.println();
-		
+
+		System.out.println();
+		System.out.println();
+
 		session.close();
 	}
 
@@ -164,15 +254,13 @@ public class Principal {
 		Query q = session.createQuery(con, TTrenes.class);
 		q.setParameterList("lista", tipos);
 		List<TTrenes> lista = q.list();
-		
+
 		System.out.println("**** Trenes de los tipos: " + tipos.toString());
-		
+
 		for (TTrenes tren : lista) {
-			System.out.printf("%5s %20s %15s%n", tren.getCodTren(), tren.getNombre(),
-					tren.getTipo());
+			System.out.printf("%5s %20s %15s%n", tren.getCodTren(), tren.getNombre(), tren.getTipo());
 		}
-		
-		
+
 		session.close();
 	}
 

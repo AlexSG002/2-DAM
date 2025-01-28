@@ -409,7 +409,7 @@
 							</li>
 
 							<li class="">
-								<a href="#">
+								<a href="registroProducto.jsp">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Registrar Producto
 								</a>
@@ -417,7 +417,7 @@
 								<b class="arrow"></b>
 							</li>
                                                         <li class="">
-								<a href="#">
+								<a href="registroProveedor.jsp">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Registrar Proveedor
 								</a>

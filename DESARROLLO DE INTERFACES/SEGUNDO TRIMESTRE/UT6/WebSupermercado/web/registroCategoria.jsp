@@ -409,17 +409,17 @@
 							</li>
 
 							<li class="">
-								<a href="registroLibro.jsp">
+								<a href="registroProducto.jsp">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Registrar Libro
+									Registrar Producto
 								</a>
 
 								<b class="arrow"></b>
 							</li>
                                                         <li class="">
-								<a href="registroEditorial.jsp">
+								<a href="registroProveedor.jsp">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Registrar Editorial
+									Registrar Proveedor
 								</a>
 
 								<b class="arrow"></b>

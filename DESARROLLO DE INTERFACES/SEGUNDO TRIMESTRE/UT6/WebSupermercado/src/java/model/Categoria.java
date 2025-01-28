@@ -12,25 +12,25 @@ import java.io.Serializable;
  * @author Tarde
  */
 public class Categoria implements Serializable{
-    private int codigo;
+    private String codigo;
     private String nombre;
 
     public Categoria() {
-        this.codigo=0;
+        this.codigo="";
         this.nombre="";
     }
 
-    public Categoria(int codigo, String nombre) {
+    public Categoria(String codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
     }
     
     
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
