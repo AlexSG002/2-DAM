@@ -8,7 +8,7 @@ public class Ventas {
 	private int univen; 
 	private String fecha;
 	
-	public Ventas(){}
+	public Ventas(int i, Articulos ar1, Clientes cli1, int j, String string, float descuento){}
 	
 	public Ventas(int codventa, Articulos codarti, Clientes numcli, int univen, String fecha) {
 		super();

@@ -7,7 +7,7 @@ public class Clientes {
      private String pobla;
      
      
-     public Clientes(){}
+     public Clientes(int i, String string, String string2, int j){}
      
 	public Clientes(int numcli, String nombre, String pobla) {
 		super();

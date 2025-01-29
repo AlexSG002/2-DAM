@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="creararticulodat/src"/>
+	<classpathentry kind="src" path="DAM_AD_4_R_120_Gestion/src"/>
+	<classpathentry kind="src" path="neodatis-odb-1.9.30-689/doc/src"/>
+	<classpathentry kind="src" path="paises/src/main/java"/>
+	<classpathentry kind="src" path="sanchezgilalejandro_neo/src/main/java"/>
+	<classpathentry kind="src" path="tema4Neodatis/src/main/java"/>
+	<classpathentry kind="src" path="tenis/src/main/java"/>
+	<classpathentry kind="lib" path="creararticulodat/conectores/neodatis-odb-1.9.30.689.jar"/>
+	<classpathentry kind="lib" path="DAM_AD_4_R_120_Gestion/conector/neodatis-odb-1.9.30.689.jar"/>
+	<classpathentry kind="lib" path="neodatis-odb-1.9.30-689/doc/tutorial.jar"/>
+	<classpathentry kind="lib" path="neodatis-odb-1.9.30-689/lib/looks-2.2.1.jar"/>
+	<classpathentry kind="lib" path="neodatis-odb-1.9.30-689/neodatis-odb-1.9.30.689.jar"/>
+	<classpathentry kind="lib" path="neodatis-odb-1.9.30-689/src/neodatis-odb-1.9.30.689-sources.jar"/>
+	<classpathentry kind="lib" path="tema4Neodatis/src/neodatis-odb-1.9.30.689.jar"/>
+	<classpathentry kind="output" path="DAM_AD_4_R_120_Gestion/bin"/>
+</classpath>

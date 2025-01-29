@@ -6,7 +6,7 @@ public class Articulos {
 	private int stock; 
 	private float pvp;
 	
-	public Articulos(){}
+	public Articulos(int i, String string, int j, float f, float g){}
 	
 	public Articulos(int codarti, String denom, int stock, float pvp) {
 		super();
@@ -38,6 +38,11 @@ public class Articulos {
 	}
 	public void setPvp(float pvp) {
 		this.pvp = pvp;
+	}
+
+	public float getDescuento() {
+		// TODO Auto-generated method stub
+		return 0;
 	} 
 
 	
