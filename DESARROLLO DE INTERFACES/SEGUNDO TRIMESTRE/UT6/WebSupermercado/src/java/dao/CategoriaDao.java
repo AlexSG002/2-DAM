@@ -19,63 +19,91 @@ import model.Categoria;
  * @author Tarde
  */
 public class CategoriaDao {
-    public static boolean registrar(Categoria cat){
-        Connection con = null;
-        PreparedStatement st = null;
+    public static boolean registrar(Categoria cat) {
+    if (categoriaExiste(cat.getCodigo())) {
+        System.err.println("❌ Error: El código de categoría ya existe.");
+        return false;
+    }
+
+    Connection con = null;
+    PreparedStatement st = null;
+    try {
+        String SQL = "INSERT INTO categorias(codigo, nombre) VALUES(?, ?)";
+        con = conexion.conectar();
+        st = con.prepareStatement(SQL);
+        st.setString(1, cat.getCodigo());
+        st.setString(2, cat.getNombre());
+
+        return st.executeUpdate() > 0;
+    } catch (SQLException ex) {
+        System.err.println("⚠️ Error SQL al insertar categoría: " + ex.getMessage());
+        return false;
+    } finally {
         try {
-            String SQL = "INSERT INTO categorias(codigo, nombre) values(?, ?);";
-            con = conexion.conectar();
-            if(con==null){
-                return false;
-            }
-            st = con.prepareStatement(SQL);
-            st.setString(1, cat.getCodigo());
-            st.setString(2, cat.getNombre());
-            if(st.executeUpdate()>0){
-                return true;
-            }else{
-                return false;
-            }
+            if (st != null) st.close();
+            if (con != null) con.close();
         } catch (SQLException ex) {
-            return false;
-        }finally{
-            try{
-                if(st!=null){
-                    st.close();
-                }
-                if(con!=null){
-                    con.close();
-                }
-            }catch(SQLException ex){
-                Logger.getLogger(CategoriaDao.class.getName()).log(Level.SEVERE,null, ex);
-            }
+            System.err.println("⚠️ Error cerrando conexión: " + ex.getMessage());
         }
     }
+}
+
     
-    public static ArrayList<Categoria> listar(){
-        ArrayList<Categoria> lista = null;
-        Connection con = null;
-        PreparedStatement st = null;
+    public static ArrayList<Categoria> listar() {
+    ArrayList<Categoria> lista = new ArrayList<>(); // Inicialización correcta
+    Connection con = null;
+    PreparedStatement st = null;
+    ResultSet resultado = null;
+    try {
+        String SQL = "SELECT * FROM categorias"; // Corrección del nombre de la tabla
+        con = conexion.conectar();
+        st = con.prepareStatement(SQL);
+        resultado = st.executeQuery();
+
+        while (resultado.next()) {
+            Categoria cat = new Categoria();
+            cat.setCodigo(resultado.getString("codigo"));
+            cat.setNombre(resultado.getString("nombre"));
+            lista.add(cat);
+        }
+    } catch (SQLException ex) {
+        System.err.println("⚠️ Error SQL al listar categorías: " + ex.getMessage());
+    } finally {
         try {
-            String SQL = "SELECT * FROM categorías;";
-            con = conexion.conectar();
-            if(con==null){
-                return null;
-            }
-            st = con.prepareStatement(SQL);
-            //st.setString(1, cat.getNombre());
-            ResultSet resultado = st.executeQuery();
-            Categoria cat;
-            while(resultado.next()){
-                cat = new Categoria();
-                cat.setCodigo(resultado.getString("codigo"));
-                cat.setNombre(resultado.getString("nombre"));
-                lista.add(cat);
-            }
-            return lista;
+            if (resultado != null) resultado.close();
+            if (st != null) st.close();
+            if (con != null) con.close();
         } catch (SQLException ex) {
-            return null;
+            System.err.println("⚠️ Error cerrando conexión: " + ex.getMessage());
         }
     }
+    return lista;
+}
+    
+    public static boolean categoriaExiste(String codigo) {
+    Connection con = null;
+    PreparedStatement st = null;
+    ResultSet rs = null;
+    try {
+        String SQL = "SELECT 1 FROM categorias WHERE codigo = ?";
+        con = conexion.conectar();
+        st = con.prepareStatement(SQL);
+        st.setString(1, codigo);
+        rs = st.executeQuery();
+        return rs.next(); // Si hay resultados, la categoría ya existe
+    } catch (SQLException ex) {
+        System.err.println("⚠️ Error al verificar categoría: " + ex.getMessage());
+        return false;
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (st != null) st.close();
+            if (con != null) con.close();
+        } catch (SQLException ex) {
+            System.err.println("⚠️ Error cerrando conexión: " + ex.getMessage());
+        }
+    }
+}
+
     
 }

@@ -1,0 +1,2 @@
+Introduce un número para sumar sus cifras: 
+Suma de las cifras: 13

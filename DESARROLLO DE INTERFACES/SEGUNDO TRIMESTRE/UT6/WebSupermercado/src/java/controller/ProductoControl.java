@@ -37,7 +37,7 @@ public class ProductoControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductoControl</title>");            
+            out.println("<title>Servlet ProductoControl</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ProductoControl at " + request.getContextPath() + "</h1>");
@@ -58,29 +58,7 @@ public class ProductoControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String cod = request.getParameter("codigo");
-        String nombre = request.getParameter("nombre");
-        String descripcion = request.getParameter("descripcion");
-        String stock = request.getParameter("stock");
-        String pvp = request.getParameter("pvp");
-        String codCat = request.getParameter("codigo_categoria");
-        String nitProv = request.getParameter("nit_proveedor");
-        
-        Producto p = new Producto();
-        p.setCodigo(cod);
-        p.setNombre(nombre);
-        p.setDescripcion(descripcion);
-        p.setStock(stock);
-        p.setPvp(pvp);
-        p.setCodigoCategoria(codCat);
-        p.setNitProveedor(nitProv);
-        
-        if(ProductoDao.registrar(p)){
-            request.setAttribute("mensaje", "El producto fue registrado");
-        }else{
-            request.setAttribute("mensaje", "El producto NO fue registrado");
-        }
-        request.getRequestDispatcher("registroProducto.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -94,7 +72,44 @@ public class ProductoControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String cod = request.getParameter("codigo");
+        String nombre = request.getParameter("nombre");
+        String descripcion = request.getParameter("descripcion");
+        String stock = request.getParameter("stock");
+        String pvp = request.getParameter("pvp");
+        String codCat = request.getParameter("codigo_categoria");
+        String nitProv = request.getParameter("nit_proveedor");
+        System.out.println("📌 Enviando producto: " + cod + " | " + nombre + " | " + descripcion + " | " + stock + " | " + pvp + " | " + codCat + " | " + nitProv);
+        if (!ProductoDao.categoriaExiste(Integer.parseInt(codCat))) {
+            request.setAttribute("mensaje", "Error: La categoría especificada no existe.");
+            request.getRequestDispatcher("registroProducto.jsp").forward(request, response);
+            return;
+        }
+
+        try {
+            int stockNum = Integer.parseInt(stock);
+            double pvpNum = Double.parseDouble(pvp);
+
+            Producto p = new Producto();
+            p.setCodigo(cod);
+            p.setNombre(nombre);
+            p.setDescripcion(descripcion);
+            p.setStock(String.valueOf(stockNum));
+            p.setPvp(String.valueOf(pvpNum));
+            p.setCodigoCategoria(codCat);
+            p.setNitProveedor(nitProv);
+
+            if (ProductoDao.registrar(p)) {
+                request.setAttribute("mensaje", "✅ El producto fue registrado");
+            } else {
+                request.setAttribute("mensaje", "❌ El producto NO fue registrado");
+            }
+        } catch (NumberFormatException e) {
+            System.err.println("❌ Error: Stock o PVP no son valores numéricos válidos.");
+            request.setAttribute("mensaje", "Error: Stock y PVP deben ser números.");
+        }
+        request.getRequestDispatcher("registroProducto.jsp").forward(request, response);
+
     }
 
     /**

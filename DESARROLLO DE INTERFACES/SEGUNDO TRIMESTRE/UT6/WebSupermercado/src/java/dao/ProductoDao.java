@@ -19,34 +19,54 @@ import model.Producto;
  * @author Tarde
  */
 public class ProductoDao {
-    public static boolean registrar(Producto p){
-        Connection con = null;
-        PreparedStatement st = null;
-        try {
-            String SQL = "INSERT INTO productos(codigo, nombre, descripcion, stock, pvp, codigo_categoria, nit_proveedor) values(?,?,?,?,?,?);";
-            con = conexion.conectar();
-            if(con==null){
-                return false;
-            }
-            st = con.prepareStatement(SQL);
-            st.setString(1, p.getCodigo());
-            st.setString(2, p.getNombre());
-            st.setString(3, p.getDescripcion());
-            st.setString(4, p.getStock());
-            st.setString(5, p.getCodigoCategoria());
-            st.setString(6, p.getNitProveedor());
-            if(st.executeUpdate()>0){
-                return true;
-            }else{
-                return false;
-            }
-        } catch (SQLException ex) {
+    public static boolean registrar(Producto p) {
+    Connection con = null;
+    PreparedStatement st = null;
+    try {
+        String SQL = "INSERT INTO productos(codigo, nombre, descripcion, stock, pvp, codigo_categoria, nit_proveedor) VALUES(?,?,?,?,?,?,?);";
+        con = conexion.conectar();
+        if (con == null) {
+            System.err.println("❌ Error: No se pudo conectar a la base de datos.");
             return false;
         }
+        st = con.prepareStatement(SQL);
+        st.setString(1, p.getCodigo());
+        st.setString(2, p.getNombre());
+        st.setString(3, p.getDescripcion());
+        st.setInt(4, Integer.parseInt(p.getStock())); // Asegura que es un número
+        st.setDouble(5, Double.parseDouble(p.getPvp())); // Convierte a double
+        st.setInt(6, Integer.parseInt(p.getCodigoCategoria()));
+        st.setString(7, p.getNitProveedor());
+
+        int filasAfectadas = st.executeUpdate();
+        if (filasAfectadas > 0) {
+            System.out.println("✅ Producto insertado correctamente.");
+            return true;
+        } else {
+            System.err.println("⚠️ No se insertó ningún producto.");
+            return false;
+        }
+    } catch (SQLException ex) {
+        System.err.println("❌ Error SQL: " + ex.getMessage());
+        ex.printStackTrace();
+        return false;
+    } catch (NumberFormatException ex) {
+        System.err.println("❌ Error: Conversión de número inválida. Verifica stock y pvp.");
+        ex.printStackTrace();
+        return false;
+    } finally {
+        try {
+            if (st != null) st.close();
+            if (con != null) con.close();
+        } catch (SQLException ex) {
+            System.err.println("⚠️ Error cerrando conexión: " + ex.getMessage());
+        }
     }
+}
+
     
     public static ArrayList<Producto> listar(){
-        ArrayList<Producto> lista = null;
+        ArrayList<Producto> lista = new ArrayList<Producto>();
         Connection con = null;
         PreparedStatement st = null;
         try {
@@ -74,5 +94,31 @@ public class ProductoDao {
             return null;
         }
     }
+    
+    public static boolean categoriaExiste(int codigoCategoria) {
+    Connection con = null;
+    PreparedStatement st = null;
+    ResultSet rs = null;
+    try {
+        String SQL = "SELECT 1 FROM categorias WHERE codigo = ?";
+        con = conexion.conectar();
+        st = con.prepareStatement(SQL);
+        st.setInt(1, codigoCategoria);
+        rs = st.executeQuery();
+        return rs.next(); // Si hay resultados, la categoría existe
+    } catch (SQLException ex) {
+        System.err.println("❌ Error SQL al verificar categoría: " + ex.getMessage());
+        return false;
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (st != null) st.close();
+            if (con != null) con.close();
+        } catch (SQLException ex) {
+            System.err.println("⚠️ Error cerrando conexión: " + ex.getMessage());
+        }
+    }
+}
+
     
 }

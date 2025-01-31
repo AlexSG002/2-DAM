@@ -37,7 +37,7 @@ public class ProveedorControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProveedorControl</title>");            
+            out.println("<title>Servlet ProveedorControl</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ProveedorControl at " + request.getContextPath() + "</h1>");
@@ -77,22 +77,29 @@ public class ProveedorControl extends HttpServlet {
         String tel = request.getParameter("tlf");
         String dir = request.getParameter("direccion");
         String email = request.getParameter("correo_electronico");
-        
+
+        // Verificar que el NIT y el teléfono sean numéricos antes de continuar
+        if (!tel.matches("\\d+")) {
+            request.setAttribute("mensaje", "❌ Error: El teléfono debe ser numérico.");
+            request.getRequestDispatcher("registroProveedor.jsp").forward(request, response);
+            return;
+        }
+
         Proveedor p = new Proveedor();
         p.setNit(nit);
         p.setNombre(nombre);
         p.setTlf(tel);
         p.setDireccion(dir);
         p.setCorreoElectronico(email);
-        
-        if(ProveedorDao.registrar(p)){
-            request.setAttribute("mensaje", "El proveedor fue registrado");
-        }else{
-            request.setAttribute("mensaje", "El proveedor NO fue registrado");
+
+        if (ProveedorDao.registrar(p)) {
+            request.setAttribute("mensaje", "✅ Proveedor registrado correctamente.");
+        } else {
+            request.setAttribute("mensaje", "❌ Error al registrar el proveedor. Puede que el NIT ya exista.");
         }
+
         request.getRequestDispatcher("registroProveedor.jsp").forward(request, response);
     }
-    
 
     /**
      * Returns a short description of the servlet.

@@ -37,7 +37,7 @@ public class CategoriaControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CategoriaControl</title>");            
+            out.println("<title>Servlet CategoriaControl</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CategoriaControl at " + request.getContextPath() + "</h1>");
@@ -74,14 +74,24 @@ public class CategoriaControl extends HttpServlet {
             throws ServletException, IOException {
         String nombre = request.getParameter("nombre");
         String codigo = request.getParameter("codigo");
+
+        // Verificar que el código sea numérico antes de continuar
+        if (!codigo.matches("\\d+")) {
+            request.setAttribute("mensaje", "❌ Error: El código debe ser numérico.");
+            request.getRequestDispatcher("registroCategoria.jsp").forward(request, response);
+            return;
+        }
+
         Categoria c = new Categoria();
         c.setCodigo(codigo);
         c.setNombre(nombre);
-        if(CategoriaDao.registrar(c)){
-            request.setAttribute("mensaje", "La categoría fue registrada");
-        }else{
-            request.setAttribute("mensaje", "La categoría NO fue registrada");
+
+        if (CategoriaDao.registrar(c)) {
+            request.setAttribute("mensaje", "✅ Categoría registrada correctamente.");
+        } else {
+            request.setAttribute("mensaje", "❌ Error al registrar la categoría. Puede que el código ya exista.");
         }
+
         request.getRequestDispatcher("registroCategoria.jsp").forward(request, response);
     }
 
