@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportFilmCloud_subreport" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="33e132ec-07a7-44c3-9a31-25c198a12881">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[
+    SELECT 
+        p.id AS pelicula_id,
+        p.nombre AS pelicula_nombre,
+        p.genero AS pelicula_genero,
+        p.visto AS pelicula_visto
+    FROM peliculas p
+    WHERE p.cine_id = $P{id}
+    ORDER BY p.id;
+]]>
+	</queryString>
+	<field name="pelicula_id" class="java.lang.Integer"/>
+	<field name="pelicula_nombre" class="java.lang.String"/>
+	<field name="pelicula_genero" class="java.lang.String"/>
+	<field name="pelicula_visto" class="java.lang.Boolean"/>
+	<group name="pelicula_nombre">
+		<groupExpression><![CDATA[$F{pelicula_nombre}]]></groupExpression>
+	</group>
+	<group name="pelicula_genero">
+		<groupExpression><![CDATA[$F{pelicula_genero}]]></groupExpression>
+	</group>
+	<group name="pelicula_visto">
+		<groupExpression><![CDATA[$F{pelicula_visto}]]></groupExpression>
+	</group>
+	<group name="pelicula_id">
+		<groupExpression><![CDATA[$F{pelicula_id}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="37" y="10" width="148" height="20" uuid="34f6a021-c224-411e-bfb1-993e323bdd54"/>
+				<textFieldExpression><![CDATA[$F{pelicula_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="343" y="10" width="147" height="20" uuid="5fb988d1-719d-4321-9b37-8433c41ed2c6"/>
+				<textFieldExpression><![CDATA[$F{pelicula_genero}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
