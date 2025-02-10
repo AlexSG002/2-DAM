@@ -58,7 +58,7 @@ public class ProveedorDao {
     public static ArrayList<Proveedor> listar() {
         Connection con = null;
         PreparedStatement st = null;
-        ArrayList<Proveedor> lista = null;
+        ArrayList<Proveedor> lista = new ArrayList<>();
         try {
             String SQL = "SELECT * FROM proveedores;";
             con = conexion.conectar();
@@ -83,5 +83,100 @@ public class ProveedorDao {
             return null;
         }
     }
+    
+    public static String getProveedor(String nit){
+        Connection con = null;
+        PreparedStatement st = null;
+        try {
+            System.out.println("Buscando proveedor para nit: " + nit);
+            String SQL = "SELECT * FROM proveedores where nit = ?;";
+            con = conexion.conectar();
+            if(con==null){
+                return null;
+            }
+            st = con.prepareStatement(SQL);
+            st.setString(1, nit);
+            ResultSet resultado = st.executeQuery();
+            if(resultado.next()){
+                String nombreProveedor = resultado.getString("nombre");
+                System.out.println("Proveedor encontrado: " + nombreProveedor);
+                return resultado.getString("nombre");
+            }
+            return "--";
+        } catch (SQLException ex) {
+            return "--";
+        }
+    }
 
+    public static boolean actualizar(Proveedor p) {
+    Connection con = null;
+    PreparedStatement st = null;
+    try {
+        String SQL = "UPDATE Proveedores SET nombre = ?, tlf = ?, correo_electronico = ?, direccion = ? WHERE nit = ?";
+        con = conexion.conectar();
+        if (con == null) {
+            System.err.println("❌ Error: No se pudo conectar a la base de datos (actualizar proveedor).");
+            return false;
+        }
+        st = con.prepareStatement(SQL);
+        st.setString(1, p.getNombre());
+        st.setString(2, p.getTlf());
+        st.setString(3, p.getCorreoElectronico());
+        st.setString(4, p.getDireccion());
+        st.setString(5, p.getNit());
+        int filas = st.executeUpdate();
+        if (filas > 0) {
+            System.out.println("✅ Proveedor actualizado correctamente.");
+            return true;
+        } else {
+            System.err.println("⚠️ No se actualizó el proveedor.");
+            return false;
+        }
+    } catch (SQLException ex) {
+        System.err.println("❌ Error SQL al actualizar proveedor: " + ex.getMessage());
+        return false;
+    } finally {
+        try {
+            if (st != null) st.close();
+            if (con != null) con.close();
+        } catch (SQLException ex) {
+            System.err.println("⚠️ Error cerrando conexión en actualizar proveedor: " + ex.getMessage());
+        }
+    }
+}
+
+public static boolean eliminar(String nit) {
+    Connection con = null;
+    PreparedStatement st = null;
+    try {
+        String SQL = "DELETE FROM Proveedores WHERE nit = ?";
+        con = conexion.conectar();
+        if (con == null) {
+            System.err.println("❌ Error: No se pudo conectar a la base de datos (eliminar proveedor).");
+            return false;
+        }
+        st = con.prepareStatement(SQL);
+        st.setString(1, nit);
+        int filas = st.executeUpdate();
+        if (filas > 0) {
+            System.out.println("✅ Proveedor eliminado correctamente.");
+            return true;
+        } else {
+            System.err.println("⚠️ No se eliminó el proveedor.");
+            return false;
+        }
+    } catch (SQLException ex) {
+        System.err.println("❌ Error SQL al eliminar proveedor: " + ex.getMessage());
+        return false;
+    } finally {
+        try {
+            if (st != null) st.close();
+            if (con != null) con.close();
+        } catch (SQLException ex) {
+            System.err.println("⚠️ Error cerrando conexión en eliminar proveedor: " + ex.getMessage());
+        }
+    }
+}
+
+    
 }

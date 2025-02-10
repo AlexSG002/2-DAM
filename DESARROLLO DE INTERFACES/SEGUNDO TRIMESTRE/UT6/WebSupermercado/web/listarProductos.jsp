@@ -4,6 +4,10 @@
     Author     : Christian Gámez
 --%>
 
+<%@page import="dao.CategoriaDao"%>
+<%@page import="dao.ProveedorDao"%>
+<%@page import="model.Producto"%>
+<%@page import="dao.ProductoDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -560,39 +564,40 @@
 											<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 												<thead>
 													<tr>
-														<th>ISBN</th>
-														<th>Titulo</th>
-														<th class="hidden-480">Autor</th>
+														<th>Código</th>
+														<th>Nombre</th>
+														<th class="hidden-480">Descripción</th>
 
 														<th>
-															<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-															Fecha
+															Stock
 														</th>
                                                                                                                 <th>
 															
-															Editorial
+															PvP
 														</th>
 														<th class="hidden-480">Categoría</th>
-
+                                                                                                                <th class="hidden-480">Proveedor</th>
 														<th></th>
 													</tr>
 												</thead>
 
 												<tbody>
+                                                                                                    <% for(Producto p: ProductoDao.listar()) {%>
 													<tr>
 
 														<td>
-														<a href="#">1254-3256-9856-652</a>
+														<a href="#"><%= p.getCodigo() %></a>
 														</td>
-														<td class="hidden-480">Introducción a desarrollo web con JSP</td>
-														<td>Christian Gámez</td>
+														<td class="hidden-480"><%= p.getNombre()%></td>
+														<td><%= p.getDescripcion()%></td>
 
-														<td>2017-12-31</td>
-                                                                                                                <td><span class="label label-sm label-success">Planeta</span></td>
+														<td><%= p.getStock()%></td>
+                                                                                                                <td><%= p.getPvp()%></td>
                                                                                                                 <td>
-															<span class="label label-sm label-success">Matemáticas</span>
+															<span class="label label-sm label-success"><%= CategoriaDao.getCategoria(p.getCodigoCategoria())%></span>
 														</td>
-
+                                                                                                                <td><span class="label label-sm label-success"><%= ProveedorDao.getProveedor(p.getNitProveedor()) %></span></td>
+                                                                                                                 
 														<td>
 															<div class="hidden-sm hidden-xs action-buttons">
 																<a class="blue" href="#">
@@ -643,7 +648,7 @@
 															</div>
 														</td>
 													</tr>
-
+                                                                                                         <%}%>
 													
 													</tbody>
 												</table>

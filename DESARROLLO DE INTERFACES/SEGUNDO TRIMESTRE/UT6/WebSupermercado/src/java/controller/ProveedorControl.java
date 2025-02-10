@@ -77,13 +77,7 @@ public class ProveedorControl extends HttpServlet {
         String tel = request.getParameter("tlf");
         String dir = request.getParameter("direccion");
         String email = request.getParameter("correo_electronico");
-
-        // Verificar que el NIT y el teléfono sean numéricos antes de continuar
-        if (!tel.matches("\\d+")) {
-            request.setAttribute("mensaje", "❌ Error: El teléfono debe ser numérico.");
-            request.getRequestDispatcher("registroProveedor.jsp").forward(request, response);
-            return;
-        }
+        String accion = request.getParameter("accion").toLowerCase();
 
         Proveedor p = new Proveedor();
         p.setNit(nit);
@@ -92,10 +86,24 @@ public class ProveedorControl extends HttpServlet {
         p.setDireccion(dir);
         p.setCorreoElectronico(email);
 
-        if (ProveedorDao.registrar(p)) {
-            request.setAttribute("mensaje", "✅ Proveedor registrado correctamente.");
-        } else {
-            request.setAttribute("mensaje", "❌ Error al registrar el proveedor. Puede que el NIT ya exista.");
+        if (accion.equals("registrar")) {
+            if (ProveedorDao.registrar(p)) {
+                request.setAttribute("mensaje", "✅ Proveedor registrado correctamente.");
+            } else {
+                request.setAttribute("mensaje", "❌ Error al registrar el proveedor. Puede que el NIT ya exista.");
+            }
+        } else if (accion.equals("actualizar")) {
+            if (ProveedorDao.actualizar(p)) {
+                request.setAttribute("mensaje", "✅ Proveedor actualizado correctamente.");
+            } else {
+                request.setAttribute("mensaje", "❌ Error al actualizar el proveedor.");
+            }
+        } else if (accion.equals("eliminar")) {
+            if (ProveedorDao.eliminar(nit)) {
+                request.setAttribute("mensaje", "✅ Proveedor eliminado correctamente.");
+            } else {
+                request.setAttribute("mensaje", "❌ Error al eliminar el proveedor.");
+            }
         }
 
         request.getRequestDispatcher("registroProveedor.jsp").forward(request, response);

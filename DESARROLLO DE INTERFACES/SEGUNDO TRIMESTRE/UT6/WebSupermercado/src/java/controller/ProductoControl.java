@@ -79,34 +79,69 @@ public class ProductoControl extends HttpServlet {
         String pvp = request.getParameter("pvp");
         String codCat = request.getParameter("codigo_categoria");
         String nitProv = request.getParameter("nit_proveedor");
+        String accion = request.getParameter("accion").toLowerCase();
         System.out.println("📌 Enviando producto: " + cod + " | " + nombre + " | " + descripcion + " | " + stock + " | " + pvp + " | " + codCat + " | " + nitProv);
-        if (!ProductoDao.categoriaExiste(Integer.parseInt(codCat))) {
+        
+        if (accion.equals("registrar")) {
+            if (!ProductoDao.categoriaExiste(Integer.parseInt(codCat))) {
             request.setAttribute("mensaje", "Error: La categoría especificada no existe.");
             request.getRequestDispatcher("registroProducto.jsp").forward(request, response);
             return;
-        }
-
-        try {
-            int stockNum = Integer.parseInt(stock);
-            double pvpNum = Double.parseDouble(pvp);
-
-            Producto p = new Producto();
-            p.setCodigo(cod);
-            p.setNombre(nombre);
-            p.setDescripcion(descripcion);
-            p.setStock(String.valueOf(stockNum));
-            p.setPvp(String.valueOf(pvpNum));
-            p.setCodigoCategoria(codCat);
-            p.setNitProveedor(nitProv);
-
-            if (ProductoDao.registrar(p)) {
-                request.setAttribute("mensaje", "✅ El producto fue registrado");
-            } else {
-                request.setAttribute("mensaje", "❌ El producto NO fue registrado");
             }
-        } catch (NumberFormatException e) {
-            System.err.println("❌ Error: Stock o PVP no son valores numéricos válidos.");
-            request.setAttribute("mensaje", "Error: Stock y PVP deben ser números.");
+            try {
+                int stockNum = Integer.parseInt(stock);
+                double pvpNum = Double.parseDouble(pvp);
+
+                Producto p = new Producto();
+                p.setCodigo(cod);
+                p.setNombre(nombre);
+                p.setDescripcion(descripcion);
+                p.setStock(String.valueOf(stockNum));
+                p.setPvp(String.valueOf(pvpNum));
+                p.setCodigoCategoria(codCat);
+                p.setNitProveedor(nitProv);
+
+                if (ProductoDao.registrar(p)) {
+                    request.setAttribute("mensaje", "✅ El producto fue registrado");
+                } else {
+                    request.setAttribute("mensaje", "❌ El producto NO fue registrado");
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("❌ Error: Stock o PVP no son valores numéricos válidos.");
+                request.setAttribute("mensaje", "Error: Stock y PVP deben ser números.");
+            }
+        } else if (accion.equals("actualizar")) {
+            try {
+                int stockNum = Integer.parseInt(stock);
+                double pvpNum = Double.parseDouble(pvp);
+
+                Producto p = new Producto();
+                p.setCodigo(cod);
+                p.setNombre(nombre);
+                p.setDescripcion(descripcion);
+                p.setStock(String.valueOf(stockNum));
+                p.setPvp(String.valueOf(pvpNum));
+                p.setCodigoCategoria(codCat);
+                p.setNitProveedor(nitProv);
+
+                if (ProductoDao.actualizar(p)) {
+                    request.setAttribute("mensaje", "✅ Producto actualizado correctamente");
+                } else {
+                    request.setAttribute("mensaje", "❌ Error al actualizar el producto");
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("❌ Error: Stock o PVP no son números válidos.");
+                request.setAttribute("mensaje", "Error: Stock y PVP deben ser números.");
+            }
+        } else if (accion.equals("eliminar")) {
+            if (ProductoDao.eliminar(cod)) {
+                request.setAttribute("mensaje", "✅ Producto eliminado correctamente");
+            } else {
+                request.setAttribute("mensaje", "❌ Error al eliminar el producto");
+            }
+
+        } else {
+            request.setAttribute("mensaje", "❌ Acción desconocida");
         }
         request.getRequestDispatcher("registroProducto.jsp").forward(request, response);
 

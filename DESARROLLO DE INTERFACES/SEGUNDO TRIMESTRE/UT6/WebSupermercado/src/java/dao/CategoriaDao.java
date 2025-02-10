@@ -105,5 +105,93 @@ public class CategoriaDao {
     }
 }
 
+    public static String getCategoria(String cod){
+        Connection con = null;
+        PreparedStatement st = null;
+        try {
+            String SQL = "SELECT * FROM categorias where codigo = ?;";
+            con = conexion.conectar();
+            if(con==null){
+                return null;
+            }
+            st = con.prepareStatement(SQL);
+            st.setString(1, cod);
+            ResultSet resultado = st.executeQuery();
+            if(resultado.next()){
+                return resultado.getString("nombre");
+            }
+            return "--";
+        } catch (SQLException ex) {
+            return "--";
+        }
+    }
+    
+    public static boolean actualizar(Categoria cat) {
+    Connection con = null;
+    PreparedStatement st = null;
+    try {
+        String SQL = "UPDATE categorias SET nombre = ? WHERE codigo = ?";
+        con = conexion.conectar();
+        if (con == null) {
+            System.err.println("❌ Error: No se pudo conectar a la base de datos (actualizar categoría).");
+            return false;
+        }
+        st = con.prepareStatement(SQL);
+        st.setString(1, cat.getNombre());
+        st.setString(2, cat.getCodigo());
+        int filas = st.executeUpdate();
+        if (filas > 0) {
+            System.out.println("✅ Categoría actualizada correctamente.");
+            return true;
+        } else {
+            System.err.println("⚠️ No se actualizó la categoría.");
+            return false;
+        }
+    } catch (SQLException ex) {
+        System.err.println("❌ Error SQL al actualizar categoría: " + ex.getMessage());
+        return false;
+    } finally {
+        try {
+            if (st != null) st.close();
+            if (con != null) con.close();
+        } catch (SQLException ex) {
+            System.err.println("⚠️ Error cerrando conexión en actualizar categoría: " + ex.getMessage());
+        }
+    }
+}
+
+public static boolean eliminar(String codigo) {
+    Connection con = null;
+    PreparedStatement st = null;
+    try {
+        String SQL = "DELETE FROM categorias WHERE codigo = ?";
+        con = conexion.conectar();
+        if (con == null) {
+            System.err.println("❌ Error: No se pudo conectar a la base de datos (eliminar categoría).");
+            return false;
+        }
+        st = con.prepareStatement(SQL);
+        st.setString(1, codigo);
+        int filas = st.executeUpdate();
+        if (filas > 0) {
+            System.out.println("✅ Categoría eliminada correctamente.");
+            return true;
+        } else {
+            System.err.println("⚠️ No se eliminó la categoría.");
+            return false;
+        }
+    } catch (SQLException ex) {
+        System.err.println("❌ Error SQL al eliminar categoría: " + ex.getMessage());
+        return false;
+    } finally {
+        try {
+            if (st != null) st.close();
+            if (con != null) con.close();
+        } catch (SQLException ex) {
+            System.err.println("⚠️ Error cerrando conexión en eliminar categoría: " + ex.getMessage());
+        }
+    }
+}
+
     
 }
