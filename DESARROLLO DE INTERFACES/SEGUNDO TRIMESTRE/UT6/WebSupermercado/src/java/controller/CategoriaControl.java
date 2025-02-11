@@ -96,7 +96,11 @@ public class CategoriaControl extends HttpServlet {
             if (CategoriaDao.eliminar(codigo)) {
                 request.setAttribute("mensaje", "✅ Categoría eliminada correctamente.");
             } else {
-                request.setAttribute("mensaje", "❌ Error al eliminar la categoría.");
+                if (CategoriaDao.tieneProductos(codigo)) {
+                    request.setAttribute("mensaje", "❌ No se ha podido borrar la categoría porque hay productos asociados.");
+                } else {
+                    request.setAttribute("mensaje", "❌ Error al eliminar la categoría.");
+                }
             }
         }
 

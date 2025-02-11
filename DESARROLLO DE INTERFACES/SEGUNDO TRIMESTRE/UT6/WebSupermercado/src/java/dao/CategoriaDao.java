@@ -193,5 +193,27 @@ public static boolean eliminar(String codigo) {
     }
 }
 
+public static boolean tieneProductos(String codigoCategoria) {
+    boolean tieneProductos = false;
+    String sql = "SELECT COUNT(*) FROM productos WHERE codigo_categoria = ?";
+    
+    try (Connection conn = conexion.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+         
+         ps.setString(1, codigoCategoria);
+         try (ResultSet rs = ps.executeQuery()) {
+             if (rs.next()) {
+                 int count = rs.getInt(1);
+                 tieneProductos = (count > 0);
+             }
+         }
+    } catch (SQLException ex) {
+         System.out.println("Error en tieneProductos: " + ex.getMessage());
+    }
+    
+    return tieneProductos;
+}
+
+
     
 }

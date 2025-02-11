@@ -102,7 +102,11 @@ public class ProveedorControl extends HttpServlet {
             if (ProveedorDao.eliminar(nit)) {
                 request.setAttribute("mensaje", "✅ Proveedor eliminado correctamente.");
             } else {
-                request.setAttribute("mensaje", "❌ Error al eliminar el proveedor.");
+                if (ProveedorDao.tieneProductos(nit)) {
+                    request.setAttribute("mensaje", "❌ No se ha podido borrar el proveedor porque hay productos asociados.");
+                } else {
+                    request.setAttribute("mensaje", "❌ Error al eliminar el proveedor.");
+                }
             }
         }
 

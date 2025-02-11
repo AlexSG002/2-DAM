@@ -178,5 +178,28 @@ public static boolean eliminar(String nit) {
     }
 }
 
+public static boolean tieneProductos(String nitProveedor) {
+    boolean tieneProductos = false;
+    String sql = "SELECT COUNT(*) AS total FROM productos WHERE nit = ?";
+    
+    try (Connection conn = conexion.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+         
+         ps.setString(1, nitProveedor);
+         try (ResultSet rs = ps.executeQuery()) {
+             if (rs.next()) {
+                 int count = rs.getInt("total");
+                 System.out.println("Número de productos asociados al proveedor " + nitProveedor + ": " + count);
+                 tieneProductos = (count > 0);
+             }
+         }
+    } catch (SQLException ex) {
+         System.out.println("Error en tieneProductos: " + ex.getMessage());
+    }
+    
+    return tieneProductos;
+}
+
+
     
 }
