@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+    <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+        <config>
+          <theme>@style/Theme.NuevoMediaController</theme>
+        </config>
+      </layout>
+    </layouts>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2022443f-474a-4aa0-97cf-44f2dc223f4c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MediaController/.idea/appInsightsSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MiMediaController/app/src/main/res/drawable/ic_archivos.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MiMediaController/app/src/main/res/drawable/ic_music.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MiMediaController/app/src/main/res/drawable/ic_next.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MiMediaController/app/src/main/res/drawable/ic_pause.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MiMediaController/app/src/main/res/drawable/ic_play.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MiMediaController/app/src/main/res/drawable/ic_stop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MiMediaController/app/src/main/res/drawable/repmusica.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MiMediaController/app/src/main/res/raw/musica.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MiMediaController/app/src/main/res/raw/musica2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/Preferencias/app/src/main/res/drawable/ic_notification.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/Preferencias/app/src/main/res/layout/activity_detalles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/Preferencias/app/src/main/res/layout/fragment_detalles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/Preferencias/app/src/main/res/xml/detalles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/appInsightsSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/migrations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/proguard-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/nuevomediacontroller/ExampleInstrumentedTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/nuevomediacontroller/MainActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_music.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_pause.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_play.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/repmusica.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/musica.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/musica2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/backup_rules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/data_extraction_rules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/java/com/example/nuevomediacontroller/ExampleUnitTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/libs.versions.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ACCESO A DATOS/SEGUNDO TRIMESTRE/UT6/factory/src/main/java/empledep/OracleEmpleadoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../ACCESO A DATOS/SEGUNDO TRIMESTRE/UT6/factory/src/main/java/empledep/OracleEmpleadoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/built-jar.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/built-jar.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/classes/gui/PantallaInicial$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/classes/gui/PantallaInicial$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/classes/gui/PantallaInicial$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/classes/gui/PantallaInicial$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/classes/gui/PantallaInicial$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/classes/gui/PantallaInicial$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/classes/gui/PantallaInicial$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/classes/gui/PantallaInicial$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/classes/gui/PantallaInicial$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/classes/gui/PantallaInicial$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/classes/gui/PantallaInicial.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/build/classes/gui/PantallaInicial.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/nbproject/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/src/gui/PantallaInicial.form" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/src/gui/PantallaInicial.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/src/gui/PantallaInicial.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/PRIMER TRIMESTRE/UT3/FormularioTorneo/src/gui/PantallaInicial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/SEGUNDO TRIMESTRE/UT6/WebBiblioteca/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/SEGUNDO TRIMESTRE/UT6/WebBiblioteca/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/SEGUNDO TRIMESTRE/UT6/WebSupermercado/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/SEGUNDO TRIMESTRE/UT6/WebSupermercado/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/SEGUNDO TRIMESTRE/UT6/WebSupermercado/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../DESARROLLO DE INTERFACES/SEGUNDO TRIMESTRE/UT6/WebSupermercado/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MediaController/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MediaController/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MediaController/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MediaController/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MediaController/app/src/main/java/es/riberadeltajo/mediacontroller/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SEGUNDO TRIMESTRE/UT6/MediaController/app/src/main/java/es/riberadeltajo/mediacontroller/MainActivity.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\lannc\.android\avd\Medium_Phone_API_33_1.avd)]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "AlexSG002"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/AlexSG002/DAMTODO",
+    "accountId": "66c6f7a2-13c1-4740-95ee-973e8e1bd354"
+  }
+}]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2stELgwEzoykWSNdtJg9QRqD67M" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.app.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/lannc/OneDrive/Documentos/2DAM/DAMTODO/PROGRAMACION MULTIMEDIA/nuevoMediaController/app/src/main/res/raw"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\lannc\OneDrive\Documentos\2DAM\DAMTODO\PROGRAMACION MULTIMEDIA\nuevoMediaController\app\src\main\res\raw" />
+      <recent name="C:\Users\lannc\OneDrive\Documentos\2DAM\DAMTODO\PROGRAMACION MULTIMEDIA\nuevoMediaController\app\src\main\res\drawable" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="nuevoMediaController.app" />
+      <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="ALLOW_ASSUME_VERIFIED" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="RESTORE_ENABLED" value="false" />
+      <option name="RESTORE_FILE" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Hybrid>
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Java>
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2022443f-474a-4aa0-97cf-44f2dc223f4c" name="Changes" comment="" />
+      <created>1739266416692</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739266416692</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="play_dynamic_filters_status">
+    <option name="appIdToCheckInfo">
+      <map>
+        <entry key="com.example.nuevomediacontroller">
+          <value>
+            <CheckInfo lastCheckTimestamp="1739266557777" />
+          </value>
+        </entry>
+        <entry key="com.example.nuevomediacontroller.test">
+          <value>
+            <CheckInfo lastCheckTimestamp="1739266557777" />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

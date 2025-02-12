@@ -1,0 +1,27 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable ic_music
+drawable ic_pause
+drawable ic_play
+drawable repmusica
+id constraintLayout
+id nextButton
+id playPauseButton
+id previousButton
+id selectSongButton
+id stopButton
+id timeTextView
+layout activity_main
+mipmap ic_launcher
+mipmap ic_launcher_round
+raw musica
+raw musica2
+string app_name
+style Base.Theme.NuevoMediaController
+style Theme.NuevoMediaController
+xml backup_rules
+xml data_extraction_rules
