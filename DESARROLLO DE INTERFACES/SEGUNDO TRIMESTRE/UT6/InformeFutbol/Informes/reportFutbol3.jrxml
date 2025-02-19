@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportFutbol3" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d0e086f-a2d0-410d-a35e-f04750a0b49c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idEquipo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+CONCAT(j.nombre,' ', j.apellido) AS jugador,
+e.nombre AS equipo,
+e.liga AS liga
+FROM
+JUGADOR_EQUIPO je
+JOIN JUGADORES j ON je.idJugador = j.id
+JOIN EQUIPOS e ON je.idEquipo = e.id
+WHERE e.id = $P{idEquipo}
+ORDER BY
+e.liga, e.nombre, j.nombre;]]>
+	</queryString>
+	<field name="jugador" class="java.lang.String"/>
+	<field name="equipo" class="java.lang.String"/>
+	<field name="liga" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="60" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="57" y="0" width="214" height="20" uuid="fd45730d-f347-420d-97a5-022f9ba03c66"/>
+				<textFieldExpression><![CDATA["Equipo: "+$F{equipo}+" en "+$F{liga}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="57" y="0" width="100" height="20" uuid="884ac922-ba63-440f-aeda-b25640ee02a8"/>
+				<textFieldExpression><![CDATA[$F{jugador}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="108" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="157" y="0" width="200" height="100" uuid="09a3e781-01b8-4557-b0b3-f95bbf28b118"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Numero Jugador Equipo"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{equipo}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{COLUMN_COUNT}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<toc version="1.0"> <!--  categoryclosedimage="FolderClosed" categoryopenimage="FolderOpened"  
+topicimage="ItemIco"-->
+        <tocitem text="Introduccion Netbeans"    target="introduccion">
+           <tocitem text="Instalacion Netbeans"    target="instalacion"/>
+           <tocitem text="Interfaz Netbeans"    target="interfaz"/>
+	   <tocitem text="Funciones principales"    target="funciones"/>
+	   <tocitem text="Solucion de problemas"    target="soluciones"/>
+	   <tocitem text="Acerca de"    target="acerca"/>
+        </tocitem>
+</toc>

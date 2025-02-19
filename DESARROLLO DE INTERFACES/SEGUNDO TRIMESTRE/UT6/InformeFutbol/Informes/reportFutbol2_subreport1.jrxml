@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportFutbol2_subreport1" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="da4115ea-6dce-4ef5-af95-425af3a696a6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idJugador" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT je.idJugador, e.nombre AS EQUIPO, e.liga
+FROM JUGADOR_EQUIPO je
+JOIN EQUIPOS e ON je.idEquipo = e.id
+WHERE je.idJugador = 
+$P{idJugador}]]>
+	</queryString>
+	<field name="idJugador" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="EQUIPO" class="java.lang.String"/>
+	<field name="liga" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="119" y="13" width="100" height="20" uuid="2bacc2c2-d130-4df3-bdfa-912d558fb5e5"/>
+				<textFieldExpression><![CDATA[$F{EQUIPO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="13" width="100" height="20" uuid="54a731fc-f6b0-4a92-ac58-6280871819ff"/>
+				<textFieldExpression><![CDATA[$F{liga}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

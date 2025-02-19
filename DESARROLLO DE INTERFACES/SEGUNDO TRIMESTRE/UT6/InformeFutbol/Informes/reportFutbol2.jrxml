@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportFutbol2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4cac0d7c-87e8-4e8d-9693-fcdf4b5b8d54">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idJugador" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM JUGADORES WHERE id = $P{idJugador}]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellido" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dorsal" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="posicion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pais" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="49" y="15" width="444" height="49" uuid="24ee60d1-1d27-4208-a7a4-c017668dd9d7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="22" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[JUGADORES DE PRIMERA DIVISIÓN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="64" splitType="Stretch">
+			<subreport>
+				<reportElement x="137" y="0" width="418" height="64" uuid="272b3cde-3e4d-42a5-a1cd-7b05a400c39b"/>
+				<subreportParameter name="idJugador">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["reportFutbol2_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="19" y="24" width="100" height="20" uuid="61effc8e-625d-42ea-8c08-4bc60ab7cee6"/>
+				<textFieldExpression><![CDATA["id Jugador: "+$F{id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="3" y="0" width="100" height="20" backcolor="#66FFCC" uuid="340564d8-7718-4fb5-b134-51cd1483a48b"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="103" y="0" width="100" height="20" backcolor="#66FFCC" uuid="385a7a58-c39f-4b64-a916-f213e260521d"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[APELLIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="235" y="0" width="100" height="20" backcolor="#FF6666" uuid="7b1dd3f9-d1e5-462d-b3da-eb80e6f23c7d"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[POSICIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="345" y="0" width="100" height="20" backcolor="#9999FF" uuid="290b11d9-efe4-47c5-bf90-38506d844fae"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[DORSAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="455" y="0" width="100" height="20" backcolor="#FF66FF" uuid="55263f5e-caeb-4a5a-aede-3bc36b743769"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[PAÍS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="3" y="0" width="100" height="20" uuid="f7aa14f2-0941-446c-a81f-8704787177dc"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="103" y="0" width="100" height="20" uuid="348e92aa-d633-45db-9193-fe6fda30690a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="0" width="100" height="20" uuid="0697814f-eabb-4ea9-87be-05bf54bbe928"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{posicion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="04175a4b-8616-4623-aa2e-1eb88632697c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{pais}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="0" width="100" height="20" uuid="3abb23ee-9161-472c-9e8e-0526efb156a8"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{dorsal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
