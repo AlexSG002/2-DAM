@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listadebancos>
+<banco>
+   <codigo>1111</codigo>
+   <domicilio>GRAN VIA 10</domicilio>
+   <nif>122322223</nif>
+   <nombre>BANCO DE ESPAÑA</nombre>
+   <poblacion>MADRID</poblacion>
+   <sucursales>
+      <sucursal>
+         <codigocucursal>5000</codigocucursal>
+		 <dirección>C/ANCHA 24</dirección>
+         <localidad>TOLEDO</localidad>
+         <nombre>SUCURSAL TOLE1</nombre>
+         <provincia>TOLEDO</provincia>
+         <cuentas>
+            <cuenta>
+			   <nombre>PEDRO RAMIREZ</nombre>
+               <numerocuenta>123456788</numerocuenta>
+               <población>TOLEDO</población>
+               <saldodebe>0</saldodebe>
+               <saldohaber>200</saldohaber>
+               <dirección>C/ MORERÍA 3</dirección>
+               <fechaalta>10/10/2017</fechaalta>
+               <movimientos>
+                  <movim>
+                     <fecha>12/11/2017</fecha>
+                     <importe>2100</importe>
+                     <numeromov>1</numeromov>
+                     <tipomov>I</tipomov>
+                  </movim>
+                  <movim>
+                     <fecha>26/05/2018</fecha>
+                     <importe>100</importe>
+                     <numeromov>2</numeromov>
+                     <tipomov>I</tipomov>
+                  </movim>
+               </movimientos>
+             
+            </cuenta>
+            <cuenta>
+			   <nombre>JUAN GARCÍA</nombre>
+               <numerocuenta>123456789</numerocuenta>
+               <población>TOLEDO</población>
+               <saldodebe>200</saldodebe>
+               <saldohaber>400</saldohaber>
+               <dirección>C/ TOLEDO  23</dirección>
+               <fechaalta>15/12/2017</fechaalta>
+               <movimientos>
+                  <movim>
+                     <fecha>01/04/2018</fecha>
+                     <importe>2000</importe>
+                     <numeromov>1</numeromov>
+                     <tipomov>R</tipomov>
+                  </movim>
+                  <movim>
+                     <fecha>26/05/2018</fecha>
+                     <importe>1000</importe>
+                     <numeromov>2</numeromov>
+                     <tipomov>I</tipomov>
+                  </movim>
+               </movimientos>
+
+            </cuenta>
+         </cuentas>
+
+      </sucursal>
+      <sucursal>
+         <codigocucursal>5001</codigocucursal>
+		 <dirección>PILON 33</dirección>
+         <localidad>PASTRANA</localidad>
+         <nombre>SUCURSAL GUADA1</nombre>
+         <provincia>GUADALAJARA</provincia>
+         <cuentas>
+            <cuenta>
+			   <nombre>ANDRÉS RAMOS</nombre>
+               <numerocuenta>123456785</numerocuenta>
+               <población>ALCALÁ DE HENARES</población>
+               <saldodebe>0</saldodebe>
+               <saldohaber>3000</saldohaber>
+               <dirección>C/ALCALA 30</dirección>
+               <fechaalta>13/02/2015</fechaalta>
+               <movimientos>
+                  <movim>
+                     <fecha>12/03/2015</fecha>
+                     <importe>1000</importe>
+                     <numeromov>1</numeromov>
+                     <tipomov>I</tipomov>
+                  </movim>
+                  <movim>
+                     <fecha>16/03/2015</fecha>
+                     <importe>100</importe>
+                     <numeromov>2</numeromov>
+                     <tipomov>I</tipomov>
+                  </movim>
+                  <movim>
+                     <fecha>19/03/2015</fecha>
+                     <importe>1500</importe>
+                     <numeromov>3</numeromov>
+                     <tipomov>R</tipomov>
+                  </movim>
+               </movimientos>
+
+            </cuenta>
+            <cuenta>
+				<nombre>MANUEL RODRÍGUEZ</nombre>
+               <numerocuenta>123456786</numerocuenta>
+               <población>GUADALAJARA</población>
+               <saldodebe>100</saldodebe>
+               <saldohaber>2000</saldohaber>
+               <dirección>GUADALAJARA</dirección>
+               <fechaalta>12/04/2016</fechaalta>
+               <movimientos>
+                  <movim>
+                     <fecha>12/04/2017</fecha>
+                     <importe>2000</importe>
+                     <numeromov>1</numeromov>
+                     <tipomov>I</tipomov>
+                  </movim>
+                  <movim>
+                     <fecha>26/05/2017</fecha>
+                     <importe>100</importe>
+                     <numeromov>2</numeromov>
+                     <tipomov>I</tipomov>
+                  </movim>
+                  <movim>
+                     <fecha>19/03/2017</fecha>
+                     <importe>2500</importe>
+                     <numeromov>3</numeromov>
+                     <tipomov>R</tipomov>
+                  </movim>
+               </movimientos>
+         
+            </cuenta>
+            <cuenta>
+			    <nombre>ANA MOHEDAS</nombre>
+               <numerocuenta>123456787</numerocuenta>
+               <población>GUADALAJARA</población>
+               <saldodebe>200</saldodebe>
+               <saldohaber>3000</saldohaber>
+               <dirección>GUADALAJARA</dirección>
+               <fechaalta>01/03/2017</fechaalta>
+               <movimientos>
+                  <movim>
+                     <fecha>12/04/2017</fecha>
+                     <importe>2000</importe>
+                     <numeromov>1</numeromov>
+                     <tipomov>I</tipomov>
+                  </movim>
+                  <movim>
+                     <fecha>26/05/2017</fecha>
+                     <importe>100</importe>
+                     <numeromov>2</numeromov>
+                     <tipomov>I</tipomov>
+                  </movim>
+                  <movim>
+                     <fecha>13/06/2017</fecha>
+                     <importe>2500</importe>
+                     <numeromov>3</numeromov>
+                     <tipomov>R</tipomov>
+                  </movim>
+                  <movim>
+                     <fecha>19/06/2017</fecha>
+                     <importe>500</importe>
+                     <numeromov>4</numeromov>
+                     <tipomov>R</tipomov>
+                  </movim>
+               </movimientos>
+
+            </cuenta>
+         </cuentas>
+
+      </sucursal>
+   </sucursales>
+   </banco>
+  <banco>
+   <cif>222322223</cif>
+   <codigo>1112</codigo>
+   <domicilio>C/ MAYOR 10</domicilio>
+   <nombre>BANCO DE GUADALAJARA</nombre>
+   <poblacion>GUADALAJARA</poblacion>
+   <sucursales>
+      <sucursal>
+         <codigocucursal>6000</codigocucursal>
+		 <dirección>C/MAYOR 55</dirección>
+         <localidad>ALCALÁ DE HENARES</localidad>
+         <nombre>SUCURSAL 6000 ALCALÁ</nombre>
+         <provincia>MADRID</provincia>
+         <cuentas>
+            <cuenta>
+			   <nombre>ANALÍA ROMERO</nombre>
+               <numerocuenta>AA-123456</numerocuenta>
+               <población>TOLEDO</población>
+               <saldodebe>200</saldodebe>
+               <saldohaber>500</saldohaber>
+               <dirección>C/ ARANJUEZ 223</dirección>
+               <fechaalta>15/01/2017</fechaalta>
+               <movimientos>
+                  <movim>
+                     <fecha>01/04/2017</fecha>
+                     <importe>150</importe>
+                     <numeromov>1</numeromov>
+                     <tipomov>R</tipomov>
+                  </movim>
+                  <movim>
+                     <fecha>26/05/2017</fecha>
+                     <importe>600</importe>
+                     <numeromov>2</numeromov>
+                     <tipomov>I</tipomov>
+                  </movim>
+               </movimientos>
+            </cuenta>
+            <cuenta>
+			   <nombre>FERNANDO TEJERO</nombre>
+               <numerocuenta>AA3A-123456</numerocuenta>
+               <población>TALAVERA</población>
+               <saldodebe>1200</saldodebe>
+               <saldohaber>1500</saldohaber>
+               <dirección>C/ ESPLIEGO 132</dirección>
+               <fechaalta>15/05/2017</fechaalta>
+               <movimientos>
+                  <movim>
+                     <fecha>01/07/2017</fecha>
+                     <importe>150</importe>
+                     <numeromov>1</numeromov>
+                     <tipomov>R</tipomov>
+                  </movim>
+                  <movim>
+                     <fecha>26/07/2017</fecha>
+                     <importe>700</importe>
+                     <numeromov>2</numeromov>
+                     <tipomov>I</tipomov>
+                  </movim>
+                  <movim>
+                     <fecha>26/07/2017</fecha>
+                     <importe>1700</importe>
+                     <numeromov>3</numeromov>
+                     <tipomov>I</tipomov>
+                  </movim>
+               </movimientos>
+     
+            </cuenta>
+         </cuentas>
+
+      </sucursal>
+   </sucursales>
+</banco>
+</listadebancos>
